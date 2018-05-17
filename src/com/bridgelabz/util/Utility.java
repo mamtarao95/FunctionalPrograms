@@ -1,6 +1,6 @@
 package com.bridgelabz.util;
 import java.util.Scanner;
-
+import java.util.Random;
 public class Utility
 {
 	Scanner sc=new Scanner(System.in);
@@ -196,6 +196,37 @@ public class Utility
 		
 	}
 	
+	
+	/*
+	 * 
+	 */
+	public int randomGen(int[] ar)
+	{
+		int count=0;
+		int c=0;
+		Random ran=new Random();
+		while(count!=ar.length)
+		{
+		int code = ran.nextInt(100);
+		c++;
+		System.out.println(code);
+		for(int i=0 ; i< ar.length;i++)
+		{
+			if(code==ar[i])
+			{
+				count++;
+			}
+		}
+		}
+		
+		return c;
+		
+		
+			
+		
+		
+		
+	}
 	
 	
 	
