@@ -63,8 +63,8 @@ public class Utility
 		System.out.println("tail percentage: "+ tailPercent+"%");
 	}
 	
-	/*?
-	 * 
+	/*
+	 * Method to check whether the given year is leap year or not
 	 */
 	
 	public boolean isLeap(int year)
