@@ -90,7 +90,65 @@ public class Utility
 		
 			else{
 				return false;
-				}}
+				}
+		
+	}
+	
+	
+	/*
+	 * Method to print each power of two
+	 */
+	public void printPower(int power)
+	{
+	System.out.println("The table of power of 2 till "+ power+ ": ");
+	  
+	/*
+	 * Loop to print each power of two
+	 */
+	for(int i=1;i<=power;i++)
+	   {
+	     int res=twoPower(i);
+	      System.out.println("2^"+i+"= "+res);
+       }
+
+	}
+	
+	/*
+	 * method to find power of two for each number//
+	 */
+	public int twoPower(int i)
+	{
+	int temp=1;
+	   for(int x=1;x<=i;x++)
+	     {
+	      temp=temp*2;
+	      }
+	return temp;
+    }
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 			
 	}
 

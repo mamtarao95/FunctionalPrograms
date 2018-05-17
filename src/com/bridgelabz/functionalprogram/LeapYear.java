@@ -6,7 +6,6 @@ public class LeapYear
 {
 	public static void main(String[] args)
 	{
-	@SuppressWarnings("resource")
 	Scanner sc=new Scanner(System.in);
 	System.out.println("Enter the year: ");
 	/*
@@ -33,11 +32,12 @@ public class LeapYear
 		
 	else
 	{
-	System.out.println("Enter valid year (4 digit and not less than 1528)!! ");}
+	System.out.println("Enter valid year (4 digit and not less than 1528)!! ");
 	}
-	
-	
 
+	sc.close();
+
+	}
 }
 
 
