@@ -30,4 +30,37 @@ public class Utility
 	    	
 	}
 	
+	
+	/*
+	 * Method to calculate percentage of head vs tail in the given number of trials
+	 * 
+	 *  @param int to give reference of no. of trials
+	 */
+	public void genPercentage(int timesofflip)
+	
+	{
+		/*
+		 * initialise variables
+		 */
+		float head=0;
+		float tail=0;
+		float headPercent;
+		float tailPercent;
+		for(int i=0 ; i<timesofflip ; i++)
+		  {
+		   double flip=Math.random();
+		      if(flip<=0.5)
+		        head++;
+		      else
+		        tail++;
+		  }
+
+		headPercent= ((head/timesofflip))*100;
+		tailPercent= ((tail/timesofflip))*100;
+		System.out.println("number of times head appeared: " + head);
+		System.out.println("number of times tail appeared: " + tail);
+		System.out.println("head percentage: "+ headPercent+"%");
+		System.out.println("tail percentage: "+ tailPercent+"%");
+	}
+	
 }
