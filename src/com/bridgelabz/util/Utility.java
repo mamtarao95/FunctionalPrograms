@@ -126,7 +126,35 @@ public class Utility
 	return temp;
     }
 
+	/*
+	 * Method to take 2D array elements in integer,double 
+	 * or string type from user and store it in memory
+	 */
+	public double[][] arrayElement()
+	{
+	Scanner sc=new Scanner(System.in);
+	System.out.println("enter number of rows");
+	int m=sc.nextInt();
+	System.out.println("enter number of columns");
+	int n=sc.nextInt();
+	/*
+	 * double two dimensional array variable
+	 */
+	double[][] ar=new double[m][n];
+	System.out.println("enter "+(m*n)+" elements of the 2D array: ");
+	for(int i=0 ; i<ar.length ; i++)
+	{
+		for(int j=0 ; j<ar[i].length; j++)
+		{
+
+			System.out.print("enter ar["+i+"]["+j+"] = " );
+			ar[i][j]=sc.nextDouble();
+		}
+	}
+	sc.close();
+	return ar;
 	
+	}
 	
 	
 	

@@ -10,6 +10,10 @@ public class PowerOf2
 	System.out.println("Enter the power value N (2^N): ");
 	int power=sc.nextInt();
 
+	/*
+	 * Checks if power is valid(<31).Calculate the power of 2 if power is valid
+	 */
+	
 	if(power<31)
 	{
 	Utility utility =new Utility();
