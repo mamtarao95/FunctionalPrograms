@@ -156,6 +156,34 @@ public class Utility
 	
 	}
 	
+	/*
+	 * Method to print the number of triplet whose sum is zero and also outputs the total number of count
+	 */
+	
+	public void sumTriplet(int[] ar)
+	{
+		int count=0;
+		for(int i=0 ; i<=ar.length-3;i++)
+		{
+			for(int j=i+1 ; j<=ar.length-2 ; j++)
+			{
+				for(int k=j+1 ; k<=ar.length-1 ; k++)
+				{
+					if(ar[i]+ar[j]+ar[k] == 0)
+					{
+						count++;
+						System.out.println("{ "+ar[i]+ ", "+ar[j]+", "+ar[k]+" }");
+					}
+				}
+			}
+		}
+		if(count!=0)
+		System.out.println("there are a total of "+ count + " number of triplet whose sum counts to zero");
+		else
+		System.out.println("There are no triplets found in the given array!!");
+		
+	}
+	
 	
 	
 	
