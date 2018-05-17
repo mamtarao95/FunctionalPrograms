@@ -184,6 +184,18 @@ public class Utility
 		
 	}
 	
+	/*
+	 * Method to calculate euclid distance of given point from the origin 
+	 * 
+	 */
+	public double calcEuclid(double x, double y)
+	{
+		double sum=( Math.pow(x, 2) )+( Math.pow(x, 2));
+		System.out.println(sum);
+		return Math.sqrt(sum);
+		
+	}
+	
 	
 	
 	
