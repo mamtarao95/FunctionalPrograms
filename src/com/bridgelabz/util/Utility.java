@@ -63,10 +63,12 @@ public class Utility
 		System.out.println("tail percentage: "+ tailPercent+"%");
 	}
 	
-	/*
-	 * Method to check whether the given year is leap year or not
-	 */
 	
+	
+	/**
+	 * @param year
+	 * @return
+	 */
 	public boolean isLeap(int year)
 	{
 		
@@ -269,10 +271,87 @@ public class Utility
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println(estimatedTime+"ms");
 	}
-	 
+	
+	/*
+	 * 
+	 */
+	
+	public void letsPlay(int row1,int col1)
+	{
+		int[][] ar=formTable(row1,col1);
+		
+		System.out.println("Enter the row and col number in which you want to insert X");
+		System.out.println("Enter the row:");
+		int row = sc.nextInt();
+		System.out.println("Enter the col:");
+		int col = sc.nextInt();
+		
+		ar[row][col]='X';
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		}
+
+	
+	/**
+	 * @param row
+	 * @param col
+	 * @return
+	 */
+	public int[][] formTable(int row1, int col1)
+	{
+		int[][] ar=new int[row1][col1];
+		for(int i=0 ;i<ar.length;i++)
+		{
+			for(int j=0;j<ar[i].length;j++)
+			{
+				System.out.print( "[" +i+ "][" +j+ "]  ");
+			
+			}
+			System.out.println();
+			System.out.println();
+		}
+		return ar;
+		
+	}
 	
 	
+	/*
+	 * Method to find roots of the quadratic equation
+	 */
 	
+	public double[] findRoots(double a,double b,double c)
+	{
+		
+		double delta= Math.abs((b*b)-(4*a*c));
+		double root1 = ((-b) + Math.sqrt(delta))/(2*a);
+		double root2 = ((-b) - Math.sqrt(delta))/(2*a);
+		double[] ar= {root1,root2};
+		return ar;
+		
+		
+		
+	}
+	
+	/*
+	 * 
+	 */
+	
+	public double calcWindChill(double temp, double wind)
+	{
+    double windChill = 35.74 + (0.6215*temp) + ( ((0.4275*temp) - 35.75)*Math.pow(wind,0.16));
+	return windChill;	
+	}
 	
 	
 	
