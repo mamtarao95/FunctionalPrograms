@@ -17,16 +17,9 @@ public class ReplaceString
 	 */
 	public static void main(String[] args)
 	{
-		/*
-		 * mtemplate stores the given String
-		 */
-		String mtemplate="Hello <<username>> , How are you?";
-		Utility utility=new Utility();
 		
-		/*
-		 * mresult stores the returned modified string
-		 */
-		String mresult=utility.replaceUserName(mtemplate);
+		String mtemplate="Hello <<username>> , How are you?";
+		String mresult=Utility.replaceUserName(mtemplate);
 		System.out.println(mresult);
 		
 		}

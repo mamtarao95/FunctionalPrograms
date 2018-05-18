@@ -11,15 +11,16 @@ public class Coupon
 		int num=sc.nextInt();
 		System.out.println("Enter "+num+" distinct coupons: ");
 		int[] ar= new int[num];
+		
 		for(int i=0;i<num;i++)
 		{
 			ar[i]=sc.nextInt();
+			
+		
 		}
 	   Utility utility=new Utility();
 	   int res=utility.randomGen(ar);
       System.out.println("the number of random number needed to have all distinct coupons are :" +res);
 	  sc.close();
 	}
-	
-
-}
+	}
