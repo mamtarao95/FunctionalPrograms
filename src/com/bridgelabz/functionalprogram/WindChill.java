@@ -11,7 +11,7 @@ public class WindChill
 		
 		 if(Math.abs(temp) < 50 && wind>3 && wind<120)
 		 {
-			 double windChill=utility.calcWindChill(temp,wind);
+	        double windChill=utility.calcWindChill(temp,wind);
 			System.out.println("The windchill is: "+ windChill);
 		 }
 		 else

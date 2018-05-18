@@ -354,7 +354,56 @@ public class Utility
 	}
 	
 	
+	/*
+	 * Method to calculate percentage of win and loss
+	 */
 	
+	/**
+	 * @param $stake
+	 * @param $goal
+	 * @param plays
+	 */
+	public void gambling(double stake, double goal , int plays)
+	{
+	int win=0;
+    
+	for(int i=1 ; i<=plays ; i++)
+	{
+
+	while(stake!=goal)
+	{
+	double prob=Math.random();
+
+	if(prob<0.5)
+	{
+	stake-=1;
+	}
+
+	else
+	{
+    stake+=1;
+	win++;
+	}
+	}
+	}
+	 double winP=((win/plays)*100);
+	 double lossP=(100)-(winP);
+	System.out.println("NO of times he/she wins: "+ win+ " out of " + plays+ " no. of plays ");
+	if(stake==goal)
+	{
+	System.out.println("reached goal/win");
+	System.out.println("win percentage: "+ winP);
+	System.out.println("loss percentage: "+ lossP);
+
+	}
+	else
+	{
+	System.out.println("coudn't reach goal/loss");
+	System.out.println("win percentage: "+ winP);
+	System.out.println("loss percentage: "+ lossP);
+	}
+
+	}
 	
 	
 	
