@@ -221,13 +221,55 @@ public class Utility
 		
 		return c;
 		
-		
-			
-		
-		
-		
 	}
 	
+	/*
+	 * 
+	 */
+	/* Function to swap values at two pointers */
+	/*public void swap(char *x, char *y)
+	{
+	    char temp;
+	    temp = *x;
+	    *x = *y;
+	    *y = temp;
+	}
+	 
+	/* Function to print permutations of string
+	   This function takes three parameters:
+	   1. String
+	   2. Starting index of the string
+	   3. Ending index of the string. */
+	/*public void permute(String str, int start, int end)
+	 {
+	   if (start == end)
+	     System.out.println(str);
+	   else
+	   {
+	       for (int i = start; i <= end; i++)
+	       {
+	          swap((str+start), (str+i));
+	          permute(str, start+1, end);
+	          swap((str+start), (str+i)); //backtrack
+	       }
+	   }
+	}*/
+	
+	/*
+	 * Method to calculate the elapsed time in milliseconds 
+	 */
+	public void elapsedTime()
+	{
+		System.out.println("To start stopwatch, type start");
+		sc.next();
+		long startTime = System.currentTimeMillis();
+		
+		System.out.println("To start stopwatch, type end");
+		sc.next();
+		long estimatedTime = System.currentTimeMillis() - startTime;
+		System.out.println(estimatedTime+"ms");
+	}
+	 
 	
 	
 	
