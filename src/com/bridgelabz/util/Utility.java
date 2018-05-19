@@ -15,14 +15,12 @@ public class Utility {
 	}
 	
 	/*
-	 * Method to take user input as string
+	 * Method to take user input as integer
 	 */
 	public static int userInputInteger() {
 		return scanner.nextInt();
 	}
 
-	
-	
 	/**
 	 * Method to replace the a string with the user input name
 	 * @param temp
@@ -95,15 +93,32 @@ public class Utility {
 	 * Method to print each power of two
 	 * @param power
 	 */
-	public void printPower(int power) {
-		System.out.println("The table of power of 2 till " + power + ": ");
-
-		for (int i = 1; i <= power; i++) {
-			int res = twoPower(i);
-			System.out.println("2^" + i + "= " + res);
+	public static void printPower(int power) {
+		if(power<31)
+		{
+		  System.out.println("The table of power of 2 till " + power + ": ");
+			for (int i = 1; i <= power; i++) {
+				int res = twoPower(i);
+				System.out.println("2^" + i + "= " + res);
+				}
 		}
-
+		else
+		{
+		System.out.println("Enter value less than 32!!");
+		}
 	}
+	
+	/*
+	 * method to find power of two for each number
+	 */
+	public static int twoPower(int i) {
+		int temp = 1;
+		for (int x = 1; x <= i; x++) {
+			temp = temp * 2;
+		}
+		return temp;
+	}
+
 
 	/*
 	 * Method to find harmonic number
@@ -118,17 +133,7 @@ public class Utility {
 		return output;
 	}
 
-	/*
-	 * method to find power of two for each number//
-	 */
-	public int twoPower(int i) {
-		int temp = 1;
-		for (int x = 1; x <= i; x++) {
-			temp = temp * 2;
-		}
-		return temp;
-	}
-
+	
 	/*
 	 * Method to find prime factors using brute's force
 	 */
@@ -216,55 +221,89 @@ public class Utility {
 
 	}
 
-	/*
-	 * To print random number count to get n distinct coupon number
+	
+	/**
+	 * To check whether the coupon numbers entered by user are distinct or not
+	 * @param num
+	 * @return
 	 */
-	public int randomGen(int[] ar) {
-		int count = 0;
-		int c = 0;
+	public static int[] checkDistinct(int num) {
+		int[] ar= new int[num];
+		System.out.println("Enter "+num+" distinct coupons: ");
+		
+		for(int i=0;i<num;i++)
+		{
+			ar[i]=Utility.userInputInteger();
+			if(i!=0) {
+			   for(int j=i-1 ; j>=0 ; j--){
+				  if(ar[i]==ar[j]) {
+					System.out.println("You have entered duplicate values.Please start again!!");
+					checkDistinct(num);
+						}
+					}
+				}
+		}
+	return ar;	
+	}
+	
+	
+
+	/**
+	 * Method to return the all possible random numbers 
+	 * need to be generated to get all n distinct coupons  
+	 * @param num
+	 * @return
+	 */
+	public static int randomGen(int num) {
+		int[] ar=checkDistinct(num);
+		int match = 0;
+		int codeCount = 0;
 		Random ran = new Random();
 
-		while (count != ar.length) {
+		while (match != ar.length) {
 			int code = ran.nextInt(100);
-			c++;
+			codeCount++;
 			for (int i = 0; i < ar.length; i++) {
 				if (code == ar[i]) {
-					count++;
+					match++;
 				}
 			}
 		}
-
-		return c;
-
+		return codeCount;
 	}
 
-	/*
-	 * Method to return all possible permutation of given string
-	 */
-
 	
-	  public void permutation(char[] ch, int key) { 
+	/**
+	 * Method to return all possible permutation of given string
+	 * @param ch
+	 * @param key
+	 */
+	public static void permutation(char[] ch, int key) { 
+		  
 	  if (key == ch.length) { 
-	  for(int i = 0; i < ch.length; i++) { System.out.print(ch[i]); }
-	  System.out.println();
+		  for(int i = 0; i < ch.length; i++) 
+		  { 
+			  System.out.print(ch[i]); 
+		  }
+	      System.out.println();
 	  
 	  }
 	  
 	 else {
-	 char temp = ch[key];
-	  ch[key]=ch[i];
-	  ch[i]=temp;
+		 for(int i=0 ; i<ch.length ;i++) 
+		 {
+			 char temp = ch[key];
+			 ch[key]=ch[i];
+			 ch[i]=temp;
 	  
-	 permutation(ch, key + 1);
-	  temp = ar[key];
-	 ch[key]=ch[i];
-	  ch[i]=temp;
-	 
-	  
-	  
-	  }
-	  
-	 * } }
+			 permutation(ch, key + 1);
+	
+			 temp = ch[key];
+			 ch[key]=ch[i];
+			 ch[i]=temp;
+		 }
+	  	} 
+	}
 	
 
 	/*
@@ -275,7 +314,7 @@ public class Utility {
 		scanner.next();
 		long startTime = System.currentTimeMillis();
 
-		System.out.println("To start stopwatch, type end");
+		System.out.println("To stop stopwatch, type end");
 		scanner.next();
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println(estimatedTime + "ms");
@@ -290,9 +329,9 @@ public class Utility {
 
 		System.out.println("Enter the row and col number in which you want to insert X");
 		System.out.println("Enter the row:");
-		int row = sc.nextInt();
+		int row = scanner.nextInt();
 		System.out.println("Enter the col:");
-		int col = sc.nextInt();
+		int col = scanner.nextInt();
 
 		ar[row][col] = 'X';
 
@@ -325,17 +364,20 @@ public class Utility {
 		double delta = Math.abs((b * b) - (4 * a * c));
 		double root1 = ((-b) + Math.sqrt(delta)) / (2 * a);
 		double root2 = ((-b) - Math.sqrt(delta)) / (2 * a);
-		double[] ar = { root1, root2 };
+		double[] ar = {root1,root2};
 		return ar;
 	}
 
-	/*
-	 * 
-	 */
 
+	/**
+	 * Method to calculate wind chill based on given temperature 'temp' and wind speed 'wind'
+	 * @param temp
+	 * @param wind
+	 * @return
+	 */
 	public double calcWindChill(double temp, double wind) {
-		double windChill = 35.74 + (0.6215 * temp) + (((0.4275 * temp) - 35.75) * Math.pow(wind, 0.16));
-		return windChill;
+		return 35.74 +(0.6215*temp)+(((0.4275*temp)-35.75)*Math.pow(wind, 0.16));
+	
 	}
 
 
