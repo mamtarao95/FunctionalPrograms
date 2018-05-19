@@ -1,21 +1,25 @@
+/******************************************************************************
+ *  Purpose: Simulates a gambler who start with $stake and place fair $1 bets until
+			he/she goes broke (i.e. has no money) or reach $goal.
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.functionalprogram;
-import java.util.Scanner;
+
 import com.bridgelabz.util.Utility;
 
-public class Gambler 
-{
-	public static void main(String[] args)
-	{
-		Utility utility = new Utility();
-		Scanner sc=new Scanner(System.in);
-	System.out.println("enter the stake amount(in Rs): ");
-	double stake=sc.nextDouble();
-	System.out.println("enter the goal amount(in Rs): ");
-	double goal=sc.nextDouble();
-	System.out.println("enter the no. of plays: ");
-	int plays=sc.nextInt();
-	utility.gambling(stake,goal,plays);
-     sc.close();
+public class Gambler {
+	public static void main(String[] args) {
+		System.out.println("enter the stake amount(in Rs): ");
+		double stake =Utility.userInputDouble();
+		System.out.println("enter the goal amount(in Rs): ");
+		double goal = Utility.userInputDouble();
+		System.out.println("enter the no. of plays: ");
+		int plays = Utility.userInputInteger();
+		Utility.gambling(stake, goal, plays);
 
 	}
 

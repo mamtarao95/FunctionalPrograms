@@ -1,23 +1,24 @@
+/******************************************************************************
+ *  Purpose: Program Distance.java that takes two integer command­line arguments x
+			and y and prints the Euclidean distance from the point (x, y) to the origin (0, 0).
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.functionalprogram;
-import com.bridgelabz.util.Utility;
-import java.util.Scanner;
 
-public class Distance 
-{
-	public static void main(String[] args)
-	{
-	Scanner sc=new Scanner(System.in);
-	System.out.println("Enter the value of X: ");
-	double x=sc.nextDouble();
-	System.out.println("Enter the value of Y: ");
-	double y=sc.nextDouble();
-	
-	Utility utility=new Utility();
-	double distOrigin=utility.calcEuclid(x,y);
-	System.out.println("The euclid distance from origin(0,0) to point("+x+","+y+") is: ");
-	System.out.println(distOrigin);
-	
-	sc.close();
+import com.bridgelabz.util.Utility;
+
+public class Distance {
+	public static void main(String[] args) {
+		System.out.println("Enter the value of X: ");
+		double x = Utility.userInputInteger();
+		System.out.println("Enter the value of Y: ");
+		double y =  Utility.userInputInteger();
+        double distOrigin = Utility.calcEuclid(x,y);
+		System.out.println("The euclid distance from origin(0,0) to point(" + x + "," + y + ") is: "+distOrigin);
 	}
 
 }

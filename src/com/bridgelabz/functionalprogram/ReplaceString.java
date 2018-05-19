@@ -8,20 +8,13 @@
  ******************************************************************************/
 
 package com.bridgelabz.functionalprogram;
+
 import com.bridgelabz.util.Utility;
 
-public class ReplaceString
-{
-	/*
-	 * The main function is written to test PrimeChecker class
-	 */
-	public static void main(String[] args)
-	{
-		
-		String mtemplate="Hello <<username>> , How are you?";
-		String mresult=Utility.replaceUserName(mtemplate);
-		System.out.println(mresult);
-		
-		}
+public class ReplaceString {
+	public static void main(String[] args) {
+		String mtemplate = "Hello <<username>> , How are you?";
+		System.out.println(Utility.replaceUserName(mtemplate));
+	}
 
 }

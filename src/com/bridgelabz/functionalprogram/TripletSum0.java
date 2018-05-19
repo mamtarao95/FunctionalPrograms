@@ -1,24 +1,20 @@
-package com.bridgelabz.functionalprogram;
-import com.bridgelabz.util.Utility;
-import java.util.Scanner;
+/******************************************************************************
+ *  Purpose: A program with cubic running time. Read in N integers and counts the
+			number of triples that sum to exactly 0.
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 
-public class TripletSum0 
-{
-	public static void main(String[] args) 
-	{
-	Scanner sc=new Scanner(System.in);
-	System.out.println("Enter the number of integers you want in the array: ");
-	int num=sc.nextInt();
-	int[] ar=new int[num];
-	System.out.println("Enter "+num+ " integers: " );
-	for(int i=0;i<num;i++)
-	{
-		ar[i]=sc.nextInt();
-	}
-	
-	Utility utility=new Utility();
-	utility.sumTriplet(ar);
-	sc.close();
-	}
-	
+package com.bridgelabz.functionalprogram;
+
+import com.bridgelabz.util.Utility;
+
+public class TripletSum0 {
+	public static void main(String[] args) {
+		System.out.println("Enter the number of integers you want in the array: ");
+		Utility.sumTriplet(Utility.userInputInteger());
+		}
 }
