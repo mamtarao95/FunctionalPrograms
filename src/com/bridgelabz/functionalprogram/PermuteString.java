@@ -1,23 +1,11 @@
 package com.bridgelabz.functionalprogram;
-import java.util.Scanner;
+
 import com.bridgelabz.util.Utility;
 
-public class PermuteString
-{
-public static void main(String[] args)
-{
+public class PermuteString{
 	
-	Scanner sc = new Scanner(System.in);
-	Utility utility=new Utility();
-	
-	String str=sc.next();
-	char[] ch=str.toCharArray();
-	
-	utility.permutation(ch,0);
-	sc.close();
-	
-	
-	
-	
-}
+	public static void main(String[] args){
+	Utility.permutation(Utility.userInputString().toCharArray() , 0);
+		
+     }
 }
