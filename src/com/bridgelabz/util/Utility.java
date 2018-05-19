@@ -4,16 +4,17 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Utility {
-	
+
 	static Scanner scanner = new Scanner(System.in);
-	
+	static Random ran = new Random();
+
 	/*
 	 * Method to take user input as string
 	 */
 	public static String userInputString() {
 		return scanner.nextLine();
 	}
-	
+
 	/*
 	 * Method to take user input as integer
 	 */
@@ -23,6 +24,7 @@ public class Utility {
 
 	/**
 	 * Method to replace the a string with the user input name
+	 * 
 	 * @param temp
 	 * @return
 	 */
@@ -32,11 +34,10 @@ public class Utility {
 		String res = temp.replace("<<username>>", name);
 		return res;
 	}
-	
-	
-	
+
 	/**
 	 * Method to calculate percentage of head vs tail in the given number of trials
+	 * 
 	 * @param timesofflip
 	 */
 	public static void genPercentage(int timesofflip) {
@@ -44,8 +45,8 @@ public class Utility {
 		float tail = 0;
 		float headPercent;
 		float tailPercent;
-		for(int i = 1; i <= timesofflip; i++) {
-			if(Math.random() < 0.5)
+		for (int i = 1; i <= timesofflip; i++) {
+			if (Math.random() < 0.5)
 				head++;
 			else
 				tail++;
@@ -59,11 +60,9 @@ public class Utility {
 		System.out.println("tail percentage: " + tailPercent + "%");
 	}
 
-	
-	
-	
 	/**
 	 * Method to check given year is leap year or not
+	 * 
 	 * @param year
 	 * @return
 	 */
@@ -72,42 +71,35 @@ public class Utility {
 			if (year % 100 == 0) {
 				if (year % 400 == 0) {
 					return true;
-					}
-				else {
+				} else {
 					return false;
 				}
-			}
-           else {
+			} else {
 				return true;
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 
 	}
-	
-	
-	
+
 	/**
 	 * Method to print each power of two
+	 * 
 	 * @param power
 	 */
 	public static void printPower(int power) {
-		if(power<31)
-		{
-		  System.out.println("The table of power of 2 till " + power + ": ");
+		if (power < 31) {
+			System.out.println("The table of power of 2 till " + power + ": ");
 			for (int i = 1; i <= power; i++) {
 				int res = twoPower(i);
 				System.out.println("2^" + i + "= " + res);
-				}
-		}
-		else
-		{
-		System.out.println("Enter value less than 32!!");
+			}
+		} else {
+			System.out.println("Enter value less than 32!!");
 		}
 	}
-	
+
 	/*
 	 * method to find power of two for each number
 	 */
@@ -118,7 +110,6 @@ public class Utility {
 		}
 		return temp;
 	}
-
 
 	/*
 	 * Method to find harmonic number
@@ -133,7 +124,6 @@ public class Utility {
 		return output;
 	}
 
-	
 	/*
 	 * Method to find prime factors using brute's force
 	 */
@@ -221,41 +211,39 @@ public class Utility {
 
 	}
 
-	
 	/**
 	 * To check whether the coupon numbers entered by user are distinct or not
+	 * 
 	 * @param num
 	 * @return
 	 */
 	public static int[] checkDistinct(int num) {
-		int[] ar= new int[num];
-		System.out.println("Enter "+num+" distinct coupons: ");
-		
-		for(int i=0;i<num;i++)
-		{
-			ar[i]=Utility.userInputInteger();
-			if(i!=0) {
-			   for(int j=i-1 ; j>=0 ; j--){
-				  if(ar[i]==ar[j]) {
-					System.out.println("You have entered duplicate values.Please start again!!");
-					checkDistinct(num);
-						}
+		int[] ar = new int[num];
+		System.out.println("Enter " + num + " distinct coupons: ");
+
+		for (int i = 0; i < num; i++) {
+			ar[i] = Utility.userInputInteger();
+			if (i != 0) {
+				for (int j = i - 1; j >= 0; j--) {
+					if (ar[i] == ar[j]) {
+						System.out.println("You have entered duplicate values.Please start again!!");
+						checkDistinct(num);
 					}
 				}
+			}
 		}
-	return ar;	
+		return ar;
 	}
-	
-	
 
 	/**
-	 * Method to return the all possible random numbers 
-	 * need to be generated to get all n distinct coupons  
+	 * Method to return the all possible random numbers need to be generated to get
+	 * all n distinct coupons
+	 * 
 	 * @param num
 	 * @return
 	 */
 	public static int randomGen(int num) {
-		int[] ar=checkDistinct(num);
+		int[] ar = checkDistinct(num);
 		int match = 0;
 		int codeCount = 0;
 		Random ran = new Random();
@@ -272,39 +260,36 @@ public class Utility {
 		return codeCount;
 	}
 
-	
 	/**
 	 * Method to return all possible permutation of given string
+	 * 
 	 * @param ch
 	 * @param key
 	 */
-	public static void permutation(char[] ch, int key) { 
-		  
-	  if (key == ch.length) { 
-		  for(int i = 0; i < ch.length; i++) 
-		  { 
-			  System.out.print(ch[i]); 
-		  }
-	      System.out.println();
-	  
-	  }
-	  
-	 else {
-		 for(int i=0 ; i<ch.length ;i++) 
-		 {
-			 char temp = ch[key];
-			 ch[key]=ch[i];
-			 ch[i]=temp;
-	  
-			 permutation(ch, key + 1);
-	
-			 temp = ch[key];
-			 ch[key]=ch[i];
-			 ch[i]=temp;
-		 }
-	  	} 
+	public static void permutation(char[] ch, int key) {
+
+		if (key == ch.length) {
+			for (int i = 0; i < ch.length; i++) {
+				System.out.print(ch[i]);
+			}
+			System.out.println();
+
+		}
+
+		else {
+			for (int i = 0; i < ch.length; i++) {
+				char temp = ch[key];
+				ch[key] = ch[i];
+				ch[i] = temp;
+
+				permutation(ch, key + 1);
+
+				temp = ch[key];
+				ch[key] = ch[i];
+				ch[i] = temp;
+			}
+		}
 	}
-	
 
 	/*
 	 * Method to calculate the elapsed time in milliseconds
@@ -320,69 +305,162 @@ public class Utility {
 		System.out.println(estimatedTime + "ms");
 	}
 
-	/*
-	 * 
+	
+	
+	/**
+	 *  Method to play tic-tac-toe
+	 * @param row1
+	 * @param col1
 	 */
-
-	public void letsPlay(int row1, int col1) {
+	public static void letsPlay(int row1, int col1) {
 		int[][] ar = formTable(row1, col1);
+       System.out.println("Enter the row and col number in which you want to insert X");
+       int a=0;
+	
+       while(a!=2) {	
+    	   System.out.println("Enter the row:");
+    	   int row = userInputInteger();
+    	   System.out.println("Enter the col:");
+    	   int col =  userInputInteger();
+    	   ar[row][col] =2;
+    	   show(ar);
+    	   a=winner(ar);
+    	   computer(ar,row,col);
+	      }
+       	System.out.println("Youwon");
+     }
 
-		System.out.println("Enter the row and col number in which you want to insert X");
-		System.out.println("Enter the row:");
-		int row = scanner.nextInt();
-		System.out.println("Enter the col:");
-		int col = scanner.nextInt();
-
-		ar[row][col] = 'X';
-
-	}
 
 	/**
+	 * Method to trigger computer's turn(randomly generated) 
+	 * 
+	 * @param row
+	 * @param col
+	 */
+	public static void computer(int[][] ar, int row, int col) {
+		int comrow = ran.nextInt(3);
+		int comcol = ran.nextInt(3);
+		if (comrow == row && comcol == col) {
+			computer(ar, row, col);
+		 }
+		System.out.println("System turn ..!!");
+		ar[comrow][comcol] = 1;
+		show(ar);
+    }
+
+	/*
+	 * Method to decide who is the winner
+	 * @param ar
+	 * @return int
+	 */
+	public static int winner(int[][] ar) {
+        int i=0;
+	
+			for ( i = 0; i < 3; i++) {
+			int j = 0;
+			int count=0;
+			while (j < 3) {
+				if (ar[i][j] == 2) {
+					j++;
+					count++;
+				}
+				else 
+					j++;
+             }
+			if(count==3) {
+			return 2;
+			}
+			
+			for (int x = 0; x < 3; x++) {
+				int y = 0;
+				int count1=0;
+				while (y < 3) {
+					if (ar[y][x] == 2) {
+						y++;
+						count1++;
+					}
+					else 
+						y++;
+	             }
+				if(count1==3) {
+				return 2;
+		}
+		if(ar[0][0]==2 && ar[1][1]==2 && ar[2][2]==2
+		|| ar[0][2]==2 && ar[1][1]==2 && ar[2][0]==2)	{
+		return 2;	
+		}			
+		}
+				}return 0;
+	}
+
+
+	/**
+	 * Method to display reference  play board
 	 * @param row
 	 * @param col
 	 * @return
 	 */
-	public int[][] formTable(int row1, int col1) {
+	public static int[][] formTable(int row1, int col1) {
 		int[][] ar = new int[row1][col1];
+		
 		for (int i = 0; i < ar.length; i++) {
 			for (int j = 0; j < ar[i].length; j++) {
 				System.out.print("[" + i + "][" + j + "]  ");
-
-			}
+				}
 			System.out.println();
 			System.out.println();
 		}
-		return ar;
+     return ar;
+    }
 
+	/**
+	 * Method to display modified play board after each of the player's turn
+	 * @param ar
+	 */
+	public static void show(int[][] ar)
+	{
+		for (int i = 0; i < ar.length; i++) {
+			for (int j = 0; j < ar[i].length; j++) {
+				
+				System.out.print(ar[i][j]);
+				}
+			System.out.println();
+		}
 	}
 
-	/*
-	 * Method to find roots of the quadratic equation
-	 */
+	
 
+	/**
+	 *  Method to find roots of the quadratic equation
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @return
+	 */
 	public double[] findRoots(double a, double b, double c) {
 		double delta = Math.abs((b * b) - (4 * a * c));
 		double root1 = ((-b) + Math.sqrt(delta)) / (2 * a);
 		double root2 = ((-b) - Math.sqrt(delta)) / (2 * a);
-		double[] ar = {root1,root2};
+		double[] ar = { root1, root2 };
 		return ar;
 	}
 
-
 	/**
-	 * Method to calculate wind chill based on given temperature 'temp' and wind speed 'wind'
+	 * Method to calculate wind chill based on given temperature 'temp' and wind
+	 * speed 'wind'
+	 * 
 	 * @param temp
 	 * @param wind
 	 * @return
 	 */
 	public double calcWindChill(double temp, double wind) {
-		return 35.74 +(0.6215*temp)+(((0.4275*temp)-35.75)*Math.pow(wind, 0.16));
-	
-	}
+		return 35.74 + (0.6215 * temp) + (((0.4275 * temp) - 35.75) * Math.pow(wind, 0.16));
 
+	}
 
 	/**
 	 * Method to calculate percentage of win and loss
+	 * 
 	 * @param $stake
 	 * @param $goal
 	 * @param plays
@@ -394,8 +472,7 @@ public class Utility {
 			while (stake != goal) {
 				if (Math.random() < 0.5) {
 					stake -= 1;
-				}
-				else {
+				} else {
 					stake += 1;
 					win++;
 				}

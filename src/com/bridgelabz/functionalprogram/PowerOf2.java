@@ -1,30 +1,12 @@
 package com.bridgelabz.functionalprogram;
+
 import com.bridgelabz.util.Utility;
-import java.util.Scanner;
 
-public class PowerOf2
-{
-	public static void main(String[] args)
-	{
-	Scanner sc=new Scanner(System.in);
-	System.out.println("Enter the power value N (2^N): ");
-	int power=sc.nextInt();
+public class PowerOf2{
 
-	/*
-	 * Checks if power is valid(<31).Calculate the power of 2 if power is valid
-	 */
-	
-	if(power<31)
-	{
-	Utility utility =new Utility();
-	utility.printPower(power);
-	}
-	else
-	{
-	System.out.println("Enter value less than 32!!");
-	}
-	sc.close();
+	public static void main(String[] args){
+		System.out.println("Enter the power value N (2^N): ");
+		Utility.printPower(Utility.userInputInteger());
 	}
 	
-
 }
