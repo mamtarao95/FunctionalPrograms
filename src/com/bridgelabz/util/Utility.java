@@ -350,12 +350,12 @@ public class Utility {
 		System.out.println("Enter the row and col number in which you want to insert X");
 		int a = 0;
 		
-		while (a != 2) {
+		while (a!= 2) {
 			System.out.println("Enter the row:");
 			int row = userInputInteger();
 			System.out.println("Enter the col:");
 			int col = userInputInteger();
-			ar[row][col] = 2;
+			ar[row][col] = 88;
 			show(ar);
 			a = winnerUser(ar);
 			computer(ar, row, col);
@@ -375,7 +375,7 @@ public class Utility {
 			computer(ar, row, col);
 		}
 		System.out.println("System turn ..!!");
-		ar[comrow][comcol] = 1;
+		ar[comrow][comcol] = 48;
 		show(ar);
 	}
 
@@ -435,6 +435,7 @@ public class Utility {
 
 		for (int i = 0; i < ar.length; i++) {
 			for (int j = 0; j < ar[i].length; j++) {
+				ar[i][j]=42;
 				System.out.print("[" + i + "][" + j + "]  ");
 			}
 			System.out.println();
@@ -450,7 +451,7 @@ public class Utility {
 	public static void show(int[][] ar) {
 		for (int i = 0; i < ar.length; i++) {
 			for (int j = 0; j < ar[i].length; j++) {
-				System.out.print(ar[i][j]);
+				System.out.print((char)ar[i][j]);
 			}
 			System.out.println();
 		}
