@@ -2,8 +2,13 @@ package com.bridgelabz.util;
 
 import java.util.Scanner;
 import java.util.Random;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 //import java.util.Arrays;
+import java.util.List;
 
 public class Utility {
 
@@ -15,7 +20,8 @@ public class Utility {
 	 * Method to take user input as string
 	 */
 	public static String userInputString() {
-		return scanner.nextLine();
+		String str = scanner.next();
+		return str;
 	}
 
 	/*
@@ -527,6 +533,7 @@ public class Utility {
 
 	}
 	
+	//*********************************************************************
 	
 	/**
 	 * Method to print all the prime numbers between 0 to 1000
@@ -598,6 +605,7 @@ public class Utility {
 	}
 	
 	
+	
 	/**
 	 * Method to perform binary search to find the integer element 
 	 * @param ar
@@ -622,33 +630,28 @@ public class Utility {
 	
 	
 	/**
-	 * Method to perform binary search to find the integer element 
+	 * Method to perform binary search to find the string element 
 	 * @param ar
 	 * @param element
 	 * @return
 	 */
 	
 	public static int binSearchStr(String[] ar, String element){
+		
 		int start=0;
 		int end =ar.length-1;
 		 
 		while (start <= end){
 		      int mid = start + (end-start)/2;
-		            if (ar[mid] == element)
+	
+		            if (ar[mid].equals(element))
 		                return mid;
-		            if (ar[mid]<element)
+		            if (ar[mid].compareTo(element)<0)
 		                start = mid + 1;
 		            else
 		                end = mid - 1;
 		     }
 		        return -1;
-		
-		
-		
-	}
-
-	public static String sortString(String[] ar) {
-		
 		
 		
 		
@@ -680,7 +683,28 @@ public class Utility {
 return ar;
 	}
 
-
+	/*
+	 * Method to perform insertion sort in string
+	 */
+	public static String[] insertSortStr(int size) {
+		String[] str=new String[size];
+		System.out.println("Enter the elements in the array");
+		
+		for(int i=0 ; i<size ; i++){
+			str[i]=userInputString();
+		}
+		
+		for(int i=1 ; i<size ;i++) {
+			String key=str[i];
+			int j=i-1;
+			while(j>=0 && (key.compareTo(str[j])<0)) {
+				str[j+1]=str[j];
+				j=j-1;
+			}
+			str[j+1]=key;
+		}
+	return str;
+		}
 
 /**
  * Method to perform bubble sort on integer 
@@ -706,6 +730,31 @@ public static int[] bubbleSortInt(int size) {
 	}
 	return ar;
 	}
+
+/*
+ * Method to perform bubble sort in string
+ * 
+ */
+public static String[] bubbleSortStr(int size) {
+	String[] ar=new String[size];
+	System.out.println("Enter the elements in the array");
+	
+	for(int i=0; i<size ; i++) {
+		ar[i]=userInputString();
+	}
+	
+	for(int i=0;i<size-1;i++) {
+		for(int j=i+1 ; j<size ;j++) {
+			if(ar[i].compareTo(ar[j]) >0) {
+				String temp=ar[i];
+				ar[i]=ar[j];
+				ar[j]=temp;
+			}
+		}
+	}
+	return ar;
+	}
+
 
 /**
  * Method to play guess game
@@ -735,10 +784,141 @@ public static int[] bubbleSortInt(int size) {
 		                end = mid - 1;
 		     }
 		        return -1;
+    }
+    /*
+     * 
+     */
+    public static void searchWord() throws IOException{
+    	BufferedReader in = new BufferedReader(new FileReader("/home/administrator/Documents/test"));
+        String str;
+        while((str = in.readLine())!= null){
+            String[] arr = str.split("");
+            for(int i=0 ; i<str.length() ; i++){
+                arr[i] = in.readLine();
+            }
+            System.out.println(arr[2]);
+
+ 
+   /* for(int i=0 ;i<stringArr.length;i++) {
+    	System.out.println(stringArr[i]);
+    }*/
+    
+    System.out.println("Enter the word you want to search for:");
+    String s1=scanner.next();
+    int result=binSearchStr(arr, s1);
+	if (result == -1)
+		System.out.println("Element not present");
+	else
+		System.out.println("Element found at " + "index " + result);
+    
+    }in.close();
+    }
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+     * 
+     */
+    	public static void merge(int arr[], int l, int m, int r)
+    	{
+    		int n1 = m - l + 1;
+    		int n2 = r - m;
+
+    		/* Create temp arrays */
+    		int L[] = new int [n1];
+    		int R[] = new int [n2];
+
+    		/*Copy data to temp arrays*/
+    		for (int i=0; i<n1; ++i)
+    			L[i] = arr[l + i];
+    		for (int j=0; j<n2; ++j)
+    			R[j] = arr[m + 1+ j];
+
+
+    		/* Merge the temp arrays */
+
+    		// Initial indexes of first and second subarrays
+    		int i = 0, j = 0;
+
+    		// Initial index of merged subarry array
+    		int k = l;
+    		while (i < n1 && j < n2)
+    		{
+    			if (L[i] <= R[j])
+    			{
+    				arr[k] = L[i];
+    				i++;
+    			}
+    			else
+    			{
+    				arr[k] = R[j];
+    				j++;
+    			}
+    			k++;
+    		}
+
+    		/* Copy remaining elements of L[] if any */
+    		while (i < n1)
+    		{
+    			arr[k] = L[i];
+    			i++;
+    			k++;
+    		}
+
+    		/* Copy remaining elements of R[] if any */
+    		while (j < n2)
+    		{
+    			arr[k] = R[j];
+    			j++;
+    			k++;
+    		}
+    	}
+
+    	// Main function that sorts arr[l..r] using
+    	// merge()
+    	void sort(int arr[], int l, int r)
+    	{
+    		if (l < r)
+    		{
+    			// Find the middle point
+    			int m = (l+r)/2;
+
+    			// Sort first and second halves
+    			sort(arr, l, m);
+    			sort(arr , m+1, r);
+
+    			// Merge the sorted halves
+    			merge(arr, l, m, r);
+    		}
+    	}
+
+    	
+
+
+    }
+   
+
+
+	
+	
+	
+
 		
-		
-		
-	}
 
 
 
@@ -747,9 +927,6 @@ public static int[] bubbleSortInt(int size) {
 
 
 
-
-
-}
 	
 
 	
