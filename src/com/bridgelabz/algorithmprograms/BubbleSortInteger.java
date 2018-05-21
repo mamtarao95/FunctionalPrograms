@@ -13,6 +13,7 @@ public class BubbleSortInteger {
 		for(int i=0 ;i<size;i++) {
 			System.out.print(ar[i]+ ", ");
 		}
+		System.out.println();
 		System.out.println("The elapsed time for the searching operation is: "+elapsedtime+"ns");
 		
 	}

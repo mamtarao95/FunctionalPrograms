@@ -19,7 +19,7 @@ public class BinarySearchString {
 		System.out.println("Enter the string you want to search");
 		String element = Utility.userInputString();
 		
-		sortString(ar);
+		Arrays.sort(ar);
 		long starttime=System.nanoTime();
 		int result = Utility.binSearchStr(ar, element);
 		long elapsedtime=System.nanoTime()-starttime;

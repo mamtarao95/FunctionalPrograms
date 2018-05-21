@@ -636,7 +636,7 @@ public class Utility {
 		      int mid = start + (end-start)/2;
 		            if (ar[mid] == element)
 		                return mid;
-		            if (ar[mid] < element)
+		            if (ar[mid]<element)
 		                start = mid + 1;
 		            else
 		                end = mid - 1;
@@ -707,9 +707,38 @@ public static int[] bubbleSortInt(int size) {
 	return ar;
 	}
 
-
-
-
+/**
+ * Method to play guess game
+ * @param num
+ */
+    public static int guessGame(int num) {
+    	System.out.println("Think of number between 0 to "+(num-1));
+    	int[] ar=new int[num];
+    	int count=0;
+    	for(int i=0;i<num;i++) {
+    		ar[i]=count++;
+    	}
+    	int start=0;
+		int end=ar.length-1;
+		 
+		while (start <= end){
+		      int mid = start + (end-start)/2;
+		      System.out.println("Is the number is "+ar[mid]);
+		      
+	           if (userInputString().equals("true"))
+	                return mid;
+		     
+	           System.out.println("Is the number lies between "+mid+" & "+end);
+		            if (userInputString().equals("true"))
+		                start = mid + 1;
+		            else
+		                end = mid - 1;
+		     }
+		        return -1;
+		
+		
+		
+	}
 
 
 
