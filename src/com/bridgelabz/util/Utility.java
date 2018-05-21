@@ -2,9 +2,12 @@ package com.bridgelabz.util;
 
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
+//import java.util.Arrays;
 
 public class Utility {
 
+	static ArrayList <Integer> arrayList=new  ArrayList <Integer>();
 	static Scanner scanner = new Scanner(System.in);
 	static Random ran = new Random();
 
@@ -231,7 +234,6 @@ public class Utility {
 
 	}
 
-	
 	
 	/**
 	 * Method to calculate Euclid distance of given point from the origin
@@ -524,5 +526,203 @@ public class Utility {
 		}
 
 	}
+	
+	
+	/**
+	 * Method to print all the prime numbers between 0 to 1000
+	 * @param num
+	 */
+	public static int TOTAL=0;
+	public static void printPrime(int num){
+		int count=0;
+		
+		for(int i=2 ; i<=num ;i++ ){
+			if(num%i==0){
+				count++;
+				}
+		}
+		if(count==1) {
+			System.out.println(num);
+		    arrayList.add(num);
+			TOTAL++;
+		}
+		else {
+			return;
+		}
+	}
+	
+	
+	
+	
+	/**
+	 * Method to check pairs of prime numbers which are anagram
+	 * @param num1
+	 * @param num2
+	 */
+	public static void checkAnag(int num1 , int num2){
+		String s1= String.valueOf(num1);
+		String s2= String.valueOf(num1);
+		int count=0;
+		
+		for(int i=s1.charAt(0) ; i<s1.length(); i++){
+			for(int j=s2.charAt(0) ; j<s2.length(); j++) {
+				if(i==j) {
+					count++;
+				}
+			}
+			if(count==s1.length()) {
+				System.out.println(s1 +" & "+ s2);
+			}
+			else return;
+		}
+	}
+	
+
+	/**
+	 * Method to check whether a given number is pallindrome
+	 * @param num
+	 */
+	public static void checkPallindrome(int num){
+		String s1= String.valueOf(num);
+		int lastIndex=s1.length()-1;
+		String res="";
+		for(int i=lastIndex ; i>=0 ; i--) {
+	    	res=res+s1.charAt(i);
+	    	}
+	    if (res==s1) {
+	    	System.out.println(s1 +" is a pallindrome ");
+	    }
+	    else {
+	    	return;
+	    }
+	}
+	
+	
+	/**
+	 * Method to perform binary search to find the integer element 
+	 * @param ar
+	 * @param element
+	 * @return
+	 */
+	public static int binSearchInt(int[] ar , int element){
+		int start=0;
+		int end =ar.length-1;
+		 
+		while (start <= end){
+		      int mid = start + (end-start)/2;
+		            if (ar[mid] == element)
+		                return mid;
+		            if (ar[mid] < element)
+		                start = mid + 1;
+		            else
+		                end = mid - 1;
+		     }
+		        return -1;
+	}
+	
+	
+	/**
+	 * Method to perform binary search to find the integer element 
+	 * @param ar
+	 * @param element
+	 * @return
+	 */
+	
+	public static int binSearchStr(String[] ar, String element){
+		int start=0;
+		int end =ar.length-1;
+		 
+		while (start <= end){
+		      int mid = start + (end-start)/2;
+		            if (ar[mid] == element)
+		                return mid;
+		            if (ar[mid] < element)
+		                start = mid + 1;
+		            else
+		                end = mid - 1;
+		     }
+		        return -1;
+		
+		
+		
+	}
+
+	public static String sortString(String[] ar) {
+		
+		
+		
+		
+	}
+	
+
+	
+	/**
+	 * Method to perform insertion sort on integer
+	 * @param size
+	 * @return
+	 */
+	public static int[] insertSortInt(int size) {
+	int[] ar=new int[size];
+	System.out.println("Enter the elements in the array");
+	
+	for(int i=0 ; i<size ; i++){
+		ar[i]=userInputInteger();
+	}
+	for(int i=1 ; i<size ;i++) {
+		int key=ar[i];
+		int j=i-1;
+		while(j>=0 && key<ar[j]) {
+			ar[j+1]=ar[j];
+			j=j-1;
+		}
+		ar[j+1]=key;
+	}
+return ar;
+	}
+
+
+
+/**
+ * Method to perform bubble sort on integer 
+ * @param size
+ * @return
+ */
+public static int[] bubbleSortInt(int size) {
+	int[] ar=new int[size];
+	System.out.println("Enter the elements in the array");
+	
+	for(int i=0 ; i<size ; i++){
+		ar[i]=userInputInteger();
+	}
+	
+	for(int i=0;i<size-1;i++) {
+		for(int j=i+1 ; j<size ;j++) {
+			if(ar[i]>ar[j]) {
+				int temp=ar[i];
+				ar[i]=ar[j];
+				ar[j]=temp;
+			}
+		}
+	}
+	return ar;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
+	
+
+	
+
+
