@@ -1150,9 +1150,31 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     		return out;
     	}
     	
+    public static void optimiseTask(int num) {
+    	int
     	
     	
     	
+    }
+    	
+    
+    public static void generateChange(int num) {
+    	int[] ar= {1,2,5,10,50,100,500,1000};
+    	
+    	for(int i=0;i<ar.length;i++) {
+    		if(num==ar[i])
+    		{
+    			System.out.println(num);
+    			break;
+    		}
+    	}
+    	
+    	
+    	
+    	
+    	
+    }
+    	
     
     
     
@@ -1160,6 +1182,26 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     
     
     
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     
     
     
