@@ -10,7 +10,7 @@ public class BinarySearchInt {
 
 		System.out.println("Enter the size of array");
 		int size = Utility.userInputInteger();
-		int[] ar = new int[size];
+		Integer[] ar=new Integer[size];
 		System.out.println("Enter the elements ");
 		
 		for (int i = 0; i < size; i++) {
@@ -20,13 +20,8 @@ public class BinarySearchInt {
 		int element = Utility.userInputInteger();
 		Arrays.sort(ar);
 		long starttime=System.nanoTime();
-		int result = Utility.binSearchInt(ar, element);
+		Utility.binSearchGenerics(ar, element);
 		long elapsedtime=System.nanoTime()-starttime;
-		
-		if (result == -1)
-			System.out.println("Element not present");
-		else
-			System.out.println("Element found at " + "index " + result);
 		System.out.println("The elapsed time for the searching operation is: "+elapsedtime+"ns");
 	}
 }

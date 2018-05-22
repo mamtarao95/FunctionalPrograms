@@ -24,7 +24,7 @@ public class BinarySearchString {
 			System.out.print(ar[i]+", ");
 		}
 		long starttime=System.nanoTime();
-		int result = Utility.binSearchStr(ar, element);
+		int result = Utility.binSearchGenerics(ar, element);
 		long elapsedtime=System.nanoTime()-starttime;
 		
 		if (result == -1)

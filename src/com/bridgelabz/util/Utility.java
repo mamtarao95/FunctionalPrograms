@@ -3,12 +3,12 @@ package com.bridgelabz.util;
 import java.util.Scanner;
 import java.util.Random;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-//import java.util.Arrays;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Iterator;
 
 public class Utility {
 
@@ -38,7 +38,21 @@ public class Utility {
 		return scanner.nextDouble();
 	}
 
+	/*
+	 * Method to take user input as boolean
+	 */
+	public static boolean userInputBoolean() {
+		return scanner.nextBoolean();
+	}
 	
+	
+	private static char[] arrayList(Object object) {
+		return null;
+	}
+
+	private static Object get(int i) {
+		return null;
+	}
 	
 	/**
 	 * Method to replace the a string with the user input name
@@ -556,7 +570,8 @@ public class Utility {
 		else {
 			return;
 		}
-	}
+}
+	
 	
 	
 	
@@ -566,42 +581,49 @@ public class Utility {
 	 * @param num1
 	 * @param num2
 	 */
-	public static void checkAnag(int num1 , int num2){
-		String s1= String.valueOf(num1);
-		String s2= String.valueOf(num1);
+	public static void checkAnag(){
+		
+		for (int i = 0; i<arrayList.size(); i++) {
+			for(int j=i+1 ; j<=arrayList.size() ; j++) {
+		
+		
+		String s1= String.valueOf(arrayList(get(i)));
+		String s2= String.valueOf(arrayList(get(j)));
 		int count=0;
 		
-		for(int i=s1.charAt(0) ; i<s1.length(); i++){
-			for(int j=s2.charAt(0) ; j<s2.length(); j++) {
-				if(i==j) {
+		for(int x=s1.charAt(0) ; x<s1.length(); x++){
+			for(int y=s2.charAt(0) ; y<s2.length(); y++) {
+				if(x==y) {
 					count++;
 				}
 			}
 			if(count==s1.length()) {
 				System.out.println(s1 +" & "+ s2);
 			}
-			else return;
 		}
+		}}
+		
 	}
+	
+
 	
 
 	/**
 	 * Method to check whether a given number is pallindrome
 	 * @param num
 	 */
-	public static void checkPallindrome(int num){
-		String s1= String.valueOf(num);
+	public static void checkPallindrome(){
+		for (int i = 0; i<arrayList.size(); i++) {
+		String s1= String.valueOf(arrayList.get(i));
 		int lastIndex=s1.length()-1;
 		String res="";
-		for(int i=lastIndex ; i>=0 ; i--) {
+		for(int j=lastIndex ; j>=0 ; j--) {
 	    	res=res+s1.charAt(i);
 	    	}
 	    if (res==s1) {
 	    	System.out.println(s1 +" is a pallindrome ");
 	    }
-	    else {
-	    	return;
-	    }
+		}
 	}
 	
 	
@@ -617,10 +639,10 @@ public class Utility {
 		int end =ar.length-1;
 		 
 		while (start <= end){
-		      int mid = start + (end-start)/2;
-		            if (ar[mid] == element)
+		     int mid = start + (end-start)/2;
+		            if (ar[mid]==element)
 		                return mid;
-		            if (ar[mid] < element)
+		            if (ar[mid]<(element))
 		                start = mid + 1;
 		            else
 		                end = mid - 1;
@@ -652,11 +674,23 @@ public class Utility {
 		                end = mid - 1;
 		     }
 		        return -1;
-		
-		
-		
-	}
+		}
 	
+	
+	public static <T extends Comparable<T>> void binSearchGenerics(T[] ar , T element){
+		int start=0;
+		int end =ar.length-1;
+		 
+		while (start <= end){
+		     int mid = start + (end-start)/2;
+		            if (ar[mid]==element)
+		            	System.out.println("Element found at " + "index " + mid);
+		            if (ar[mid].compareTo(element)<0)
+		                start = mid + 1;
+		            else
+		                end = mid - 1;
+		     }
+	}
 
 	
 	/**
@@ -706,6 +740,33 @@ return ar;
 	return str;
 		}
 
+	
+	/**
+	 * Generic insertion sort that takes both string and integer as input
+	 * @param size
+	 * @return
+	 */
+	public static <T extends Comparable<T>> T[] insertSortGen(T[] ar) {
+	for(int i=1 ; i<ar.length ;i++) {
+		T key=ar[i];
+		int j=i-1;
+		while(j>=0 && key.compareTo(ar[j])<0) {
+			ar[j+1]=ar[j];
+			j=j-1;
+		}
+		ar[j+1]=key;
+	}
+return ar;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 /**
  * Method to perform bubble sort on integer 
  * @param size
@@ -757,36 +818,48 @@ public static String[] bubbleSortStr(int size) {
 
 
 /**
+ * Generic method for bubble sort: takes both string and integer as input
+ * @param ar
+ * @return
+ */
+public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
+	for(int i=0;i<ar.length-1;i++) {
+		for(int j=i+1 ; j<ar.length ;j++) {
+			if(ar[i].compareTo(ar[j])>0) {
+				T temp=ar[i];
+				ar[i]=ar[j];
+				ar[j]=temp;
+			}
+		}
+	}
+	return ar;
+	}
+
+
+
+/**
  * Method to play guess game
  * @param num
  */
-    public static int guessGame(int num) {
-    	System.out.println("Think of number between 0 to "+(num-1));
-    	int[] ar=new int[num];
-    	int count=0;
-    	for(int i=0;i<num;i++) {
-    		ar[i]=count++;
-    	}
-    	int start=0;
-		int end=ar.length-1;
-		 
-		while (start <= end){
-		      int mid = start + (end-start)/2;
-		      System.out.println("Is the number is "+ar[mid]);
-		      
-	           if (userInputString().equals("true"))
-	                return mid;
-		     
-	           System.out.println("Is the number lies between "+mid+" & "+end);
-		            if (userInputString().equals("true"))
-		                start = mid + 1;
-		            else
-		                end = mid - 1;
-		     }
-		        return -1;
-    }
-    /*
-     * 
+    public static int guessGame(int low,int high) {
+		            if (high - low == 1) {
+		                return low;
+		            }
+		            int mid = low + (high - low) / 2;
+		            System.out.println("Is it less than " + mid);
+		            if (userInputBoolean()) {
+		                return guessGame(low,mid);
+		            }
+		            else {
+		            return guessGame(mid,high);
+		            }
+		        }
+
+
+ 
+    /**
+     *  Method to find a word using binary search froma file
+     * @throws IOException
      */
     public static void searchWord() throws IOException{
     	BufferedReader in = new BufferedReader(new FileReader("/home/administrator/Documents/test"));
@@ -798,10 +871,6 @@ public static String[] bubbleSortStr(int size) {
             }
             System.out.println(arr[2]);
 
- 
-   /* for(int i=0 ;i<stringArr.length;i++) {
-    	System.out.println(stringArr[i]);
-    }*/
     
     System.out.println("Enter the word you want to search for:");
     String s1=scanner.next();
@@ -815,102 +884,292 @@ public static String[] bubbleSortStr(int size) {
     }
     
     
+	/**Method to perform merge sort
+	 *
+	 * @param ar
+	 * @param l
+	 * @param r
+	 */
    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-     * 
-     */
-    	public static void merge(int arr[], int l, int m, int r)
-    	{
-    		int n1 = m - l + 1;
-    		int n2 = r - m;
-
-    		/* Create temp arrays */
-    		int L[] = new int [n1];
-    		int R[] = new int [n2];
-
-    		/*Copy data to temp arrays*/
-    		for (int i=0; i<n1; ++i)
-    			L[i] = arr[l + i];
-    		for (int j=0; j<n2; ++j)
-    			R[j] = arr[m + 1+ j];
-
-
-    		/* Merge the temp arrays */
-
-    		// Initial indexes of first and second subarrays
-    		int i = 0, j = 0;
-
-    		// Initial index of merged subarry array
-    		int k = l;
-    		while (i < n1 && j < n2)
-    		{
-    			if (L[i] <= R[j])
-    			{
-    				arr[k] = L[i];
-    				i++;
-    			}
-    			else
-    			{
-    				arr[k] = R[j];
-    				j++;
-    			}
-    			k++;
-    		}
-
-    		/* Copy remaining elements of L[] if any */
-    		while (i < n1)
-    		{
-    			arr[k] = L[i];
-    			i++;
-    			k++;
-    		}
-
-    		/* Copy remaining elements of R[] if any */
-    		while (j < n2)
-    		{
-    			arr[k] = R[j];
-    			j++;
-    			k++;
-    		}
-    	}
-
-    	// Main function that sorts arr[l..r] using
-    	// merge()
-    	void sort(int arr[], int l, int r)
-    	{
-    		if (l < r)
-    		{
-    			// Find the middle point
-    			int m = (l+r)/2;
-
-    			// Sort first and second halves
-    			sort(arr, l, m);
-    			sort(arr , m+1, r);
-
-    			// Merge the sorted halves
-    			merge(arr, l, m, r);
-    		}
-    	}
-
-    	
-
-
+ public static String[] mergeArray(String[] left, String[] right) {
+        String[] merged = new String[left.length+right.length];
+        int lIndex = 0;
+        int rIndex = 0;
+        int mIndex = 0;
+        int comp = 0;
+        while (lIndex < left.length || rIndex < right.length) {
+            if (lIndex == left.length) {
+                merged[mIndex++] = right[rIndex++];
+            } else if (rIndex == right.length) {
+                merged[mIndex++] = left[lIndex++];
+            } else {  
+                comp = left[lIndex].compareTo(right[rIndex]);
+                if (comp > 0) {
+                    merged[mIndex++] = right[rIndex++];
+                } else if (comp < 0) {
+                    merged[mIndex++] = left[lIndex++];
+                } else { 
+                    merged[mIndex++] = left[lIndex++];
+                }
+            }   
+        }
+        return merged;
     }
+    
+  
+        
+       public static void merge(String arr[], int l, int m, int r) {
+            int n1 = m - l + 1;
+            int n2 = r - m;
+            String L[] = new String [n1];
+            String R[] = new String [n2];
+     
+            for (int i=0; i<n1; ++i)
+                L[i] = arr[l + i];
+            for (int j=0; j<n2; ++j)
+                R[j] = arr[m + 1+ j];
+            int i = 0, j = 0;
+            int k = l;
+            while (i < n1 && j < n2){
+                if (L[i].compareTo(R[j])<=0) {
+                    arr[k] = L[i];
+                    i++;
+                }
+                else{
+                    arr[k] = R[j];
+                    j++;
+                }
+                k++;
+            }
+     
+            while (i < n1) {
+                arr[k] = L[i];
+                i++;
+                k++;
+            }
+     
+            while (j < n2){
+                arr[k] = R[j];
+                j++;
+                k++;
+            }
+        }
+     
+       
+        public static void sort(String arr[], int l, int r) {
+            if (l < r) {
+                int m = (l+r)/2;
+                sort(arr, l, m);
+                sort(arr , m+1, r);
+                merge(arr, l, m, r);
+            }
+        }
+                
+  public static void printArray(String arr[])
+        {
+            int n = arr.length;
+            for (int i=0; i<n; ++i)
+                System.out.print(arr[i] + " ");
+            System.out.println();
+        }
+     
+       
+
+   /**
+   Method to find the day of the week using gregorian calender
+    * @param day
+    * @param month
+    * @param year
+    * @return
+    */
+    public static String dayOfWeek(int day, int month, int year) {
+    	int y1=year-(14 - month)/12;
+    	int x = y1 + y1 /4 - y1 /100 + y1 /400;
+    	int m1 = month + 12*((14 - month ) / 12) - 2;
+    	int d1= ( day + x + (31*m1) / 12) % 7;
+    	String res="";
+    	
+    	switch(d1) {
+    	case 0:res=res+"Sunday";
+    	break;
+    	case 1:res=res+"Monday";
+    	break;
+    	case 2:res=res+"Tuesday";
+    	break;
+    	case 3:res=res+"Wednesday";
+    	break;
+    	case 4:res=res+"Thursday";
+    	break;
+    	case 5:res=res+"Friday";
+    	break;
+    	case 6:res=res+"Satday";
+    	break;
+	}
+    	return res;
+   }
+    	
+    	
+    	
+   /**
+    * Method for temperature conversion : celsius to farenheit and vice versa
+    * @param choice
+    * @return
+    */
+    public static double temperatureConversion(int choice) {
+	   if(choice==1) {
+		   System.out.println("Enter temerature in celsius");
+		   double faren=(userInputDouble() *( 9/5)) + 32 ;
+		   return faren;
+	   }
+	   else if(choice==2) {
+		   System.out.println("Enter temerature in farenheit");
+		   double cel=(userInputDouble()-31)*(5/9);
+		   return cel;
+	   }
+	   else {
+		   return -1;
+	   }
+   } 
+   
+    	
+    	
+    /**
+     * Method to calculate monthly payment
+     * @param P
+     * @param Y
+     * @param R
+     * @return
+     */
+    public static double monthlyPayment(double P, double Y, double R){
+	  double n=12*Y;
+	  double r=R/(12*100);
+	  double pwr = Math.pow((1+r), (-n));
+	  return (P*r) / (1-pwr);
+	 }
+    	
+ 
+    	/**
+    	 * Method to find square root using Newton's raphson's method
+    	 * @param t
+    	 * @param num
+    	 * @return
+    	 */
+    	public static double sqrt(double t,double num) {
+    		double epsilon=Math.pow(10, -15);
+    		if( ( Math.abs( ((t*t)-num)/t ) > (epsilon*t))){
+    			return t;
+    			}
+    		else {
+    			double replace=(num + (t*t) )/(2*t);
+        		sqrt(replace,num);
+    		}
+    		return -1;
+    		}
+    	
+    	/**
+    	 * Method to convert decimal to binary
+    	 * @param num
+    	 * @return
+    	 */
+    	public static StringBuilder toBinary(int num) {
+    		String out="";
+    	
+    		while(num!=0) {
+    			int rem =num%2;
+    			out=rem+out;
+    			num=num/2;
+    		}
+    		
+    		int size=out.length();
+    		int temp=size;
+    			while(size%4!=0) {
+    				size++;
+    		}
+    			int diff=size-temp;
+    			for(int i=1;i<=diff;i++) {
+    			out='0'+out;
+    			}
+    			
+    			int count=0;
+    			StringBuilder sb=new StringBuilder(out);
+    			for(int i=0;i<out.length();i++) {
+    				count++;
+    				if(count==5) {
+    					sb.insert(i," ");
+    					count=0;
+    				} 
+    			}
+    			return sb;
+    		}
+    	
+    	
+    	public static int binary(int num) {
+  if(num<127) {
+    		StringBuilder str=toBinary(num);
+    		String newstr=str.toString();
+    		System.out.println(newstr);
+    		int size=newstr.length();
+    		String[] array= new String[size];
+    		array=newstr.split(" ");
+    		
+    			String temp=array[0];
+    			array[0]=array[1];
+    			array[1]=temp;
+    			String strBack="";
+    			for(int i=0 ; i< array.length ; i++) {
+    			strBack+=array[i];
+    		}
+    			strBack.replaceAll("\\s","");
+    			System.out.println("After swapping: ");
+    			System.out.println(strBack);
+    			int dec=binToDecimal(strBack);
+    		
+    		return dec;
+  }
+  else return -1;
+    	}
+    
+    	public static int binToDecimal(String string) {
+    		int num=Integer.parseInt(string);
+    		int count=0;
+    		int out=0;
+    		while(num!=0) {
+    			int rem=num%10;
+    			out=out+rem*pow(2,count++);
+    			num=num/10;
+    			
+    		}
+    		return out;
+    	}
+    	
+    	public static int pow(int num,int power) {
+    		int out=1;
+    		for(int i=0;i<power;i++) {
+    			out=out*num;
+    		}
+    		return out;
+    	}
+    	
+    	
+    	
+    	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    	}
+
+
+    
    
 
 
