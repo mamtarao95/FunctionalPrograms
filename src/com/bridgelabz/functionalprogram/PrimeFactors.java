@@ -12,6 +12,7 @@ import com.bridgelabz.util.Utility;
 
 public class PrimeFactors {
 	public static void main(String[] args) {
+		System.out.println("enter the number");
 		Utility.findPrime(Utility.userInputInteger());
 	}
 }

@@ -3,12 +3,14 @@ package com.bridgelabz.util;
 import java.util.Scanner;
 import java.util.Random;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Utility {
 
@@ -46,13 +48,22 @@ public class Utility {
 	}
 	
 	
+	/**
+	 * @param object
+	 * @return
+	 */
 	private static char[] arrayList(Object object) {
 		return null;
 	}
 
+	/**
+	 * @param i
+	 * @return
+	 */
 	private static Object get(int i) {
 		return null;
 	}
+	
 	
 	/**
 	 * Method to replace the a string with the user input name
@@ -185,17 +196,19 @@ public class Utility {
 	public static void findPrime(int num) {
 		int[] prime = new int[num];
 
-		for (int i = 2; i <= num / 2; i++) {
+		for (int i = 2; i <= num ; i++) {
 			if (num % i == 0) {
 				prime[count] = i;
 				count++;
 				}
 		}
+		
 		System.out.print("the prime factors of " + num + " are : ");
 		for (int x = 0; x < count; x++) {
-			System.out.print(prime[x] + " ");
+			printPrime(prime[x]);
 		}
 	}
+	
 
 	
 	
@@ -326,25 +339,29 @@ public class Utility {
 		if (key == ch.length) {
 			for (int i = 0; i < ch.length; i++) {
 				System.out.print(ch[i]);
-			}
+				}
 			System.out.println();
+			
 		}
 
 		else {
-			for (int i = 0; i < ch.length; i++) {
+			for (int i = key; i < ch.length; i++) {
 				char temp = ch[key];
 				ch[key] = ch[i];
 				ch[i] = temp;
-
 				permutation(ch, key + 1);
-
-				temp = ch[key];
-				ch[key] = ch[i];
-				ch[i] = temp;
+				swap(ch,key,i);
+				}
 			}
-		}
-	}
+	     }
 
+	public static char[] swap(char[] ch,int key,int i) {
+		char temp = ch[key];
+		ch[key] = ch[i];
+		ch[i] = temp;
+		
+		return ch;
+	}
 	
 	
 	
@@ -372,7 +389,7 @@ public class Utility {
 		System.out.println("Enter the row and col number in which you want to insert X");
 		int a = 0;
 		
-		while (a!= 2) {
+		while (a!=88) {
 			System.out.println("Enter the row:");
 			int row = userInputInteger();
 			System.out.println("Enter the col:");
@@ -563,16 +580,14 @@ public class Utility {
 				}
 		}
 		if(count==1) {
-			System.out.println(num);
+			System.out.print(num+", ");
 		    arrayList.add(num);
-			TOTAL++;
+		    TOTAL++;
 		}
 		else {
 			return;
 		}
 }
-	
-	
 	
 	
 	
@@ -583,12 +598,17 @@ public class Utility {
 	 */
 	public static void checkAnag(){
 		
+		 Iterator<Integer> iter = arrayList.iterator();
+	      while (iter.hasNext()) {
+	         System.out.println(iter.next());
+	      }
+		System.out.println("hi");
+		
 		for (int i = 0; i<arrayList.size(); i++) {
 			for(int j=i+1 ; j<=arrayList.size() ; j++) {
-		
-		
-		String s1= String.valueOf(arrayList(get(i)));
-		String s2= String.valueOf(arrayList(get(j)));
+				
+		String s1= String.valueOf(arrayList.get(i));
+		String s2= String.valueOf(arrayList.get(j));
 		int count=0;
 		
 		for(int x=s1.charAt(0) ; x<s1.length(); x++){
@@ -620,7 +640,7 @@ public class Utility {
 		for(int j=lastIndex ; j>=0 ; j--) {
 	    	res=res+s1.charAt(i);
 	    	}
-	    if (res==s1) {
+	    if (res.equals(s1)) {
 	    	System.out.println(s1 +" is a pallindrome ");
 	    }
 		}
@@ -677,21 +697,21 @@ public class Utility {
 		}
 	
 	
-	public static <T extends Comparable<T>> void binSearchGenerics(T[] ar , T element){
+	public static <T extends Comparable<T>> void  binSearchGenerics(T[] ar , T element){
 		int start=0;
 		int end =ar.length-1;
 		 
-		while (start <= end){
+		while (start<=end){
 		     int mid = start + (end-start)/2;
-		            if (ar[mid]==element)
-		            	System.out.println("Element found at " + "index " + mid);
+		            if (ar[mid].compareTo(element)==0)
+		      System.out.println("Element found at " + "index " + mid);
 		            if (ar[mid].compareTo(element)<0)
 		                start = mid + 1;
 		            else
 		                end = mid - 1;
 		     }
+		
 	}
-
 	
 	/**
 	 * Method to perform insertion sort on integer
@@ -1002,7 +1022,7 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     	break;
     	case 5:res=res+"Friday";
     	break;
-    	case 6:res=res+"Satday";
+    	case 6:res=res+"Saturday";
     	break;
 	}
     	return res;
@@ -1055,7 +1075,8 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     	 * @return
     	 */
     	public static double sqrt(double t,double num) {
-    		double epsilon=Math.pow(10, -15);
+    		double epsilon=1e-15;
+    		
     		if( ( Math.abs( ((t*t)-num)/t ) > (epsilon*t))){
     			return t;
     			}
@@ -1065,6 +1086,9 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     		}
     		return -1;
     		}
+    	
+    	
+    	
     	
     	/**
     	 * Method to convert decimal to binary
@@ -1103,8 +1127,17 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     		}
     	
     	
+    	/*
+    	 * 
+    	 */
+    	
+    	/**
+    	 * Method to swap the binary digit based on nibbles
+    	 * @param num
+    	 * @return
+    	 */
     	public static int binary(int num) {
-  if(num<127) {
+    		if(num<127) {
     		StringBuilder str=toBinary(num);
     		String newstr=str.toString();
     		System.out.println(newstr);
@@ -1125,10 +1158,18 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     			int dec=binToDecimal(strBack);
     		
     		return dec;
-  }
-  else return -1;
+  			}
+  			else return -1;
     	}
+    	
+    	
+    	
     
+    	/**
+    	 * Method to convert binary to decimal
+    	 * @param string
+    	 * @return
+    	 */
     	public static int binToDecimal(String string) {
     		int num=Integer.parseInt(string);
     		int count=0;
@@ -1142,6 +1183,9 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     		return out;
     	}
     	
+    	/*
+    	 * Method to calculate power of 2
+    	 */
     	public static int pow(int num,int power) {
     		int out=1;
     		for(int i=0;i<power;i++) {
@@ -1150,30 +1194,109 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     		return out;
     	}
     	
-    public static void optimiseTask(int num) {
-    	int
-    	
-    	
-    	
-    }
-    	
-    
+
+   
+	
+    /**
+     * Method to generate denominations of currency
+     * @param num
+     */
+    static int temp=0;
+	static int index=0;
     public static void generateChange(int num) {
     	int[] ar= {1,2,5,10,50,100,500,1000};
-    	
+    
     	for(int i=0;i<ar.length;i++) {
-    		if(num==ar[i])
-    		{
+    		if(num==ar[i]) {
+    			System.out.println("The ");
     			System.out.println(num);
-    			break;
+    			return;
     		}
-    	}
+    		}
+    	
+    	for(int i=0;i<ar.length;i++) {		
+    	for(int j=i+1;j<ar.length;j++) {
+    			if(num<ar[j] && num>ar[i] || num>ar[i]) {
+    				temp=ar[i];	
+    				index=i;
+    				break;
+    			}
+    			}}
+    	
+    	System.out.println(temp);
+    		int goal=num-temp;
+    		for(int i=index;i>=0;i--) {
+    			if(goal==ar[i]) {
+    				System.out.println(ar[i]);
+    				return;
+    			}
+    			
+    		}
+    		generateChange(goal);
+    	 }
     	
     	
     	
-    	
-    	
+    /*
+     * 
+     */
+   /*public static void searchLinkedList(String word, LinkedList<String> list) {
+    	if (list.contains(word)) {
+    		list.remove(word);
+    		
+    		File file=new File("/home/administrator/Documents/test1");
+    		  FileReader fr=null;
+    		  int count=0;
+    		  LinkedList<String> list=new LinkedList<String>();
+    		    
+    		  BufferedReader fo=null;
+    		     try {
+    		    	 fr=new FileReader(file);
+    		    	 fo=new  BufferedReader(fr);
+    		    	 String word=fo.readLine();
+    		
+    		    	 while(word!=null) {
+    		    		 String[] str=word.split(",");
+    		    		 for(int i=0;i<str.length;i++) {
+    		    			 count++;
+    		    			 list.add(str[i]);
+    		    		 }
+    		    		 break;
+    		    	 }
+    		     }
+    		    catch (Exception e) {
+    		         e.printStackTrace();
+    		    }
+    		     
+    		     Iterator iter = list.iterator();
+    		      while (iter.hasNext()) {
+    		         System.out.println(iter.next());
+    		      }
+    		     
+    		
+    		
+            System.out.println("Hooray!");
     }
+    */
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+   }
+    	
+
+    
     	
     
     
@@ -1208,7 +1331,7 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     
     
     
-    	}
+    	
 
 
     
@@ -1219,7 +1342,7 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
 	
 	
 
-		
+    
 
 
 

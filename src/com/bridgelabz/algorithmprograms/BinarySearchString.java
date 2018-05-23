@@ -19,18 +19,10 @@ public class BinarySearchString {
 		String element = Utility.userInputString();
 		
 		Arrays.sort(ar);
-		System.out.println("The sorted array is: ");
-		for (int i = 0; i < size; i++) {
-			System.out.print(ar[i]+", ");
-		}
 		long starttime=System.nanoTime();
-		int result = Utility.binSearchGenerics(ar, element);
+		Utility.binSearchGenerics(ar, element);
 		long elapsedtime=System.nanoTime()-starttime;
-		
-		if (result == -1)
-			System.out.println("Element not present");
-		else
-			System.out.println("Element found at " + "index " + result);
+
 		System.out.println("The elapsed time for the searching operation is: "+elapsedtime+"ns");
 	}
 	

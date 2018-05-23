@@ -5,7 +5,8 @@ import com.bridgelabz.util.Utility;
 public class Anagram_Pallindrome extends Utility {
 	
 	public static void main(String[] args) {
-			Utility.checkAnag();
+
+		Utility.checkAnag();
 			Utility.checkPallindrome();
 	}
 	}
