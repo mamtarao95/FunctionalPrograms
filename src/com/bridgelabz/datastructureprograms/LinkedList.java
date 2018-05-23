@@ -1,9 +1,9 @@
 package com.bridgelabz.datastructureprograms;
 
-public class LinkedList {
+class myLinkedList {
 
-	class Node {
-		public Object data;
+	public class Node {
+		public  Object data;
 		public Node next;
 		
 		public Node(Object data) {
@@ -12,7 +12,7 @@ public class LinkedList {
 		public Node head=null;
 		public int size=0;
 		
-		public void add(Object data) {
+		public void add(int data) {
 			Node n1=new Node(data);
 			if(head==null) {
 				head=n1;
@@ -118,7 +118,13 @@ public class LinkedList {
 			
 		}
 
-		
-
-	
+	}
+public class LinkedList{
+public static void main(String[] args) {
+	LinkedList linkedList=new LinkedList();
+	myLinkedList obj=new myLinkedList();
+	linkedList.add(3);
+	linkedList.add(4);
 }
+}
+

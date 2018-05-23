@@ -16,7 +16,6 @@ public class Prime {
 		for (int i = 0; i <= 1000; i++) {
 			Utility.printPrime(i);
 		}
-		
 	System.out.println("There are a total of " + Utility.TOTAL + " numbers of primenumber between 0-1000");
 	
 	}

@@ -19,8 +19,8 @@ public class BinarySearchInt {
 		System.out.println("Enter the elements you want to search");
 		int element = Utility.userInputInteger();
 		Arrays.sort(ar);
+		System.out.println("The sorted array is: ");
 		for (int i = 0; i < size; i++) {
-			System.out.println("The sorted array is: ");
 			System.out.println(ar[i]+", ");
 		}
 		long starttime=System.nanoTime();

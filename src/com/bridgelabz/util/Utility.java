@@ -111,8 +111,7 @@ public class Utility {
 	public static String checkLeapYear(String year) {
 		 boolean isleap=false;
 		 
-		 if(year.length()==4)
-		 {
+		 if(year.length()==4){
 			 int yr=Integer.parseInt(year);
 			 if (yr % 4 == 0) {
 					if (yr % 100 == 0) {
@@ -538,16 +537,15 @@ public class Utility {
 		double win = 0;
 
 		for (int i = 1; i <= plays; i++) {
-			while (stake != goal) {
-				if (Math.random() < 0.5) {
+			if (Math.random() < 0.5) {
 					stake -= 1;
 				} else {
 					stake += 1;
 					win++;
-				}
-				break;
-			}
+					}
 		}
+		System.out.println(stake);
+		System.out.println(goal);
 		double winP = (win * 100)/ plays;
 		double lossP = (100) - (winP);
 		System.out.println("NO of times he/she wins: " + win + " out of " + plays + " no. of plays ");
@@ -566,6 +564,32 @@ public class Utility {
 	
 	//*********************************************************************
 	
+	
+	
+	/**
+	 * Method to check whether the two strings are anagrams or not
+	 * @param s1
+	 * @param s2
+	 * @return
+	 */
+	public static boolean isAnagram(String s1,String s2) {
+        int count=0;
+		for(int x=0 ; x<s1.length(); x++){
+			for(int y=0 ; y<s2.length(); y++) {
+				if(s1.charAt(x)==s2.charAt(y)) {
+					count++;
+				}
+			}
+			}
+			if(count==s1.length()) {
+				return true;
+				}
+			
+		return false;
+	}
+	
+	
+	
 	/**
 	 * Method to print all the prime numbers between 0 to 1000
 	 * @param num
@@ -580,7 +604,7 @@ public class Utility {
 				}
 		}
 		if(count==1) {
-			System.out.print(num+", ");
+			System.out.println(num+", ");
 		    arrayList.add(num);
 		    TOTAL++;
 		}
@@ -602,7 +626,7 @@ public class Utility {
 	      while (iter.hasNext()) {
 	         System.out.println(iter.next());
 	      }
-		System.out.println("hi");
+		
 		
 		for (int i = 0; i<arrayList.size(); i++) {
 			for(int j=i+1 ; j<=arrayList.size() ; j++) {

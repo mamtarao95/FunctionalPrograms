@@ -19,6 +19,10 @@ public class BinarySearchString {
 		String element = Utility.userInputString();
 		
 		Arrays.sort(ar);
+		System.out.println("The sorted array is: ");
+		for (int i = 0; i < size; i++) {
+			System.out.println(ar[i]+", ");
+		}
 		long starttime=System.nanoTime();
 		Utility.binSearchGenerics(ar, element);
 		long elapsedtime=System.nanoTime()-starttime;

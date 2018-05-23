@@ -11,8 +11,7 @@ package com.bridgelabz.functionalprogram;
 import com.bridgelabz.util.Utility;
 
 public class FlipCoin {
-
-	public static void main(String[] args) {
+public static void main(String[] args) {
 		System.out.println("Enter the number of tosses you want: ");
 			Utility.genPercentage(Utility.userInputInteger());
 		}

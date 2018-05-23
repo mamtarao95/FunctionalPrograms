@@ -10,6 +10,5 @@ public class BinarySwapNibble {
 		System.out.println("The binary representation of swapped number is: "+binary);
 		else
 		System.out.println("Enter number in the range -128 to +127 ");
-
-
-}}
+		}
+	}
