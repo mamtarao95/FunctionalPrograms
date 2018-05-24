@@ -5,6 +5,11 @@ package com.bridgelabz.datastructureprograms;
  *
  * @param <T>
  */
+/**
+ * @author administrator
+ *
+ * @param <T>
+ */
 class LinkedList<T extends Comparable<T>> {
 	public static class Node<T extends Comparable<T>> {
 		T data;
@@ -27,21 +32,23 @@ class LinkedList<T extends Comparable<T>> {
 		public int compareTo(Object object) {
 			return 0;
 		}
-
-		
-
 }
 Node<T> head=null;
 	int size=0;
 		
+	
+	
+		/**
+		 * Method to add element
+		 * @param data
+		 */
 		public void add(T data) {
 			Node<T> new_node=new Node<T>(data);
-			if(head.compareTo(null)==0) {
+			if(head==null) {
 				head=new_node;
 				size++;
 				return;
 			}
-			
 			Node<T> temp=head;
 			while(temp.next!=null) {
 				temp=(Node<T>)temp.next;
@@ -62,20 +69,6 @@ Node<T> head=null;
 			size++;
 		}
 		
-		/**
-		 * Method to add element after the previous node of linked list
-		 */
-		public void insertAfter(T data,T reference)
-		{
-		   Node<T> temp = head;
-		   while(temp != null && !temp.data.equals(reference)) {
-			   temp = temp.next;
-		   }
-
-		   if(temp != null)
-		      temp.next = new Node<T>(data, temp.next);
-		}
-	
 		
 		/**
 		 * Method to add element at the last node of linked list
@@ -94,7 +87,21 @@ Node<T> head=null;
 		   }
 		}
 		
-		
+		/**
+		 * Method to add element after the reference element of linked list
+		 */
+		public void insertAfter(T data,T reference)
+		{
+		   Node<T> temp = head;
+		   while(temp != null && !temp.data.equals(reference)) {
+			   temp = temp.next;
+		   }
+
+		   if(temp != null)
+		      temp.next = new Node<T>(data, temp.next);
+		}
+	
+	
 		
 		/**
 		 * Method to display linked list
@@ -106,7 +113,7 @@ Node<T> head=null;
 			}
 			Node<T>temp=head;
 			while(temp!=null) {
-				System.out.println("Data: "+temp.data);
+				System.out.println(temp.data);
 				temp=temp.next;
 			}
 		}
@@ -119,8 +126,7 @@ Node<T> head=null;
 		 */
 		public boolean search(T value) {
 		        Node<T> temp = head;  
-		        while (temp != null)
-		        {
+		        while (temp != null){
 		            if (temp.data.compareTo(value)==0)
 		                return true; 
 		           temp=temp.next;
@@ -153,7 +159,7 @@ Node<T> head=null;
 		/**
 		 * Method to remove element at index
 		 */
-		public Object removeAt(int index) {
+		public T removeAt(int index) {
 			if(index==0) {
 				T temp=head.data;
 				head=(Node<T>)head.next;
@@ -166,11 +172,43 @@ Node<T> head=null;
 				t=(Node<T>)t.next;
 				count++;
 			}
-			Object temp=t.next.data;
+			T temp=t.next.data;
 			t.next=t.next.next;
 			size--;
 			return temp;
 		}
+		
+		
+		
+		
+		/**
+		 * Method to remove reference element node
+		 * @param reference
+		 */
+		public void remove(T reference){
+		   if(head == null) {
+			   throw new RuntimeException("cannot delete");
+		   }
+		   if( head.data.equals(reference) )
+		   {
+		      head = head.next;
+		      return;
+		   }
+
+		   Node<T> cur  = head;
+		   Node<T> prev = null;
+
+		   while(cur != null && !cur.data.equals(reference) ){
+		      prev = cur;
+		      cur = cur.next;
+		   }
+
+		   if(cur == null) {
+			   throw new RuntimeException("cannot delete");
+		   }
+		   prev.next = cur.next;
+		}
+		
 		
 		
 		
@@ -201,6 +239,30 @@ Node<T> head=null;
 			System.out.println(mid.data);
 		}
 			
+	   public T GetNth(int index){
+		        Node<T> temp = head;
+		        int count = 0; 
+		        while (temp != null){
+		            if (count == index) {
+		            	 return temp.data;
+		            }
+		             count++;
+		            temp = temp.next;
+		        }
+				return null;
+		    	
+			
+	   }
+		 
+		       
+		      
+			
+			
+		
+			
+
+		
+		
 		}
 
 

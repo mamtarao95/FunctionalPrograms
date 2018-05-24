@@ -13,7 +13,9 @@ import com.bridgelabz.util.Utility;
 public class PermuteString{
 	
 	public static void main(String[] args){
+		System.out.println("Enter the string");
 	Utility.permutation(Utility.userInputString().toCharArray() , 0);
+	System.out.println("number of permutations are "+Utility.permutationCount);
 		
      }
 }

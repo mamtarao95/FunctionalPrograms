@@ -72,8 +72,7 @@ public class Utility {
 	 */
 	public static String replaceUserName(String temp) {
 		System.out.println("Enter your name: ");
-		String res = temp.replace("<<username>>", userInputString());
-		return res;
+		return temp.replace("<<username>>", userInputString());
 	}
 
 	
@@ -126,8 +125,7 @@ public class Utility {
 				} else {
 					isleap=false;
 				}
-			 
-		 }
+		}
 		 if(isleap) {
 			 return  "It is a leap year";
 		 }
@@ -271,7 +269,7 @@ public class Utility {
 	 * @return
 	 */
 	public static double calcEuclid(double x, double y) {
-		double sum = (Math.pow(x, x)) + (Math.pow(y, y));
+		double sum = ((x*x)) + ((y*y));
 		return Math.sqrt(sum);
 	}
 
@@ -282,24 +280,35 @@ public class Utility {
 	 * @param num
 	 * @return integer array
 	 */
-	public static int[] checkDistinct(int num) {
-		int[] ar = new int[num];
-		System.out.println("Enter " + num + " distinct coupons: ");
-
+	public static int randomGen(int[] ar,int num) {
+		int count=0;
 		for (int i = 0; i < num; i++) {
-			ar[i] = Utility.userInputInteger();
+			ar[i] = ran.nextInt(num);
+			count++;
 			if (i != 0) {
-				for (int j = i - 1; j >= 0; j--) {
-					if (ar[i] == ar[j]) {
-						System.out.println("You have entered duplicate values.Please start again!!");
-						checkDistinct(num);
-					}
-				}
+				for(int j = i - 1; j >= 0; j--) {
+					if (ar[i] == ar[j])
+						i--;
 			}
 		}
-		return ar;
+		
 	}
-
+		for(int x=0 ; x<ar.length;x++) {
+			System.out.println(ar[x]);
+		}
+		return count;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Method to return the all possible random numbers need to be generated to get
 	 * all n distinct coupons
@@ -308,6 +317,9 @@ public class Utility {
 	 * 
 	 * @return
 	 */
+
+	
+	/*
 	public static int randomGen(int num) {
 		int[] ar = checkDistinct(num);
 		int match = 0;
@@ -323,18 +335,21 @@ public class Utility {
 			}
 		}
 		return codeCount;
-	}
+	}*/
 
 	/**
 	 * Method to return all possible permutation of given string
 	 * @param ch
 	 * @param key
 	 */
+	public static int permutationCount=0;
 	public static void permutation(char[] ch, int key) {
 
 		if (key == ch.length) {
+			permutationCount++;
 			for (int i = 0; i < ch.length; i++) {
 				System.out.print(ch[i]);
+			
 				}
 			System.out.println();
 			
@@ -368,8 +383,9 @@ public class Utility {
 		long startTime = System.currentTimeMillis();
 		System.out.println("To stop stopwatch, type 0");
 		userInputInteger();
-		long estimatedTime = System.currentTimeMillis() - startTime;
-		System.out.println(estimatedTime + "ms");
+		double estimatedTime = System.currentTimeMillis() - startTime;
+		double seconds=estimatedTime/1000;
+		System.out.println(seconds + "s");
 	}
 
 	
@@ -530,21 +546,25 @@ public class Utility {
 	 */
 	public static void gambling(double stake, double goal, int plays) {
 		double win = 0;
-
-		for (int i = 1; i <= plays; i++) {
+      for (int i = 1; i <= plays; i++) {
+			double cash=stake;
+			while(cash>0 && cash<goal) {
 			if (Math.random() < 0.5) {
-					stake -= 1;
-				} else {
-					stake += 1;
-					win++;
-					}
+					cash -= 1;
+				} 
+			else {
+			cash += 1;
+			}
 		}
-		System.out.println(stake);
-		System.out.println(goal);
+		if(cash==goal) {
+				win++;
+					}
+			}
+
 		double winP = (win * 100)/ plays;
 		double lossP = (100) - (winP);
 		System.out.println("NO of times he/she wins: " + win + " out of " + plays + " no. of plays ");
-		if (stake == goal) {
+		if (winP>lossP) {
 			System.out.println("reached goal/win");
 			System.out.println("win percentage: " + winP+"%");
 			System.out.println("loss percentage: " + lossP+"%");
