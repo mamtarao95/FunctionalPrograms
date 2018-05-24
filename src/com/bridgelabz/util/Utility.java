@@ -200,9 +200,8 @@ public class Utility {
 				prime[count] = i;
 				count++;
 				}
-		}
-		
-		System.out.print("the prime factors of " + num + " are : ");
+			}
+	System.out.println("the prime factors of " + num + " are : ");
 		for (int x = 0; x < count; x++) {
 			printPrime(prime[x]);
 		}
@@ -241,8 +240,7 @@ public class Utility {
 	 * Method to print the number of triplet whose sum is zero and also outputs the
 	 * total number of count
 	 */
-
-	public static void sumTriplet(int num) {
+  public static void sumTriplet(int num) {
 		int[] ar = new int[num];
 		System.out.println("Enter " + num + " integers: ");
 		for (int i = 0; i < num; i++) {
@@ -263,8 +261,7 @@ public class Utility {
 			System.out.println("there are a total of " + count + " number of triplet whose sum counts to zero");
 		else
 			System.out.println("There are no triplets found in the given array!!");
-
-	}
+}
 
 	
 	/**
@@ -345,9 +342,7 @@ public class Utility {
 
 		else {
 			for (int i = key; i < ch.length; i++) {
-				char temp = ch[key];
-				ch[key] = ch[i];
-				ch[i] = temp;
+				swap(ch,key,i);
 				permutation(ch, key + 1);
 				swap(ch,key,i);
 				}
@@ -388,7 +383,7 @@ public class Utility {
 		System.out.println("Enter the row and col number in which you want to insert X");
 		int a = 0;
 		
-		while (a!=88) {
+		while (a!=2) {
 			System.out.println("Enter the row:");
 			int row = userInputInteger();
 			System.out.println("Enter the col:");
@@ -429,7 +424,7 @@ public class Utility {
 			int j = 0;
 			int count = 0;
 			while (j < 3) {
-				if (ar[i][j] == 2) {
+				if (ar[i][j] == 88) {
 					j++;
 					count++;
 				} else
@@ -443,7 +438,7 @@ public class Utility {
 				int y = 0;
 				int count1 = 0;
 				while (y < 3) {
-					if (ar[y][x] == 2) {
+					if (ar[y][x] == 88) {
 						y++;
 						count1++;
 					} else
@@ -452,8 +447,8 @@ public class Utility {
 				if (count1 == 3) {
 					return 2;
 				}
-				if (ar[0][0] == 2 && ar[1][1] == 2 && ar[2][2] == 2
-						|| ar[0][2] == 2 && ar[1][1] == 2 && ar[2][0] == 2) {
+				if (ar[0][0] == 88 && ar[1][1] == 88 && ar[2][2] == 88
+						|| ar[0][2] == 88 && ar[1][1] == 88 && ar[2][0] == 88) {
 					return 2;
 				}
 			}
@@ -604,7 +599,7 @@ public class Utility {
 				}
 		}
 		if(count==1) {
-			System.out.println(num+", ");
+			System.out.println(num +" ");
 		    arrayList.add(num);
 		    TOTAL++;
 		}
