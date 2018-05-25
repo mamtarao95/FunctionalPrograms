@@ -5,11 +5,6 @@ package com.bridgelabz.datastructureprograms;
  *
  * @param <T>
  */
-/**
- * @author administrator
- *
- * @param <T>
- */
 public class LinkedList<T extends Comparable<T>> {
 	private Node<T> head = null;
 	private int size = 0;
@@ -238,5 +233,75 @@ public class LinkedList<T extends Comparable<T>> {
 		return null;
 
 	}
+	
+	
+
+	public void addSorted(T data) {
+		       Node<T> current;
+		       Node<T> new_node = new Node<T>(data);
+		         if (head == null || head.data .compareTo(new_node.data)>=0 )
+		         {
+		            new_node.next = head;
+		            head = new_node;
+		         }
+		         else {
+		 
+		           
+		            current = head;
+		 
+		            while (current.next != null &&
+		                   current.next.data .compareTo( new_node.data)<0)
+		                  current = current.next;
+		 
+		            new_node.next = current.next;
+		            current.next = new_node;
+		         }
+		     }
+	
+	
+	public void displaySorted() {
+		if (size == 0) {
+			System.out.println("Empty");
+			return;
+		}
+		
+		Node<T> temp = head;
+		while (temp != null) {
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

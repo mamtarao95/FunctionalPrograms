@@ -6,7 +6,8 @@ import com.bridgelabz.util.Utility;
 
 public class OrderedList {
 	public static void main(String[] args) throws FileNotFoundException {
-		Utility.orderedList();
+		Utility utility=new Utility();
+		utility.orderedList();
 	}
 
 }

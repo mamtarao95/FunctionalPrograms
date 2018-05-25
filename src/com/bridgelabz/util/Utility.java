@@ -9,9 +9,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.bridgelabz.datastructureprograms.LinkedList;
-
-
+import com.bridgelabz.datastructureprograms.LinkedStack;
 
 public class Utility {
 
@@ -22,6 +23,8 @@ public class Utility {
 	public static int temp=0;
 	public static int index=0;
 	public static ArrayList <Integer> arrayList=new  ArrayList <Integer>();
+	LinkedList<String> list = new LinkedList<String>();
+	LinkedList<Integer> ilist = new LinkedList<Integer>();
 	public static Scanner scanner = new Scanner(System.in);
 	public static Random ran = new Random();
 
@@ -1027,6 +1030,7 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
     	case 6:res=res+"Saturday";
     	break;
     	default:res=res+"error";
+    	break;
 	}
     	return res;
    }
@@ -1144,8 +1148,7 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
     		StringBuilder str=toBinary(num);
     		String newstr=str.toString();
     		System.out.println(newstr);
-    		int size=newstr.length();
-    		String[] array= new String[size];
+    		String[] array= new String[newstr.length()];
     		array=newstr.split(" ");
     		
     			String temp=array[0];
@@ -1155,12 +1158,10 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
     			for(int i=0 ; i< array.length ; i++) {
     			strBack+=array[i];
     		}
-    			strBack.replaceAll("\\s","");
+    			strBack=strBack.replaceAll("\\s","");
     			System.out.println("After swapping: ");
     			System.out.println(strBack);
-    			int dec=binToDecimal(strBack);
-    		
-    		return dec;
+    		return binToDecimal(strBack);
   			}
   			else return -1;
     	}
@@ -1245,9 +1246,8 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
      * @throws FileNotFoundException 
      * 
      */
-    @SuppressWarnings("unchecked")
-	public static <T extends Comparable<T>> void unOrderedList() throws FileNotFoundException {
-    LinkedList<String> list = new LinkedList<String>();
+	public  <T extends Comparable<T>> void unOrderedList() throws FileNotFoundException {
+   
     File file=new File("/home/administrator/Documents/test1");
     FileReader fileReader=null;
     BufferedReader bufferedReader=null;
@@ -1304,11 +1304,8 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
      * Method to read a file to linked list,search the integer and save the linked list back to file
      * @throws FileNotFoundException
      */
-    
-    public static <T extends Comparable<T>> void orderedList() throws FileNotFoundException {
-    LinkedList<Integer> list = new LinkedList<Integer>();
-	
-	 File file=new File("/home/administrator/Documents/test2");
+    public  <T extends Comparable<T>> void orderedList() throws FileNotFoundException {
+	File file=new File("/home/administrator/Documents/test2");
     FileReader fileReader=null;
     BufferedReader bufferedReader=null;
     try {
@@ -1330,7 +1327,7 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
    		
    		int[] sortedArray=Utility.insertSortInt(array1);
    		for(int i=0;i<sortedArray.length;i++) {
-   			 list.add(sortedArray[i]);
+   			 ilist.add(sortedArray[i]);
    		 }
    	 }
     }
@@ -1338,21 +1335,65 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
         e.printStackTrace();
    }
     System.out.println("Contents of linked list...");
-    list.display();
+    ilist.display();
     System.out.println("Enter the word you want to search");
-    String integerToSearch=Utility.userInputString();
-    
-	
+    int integerToSearch=Utility.userInputInteger();
     
     
+    //If the word is found, remove word from list and save back the file
+    if(ilist.search(integerToSearch)) {
+   	 System.out.println("Word found!!");
+   	 System.out.println("The modified list is");
+   	 ilist.remove(integerToSearch);
+   	 ilist.display(); 
+    }
+    
+  //If the word is not found, add word to the list and save back the file
+    else {
+   	 ilist.addSorted(integerToSearch);
+   	 ilist.display();
+		}
     
     
+    //save modified list to the file
+    PrintWriter writer = new PrintWriter("/home/administrator/Documents/test2");
+	 for(int i=0;i<ilist.getCount();i++) {
+		 writer.print((T) ilist.getNth(i)+",");
+	 }
+	writer.close();
     }
     
     
     
     
-    
+   /**
+    * Method to check balanced expression based on parenthesis using stack push() and pop()  
+    */
+public static <T extends Comparable<T>> void checkParenthesis() {
+	   LinkedStack<String> linkedStack=new LinkedStack<String>();
+	   String expression="(5+6)∗(7+8)/(4+3)(5+6)∗(7+8)/(4+3)";
+	  int count=0;
+	   for(int i=0; i<expression.length() ; i++) {
+		   if(expression.charAt(i)  == '(') {
+			 linkedStack.push(String.valueOf(i));
+			 count++;
+			 }
+		   
+		   else if(expression.charAt(i)==')') {
+			   linkedStack.pop();
+			   count--;
+		   }
+		  
+		   }
+	   
+	   if(count==0) {
+		   System.out.println("The arithmetic expression is Balanced expression");
+	   }
+	   else {
+		   System.out.println("The arithmetic expression is Unbalanced expression");
+	   }
+	   
+   }
     
     
     

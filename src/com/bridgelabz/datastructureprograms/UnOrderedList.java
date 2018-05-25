@@ -6,7 +6,9 @@ import com.bridgelabz.util.Utility;
 
 public class UnOrderedList {
 	public static void main(String[] args) throws FileNotFoundException {
-		Utility.unOrderedList();
+		Utility utility=new Utility();
+		utility.unOrderedList();
+		
 	}
 	
 }
