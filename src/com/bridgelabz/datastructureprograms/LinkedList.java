@@ -10,7 +10,7 @@ package com.bridgelabz.datastructureprograms;
  *
  * @param <T>
  */
-class LinkedList<T extends Comparable<T>> {
+public class LinkedList<T extends Comparable<T>> {
 	public static class Node<T extends Comparable<T>> {
 		T data;
 		Node<T> next;
