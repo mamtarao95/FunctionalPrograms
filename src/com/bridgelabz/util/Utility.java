@@ -15,9 +15,15 @@ import com.bridgelabz.datastructureprograms.LinkedList;
 
 public class Utility {
 
-	static ArrayList <Integer> arrayList=new  ArrayList <Integer>();
-	static Scanner scanner = new Scanner(System.in);
-	static Random ran = new Random();
+	public static int count = 0;
+	public static int permutationCount=0;
+	public static int TOTAL=0;
+	public static int indexOfArray=0;
+	public static int temp=0;
+	public static int index=0;
+	public static ArrayList <Integer> arrayList=new  ArrayList <Integer>();
+	public static Scanner scanner = new Scanner(System.in);
+	public static Random ran = new Random();
 
 	/*
 	 * Method to take user input as string
@@ -172,7 +178,7 @@ public class Utility {
 	 * Method to find prime factors using brute's force
 	 * @param num
 	 */
-	static int count = 0;
+	
 	public static void findPrime(int num) {
 		int[] prime = new int[num];
 
@@ -302,30 +308,12 @@ public class Utility {
 	 */
 
 	
-	/*
-	public static int randomGen(int num) {
-		int[] ar = checkDistinct(num);
-		int match = 0;
-		int codeCount = 0;
-
-		while (match != ar.length) {
-			int code = ran.nextInt(100);
-			codeCount++;
-			for (int i = 0; i < ar.length; i++) {
-				if (code == ar[i]) {
-					match++;
-				}
-			}
-		}
-		return codeCount;
-	}*/
-
 	/**
 	 * Method to return all possible permutation of given string
 	 * @param ch
 	 * @param key
 	 */
-	public static int permutationCount=0;
+	
 	public static void permutation(char[] ch, int key) {
 
 		if (key == ch.length) {
@@ -576,15 +564,17 @@ public class Utility {
 			for(int y=0 ; y<s2.length(); y++) {
 				if(s1.charAt(x)==s2.charAt(y)) {
 					count++;
-				}
+					}
 				}
 			}
+		
 			if(count==s1.length()) {
 				return true;
 				}
-			
-		return false;
-	}
+			else {
+				return false;
+			}
+		}
 	
 	
 	
@@ -592,8 +582,6 @@ public class Utility {
 	 * Method to print all the prime numbers between 0 to 1000
 	 * @param num
 	 */
-	public static int TOTAL=0;
-	static int indexOfArray=0;
 	public static int[] printPrime(){
 		int[] array=new int[1000];
 		for (int num = 0; num <= 1000; num++) {
@@ -802,12 +790,6 @@ return ar;
 	
 	
 	
-	
-	
-	
-	
-	
-	
 /**
  * Method to perform bubble sort on integer 
  * @param size
@@ -968,8 +950,8 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
                 L[i] = arr[l + i];
             for (int j=0; j<n2; ++j)
                 R[j] = arr[m + 1+ j];
-            int i = 0, j = 0;
-            int k = l;
+            int i = 0, j = 0,k = l;
+        
             while (i < n1 && j < n2){
                 if (L[i].compareTo(R[j])<=0) {
                     arr[k] = L[i];
@@ -1044,6 +1026,7 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
     	break;
     	case 6:res=res+"Saturday";
     	break;
+    	default:res=res+"error";
 	}
     	return res;
    }
@@ -1221,8 +1204,7 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
      * Method to generate denominations of currency
      * @param num
      */
-    static int temp=0;
-	static int index=0;
+    
     public static void generateChange(int num) {
     	int[] ar= {1,2,5,10,50,100,500,1000};
     
@@ -1311,7 +1293,7 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
     //save modified list to the file
     PrintWriter writer = new PrintWriter("/home/administrator/Documents/test1");
 	 for(int i=0;i<list.getCount();i++) {
-		 writer.print((T) list.GetNth(i)+",");
+		 writer.print((T) list.getNth(i)+",");
 	 }
 	writer.close();
    	
