@@ -20,6 +20,9 @@ public class InsertionSortGenerics {
 				System.out.print(ar[i]+ ", ");
 			}
 			
+			
+			
+			
 			//Invoke generic method by string as input
 			System.out.println("Enter the size of string array");
 			int size1=Utility.userInputInteger();

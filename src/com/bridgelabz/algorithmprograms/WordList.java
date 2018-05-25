@@ -22,7 +22,6 @@ public class WordList {
     			 count++;
     			 a.add(str[i]);
     		 }
-    		 break;
     	 }
      }
     catch (Exception e) {

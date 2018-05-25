@@ -11,7 +11,7 @@ package com.bridgelabz.functionalprogram;
 
 import com.bridgelabz.util.Utility;
 
-public class twoD_Array {
+public class TwoD_Array {
    public static void main(String[] args) {
 		double[][] marray = Utility.arrayElement();
 

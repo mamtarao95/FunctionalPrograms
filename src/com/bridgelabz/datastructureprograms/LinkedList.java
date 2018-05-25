@@ -12,8 +12,8 @@ package com.bridgelabz.datastructureprograms;
  */
 public class LinkedList<T extends Comparable<T>> {
 	public static class Node<T extends Comparable<T>> {
-		T data;
-		Node<T> next;
+		private T data;
+	    Node<T> next;
 		
 		public Node(T data, Node<T> next) {
 			this.data=data;

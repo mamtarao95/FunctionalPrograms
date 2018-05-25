@@ -13,9 +13,11 @@ import com.bridgelabz.util.Utility;
 public class Prime {
 
 	public static void main(String[] args) {
-		for (int i = 0; i <= 1000; i++) {
-			Utility.printPrime(i);
-		}
+	int[] array = Utility.printPrime();
+		for (int i = 0; i < array.length; i++) {
+			if(array[i]==0) break;
+			System.out.println(array[i]);
+			}
 	System.out.println("There are a total of " + Utility.TOTAL + " numbers of primenumber between 0-1000");
 	
 	}

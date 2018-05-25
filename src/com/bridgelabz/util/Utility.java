@@ -4,13 +4,14 @@ import java.util.Scanner;
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Iterator;
-import java.util.LinkedList;
+import com.bridgelabz.datastructureprograms.LinkedList;
+
+
 
 public class Utility {
 
@@ -48,22 +49,7 @@ public class Utility {
 	}
 	
 	
-	/**
-	 * @param object
-	 * @return
-	 */
-	private static char[] arrayList(Object object) {
-		return null;
-	}
 
-	/**
-	 * @param i
-	 * @return
-	 */
-	private static Object get(int i) {
-		return null;
-	}
-	
 	
 	/**
 	 * Method to replace the a string with the user input name
@@ -135,9 +121,6 @@ public class Utility {
 		}
 	
 	
-	
-	
-
 	/**
 	 * Method to print all powers of two
 	 * @param power
@@ -201,7 +184,7 @@ public class Utility {
 			}
 	System.out.println("the prime factors of " + num + " are : ");
 		for (int x = 0; x < count; x++) {
-			printPrime(prime[x]);
+			System.out.println(prime[count]);
 		}
 	}
 	
@@ -594,7 +577,7 @@ public class Utility {
 				if(s1.charAt(x)==s2.charAt(y)) {
 					count++;
 				}
-			}
+				}
 			}
 			if(count==s1.length()) {
 				return true;
@@ -610,23 +593,33 @@ public class Utility {
 	 * @param num
 	 */
 	public static int TOTAL=0;
-	public static void printPrime(int num){
-		int count=0;
+	static int indexOfArray=0;
+	public static int[] printPrime(){
+		int[] array=new int[1000];
+		for (int num = 0; num <= 1000; num++) {
+			int count=0;
+			for(int i=2 ; i<=num ;i++ ){
+				if(num%i==0){
+					count++;
+					}
+		       }
+			if(count==1) {
+				TOTAL++;
+					array[indexOfArray]=num;
+			    	indexOfArray++;
+			    }
+			    
+			}	
+		return array;
+		}
 		
-		for(int i=2 ; i<=num ;i++ ){
-			if(num%i==0){
-				count++;
-				}
-		}
-		if(count==1) {
-			System.out.println(num +" ");
-		    arrayList.add(num);
-		    TOTAL++;
-		}
-		else {
-			return;
-		}
-}
+
+		
+
+		
+		
+		
+	
 	
 	
 	
@@ -637,43 +630,37 @@ public class Utility {
 	 */
 	public static void checkAnag(){
 		
-		 Iterator<Integer> iter = arrayList.iterator();
-	      while (iter.hasNext()) {
-	         System.out.println(iter.next());
-	      }
-		
-		
-		for (int i = 0; i<arrayList.size(); i++) {
-			for(int j=i+1 ; j<=arrayList.size() ; j++) {
-				
-		String s1= String.valueOf(arrayList.get(i));
-		String s2= String.valueOf(arrayList.get(j));
-		int count=0;
-		
-		for(int x=s1.charAt(0) ; x<s1.length(); x++){
-			for(int y=s2.charAt(0) ; y<s2.length(); y++) {
-				if(x==y) {
-					count++;
+		int[] array = Utility.printPrime();
+		for (int i = 0; i < 167; i++) {
+			for(int j=i+1 ; j< 168; j++) {
+				String s1= Integer.toString(array[i]);
+				String s2= Integer.toString(array[j]);
+				int count=0;
+				for(int x=0 ; x<s1.length(); x++){
+					for(int y=0 ; y<s2.length(); y++) {
+						if(s1.charAt(x)==s2.charAt(y) ){
+							count++;
+						}
+					}
+				}
+					if(count==s1.length()) {
+						System.out.println(s1 +" & "+ s2);
+					}
+				}
+			
+			
 				}
 			}
-			if(count==s1.length()) {
-				System.out.println(s1 +" & "+ s2);
-			}
-		}
-		}}
-		
-	}
 	
-
-	
-
 	/**
 	 * Method to check whether a given number is pallindrome
 	 * @param num
-	 */
+	 *//*
 	public static void checkPallindrome(){
-		for (int i = 0; i<arrayList.size(); i++) {
-		String s1= String.valueOf(arrayList.get(i));
+		
+		int[] array = Utility.printPrime();
+		for (int i = 0; i < 167; i++) {
+		String s1= String.valueOf(array[i]);
 		int lastIndex=s1.length()-1;
 		String res="";
 		for(int j=lastIndex ; j>=0 ; j--) {
@@ -683,7 +670,7 @@ public class Utility {
 	    	System.out.println(s1 +" is a pallindrome ");
 	    }
 		}
-	}
+	}*/
 	
 	
 	
@@ -757,23 +744,18 @@ public class Utility {
 	 * @param size
 	 * @return
 	 */
-	public static int[] insertSortInt(int size) {
-	int[] ar=new int[size];
-	System.out.println("Enter the elements in the array");
+	public static int[] insertSortInt(int[] array) {
 	
-	for(int i=0 ; i<size ; i++){
-		ar[i]=userInputInteger();
-	}
-	for(int i=1 ; i<size ;i++) {
-		int key=ar[i];
+	for(int i=1 ; i<array.length ;i++) {
+		int key=array[i];
 		int j=i-1;
-		while(j>=0 && key<ar[j]) {
-			ar[j+1]=ar[j];
+		while(j>=0 && key<array[j]) {
+			array[j+1]=array[j];
 			j=j-1;
 		}
-		ar[j+1]=key;
+		array[j+1]=key;
 	}
-return ar;
+return array;
 	}
 
 	/*
@@ -881,20 +863,19 @@ public static String[] bubbleSortStr(int size) {
  * @param ar
  * @return
  */
-public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
-	for(int i=0;i<ar.length-1;i++) {
-		for(int j=i+1 ; j<ar.length ;j++) {
-			if(ar[i].compareTo(ar[j])>0) {
-				T temp=ar[i];
-				ar[i]=ar[j];
-				ar[j]=temp;
+public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
+	for(int i=0;i<array.length-1;i++) {
+		for(int j=i+1 ; j<array.length ;j++) {
+			
+			if(array[i].compareTo(array[j])>0) {
+				T temp=array[i];
+				array[i]=array[j];
+				array[j]=temp;
 			}
 		}
 	}
-	return ar;
+	return array;
 	}
-
-
 
 /**
  * Method to play guess game
@@ -1275,64 +1256,191 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] ar) {
     	 }
     	
     	
-    	
-    /*
+    
+    /**
+     * Method to read a file to linked list,search the word and save the linked list back to file 
+     * @return 
+     * @throws FileNotFoundException 
      * 
      */
-   /*public static void searchLinkedList(String word, LinkedList<String> list) {
-    	if (list.contains(word)) {
-    		list.remove(word);
-    		
-    		File file=new File("/home/administrator/Documents/test1");
-    		  FileReader fr=null;
-    		  int count=0;
-    		  LinkedList<String> list=new LinkedList<String>();
-    		    
-    		  BufferedReader fo=null;
-    		     try {
-    		    	 fr=new FileReader(file);
-    		    	 fo=new  BufferedReader(fr);
-    		    	 String word=fo.readLine();
-    		
-    		    	 while(word!=null) {
-    		    		 String[] str=word.split(",");
-    		    		 for(int i=0;i<str.length;i++) {
-    		    			 count++;
-    		    			 list.add(str[i]);
-    		    		 }
-    		    		 break;
-    		    	 }
-    		     }
-    		    catch (Exception e) {
-    		         e.printStackTrace();
-    		    }
-    		     
-    		     Iterator iter = list.iterator();
-    		      while (iter.hasNext()) {
-    		         System.out.println(iter.next());
-    		      }
-    		     
-    		
-    		
-            System.out.println("Hooray!");
+    @SuppressWarnings("unchecked")
+	public static <T extends Comparable<T>> void unOrderedList() throws FileNotFoundException {
+    LinkedList<String> list = new LinkedList<String>();
+    File file=new File("/home/administrator/Documents/test1");
+    FileReader fileReader=null;
+    BufferedReader bufferedReader=null;
+    try {
+   	 String word=null;
+   	 fileReader=new FileReader(file);
+   	 bufferedReader=new  BufferedReader(fileReader);
+   	
+   	 while((word=bufferedReader.readLine())!=null) {
+   		 String[] str=word.split(",");
+   		 for(int i=0;i<str.length;i++) {
+   			 list.add(str[i]);
+   		 }
+   	 }
     }
-    */
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
+   catch (Exception e) {
+        e.printStackTrace();
    }
+    
+    list.display();
+    System.out.println("Enter the word you want to search");
+    String wordToSearch=Utility.userInputString();
+    
+    
+    //If the word is found, remove word from list and save back the file
+    if(list.search(wordToSearch)) {
+   	 System.out.println("Word found!!");
+   	 System.out.println("The modified list is");
+   	 list.remove(wordToSearch);
+   	 list.display(); 
+    }
+    
+    
+    
+    //If the word is not found, add word to the list and save back the file
+    else {
+   	 list.addLast(wordToSearch);
+   	 list.display();
+		}
+    
+    
+    
+    //save modified list to the file
+    PrintWriter writer = new PrintWriter("/home/administrator/Documents/test1");
+	 for(int i=0;i<list.getCount();i++) {
+		 writer.print((T) list.GetNth(i)+",");
+	 }
+	writer.close();
+   	
+}
+    
+    
+    /**
+     * Method to read a file to linked list,search the integer and save the linked list back to file
+     * @throws FileNotFoundException
+     */
+    
+    public static <T extends Comparable<T>> void orderedList() throws FileNotFoundException {
+    LinkedList<Integer> list = new LinkedList<Integer>();
+	
+	 File file=new File("/home/administrator/Documents/test2");
+    FileReader fileReader=null;
+    BufferedReader bufferedReader=null;
+    try {
+   	 String word=null;
+   	 fileReader=new FileReader(file);
+   	 bufferedReader=new  BufferedReader(fileReader);
+   	
+   	 while((word=bufferedReader.readLine())!=null) {
+   		String[] array=word.split(",");
+   		System.out.println("Reading from the file.....");
+   		for(int i=0;i<array.length;i++) {
+      		 System.out.println(array[i]);
+      }
+   		
+   		int array1[]=new int[array.length];
+   		for(int i=0;i<array.length;i++) {
+   		 array1[i]=Integer.parseInt(array[i]);
+   }
+   		
+   		int[] sortedArray=Utility.insertSortInt(array1);
+   		for(int i=0;i<sortedArray.length;i++) {
+   			 list.add(sortedArray[i]);
+   		 }
+   	 }
+    }
+   catch (Exception e) {
+        e.printStackTrace();
+   }
+    System.out.println("Contents of linked list...");
+    list.display();
+    System.out.println("Enter the word you want to search");
+    String integerToSearch=Utility.userInputString();
+    
+	
+    
+    
+    
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    	
+    	
+   
     	
 
     
