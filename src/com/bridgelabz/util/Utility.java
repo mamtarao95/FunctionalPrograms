@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.bridgelabz.datastructureprograms.LinkedList;
 import com.bridgelabz.datastructureprograms.LinkedStack;
@@ -23,8 +22,8 @@ public class Utility {
 	public static int temp=0;
 	public static int index=0;
 	public static ArrayList <Integer> arrayList=new  ArrayList <Integer>();
-	LinkedList<String> list = new LinkedList<String>();
-	LinkedList<Integer> ilist = new LinkedList<Integer>();
+	private LinkedList<String> list = new LinkedList<String>();
+	private LinkedList<Integer> ilist = new LinkedList<Integer>();
 	public static Scanner scanner = new Scanner(System.in);
 	public static Random ran = new Random();
 
@@ -57,7 +56,7 @@ public class Utility {
 		return scanner.nextBoolean();
 	}
 	
-	
+
 
 	
 	/**
@@ -605,15 +604,6 @@ public class Utility {
 		}
 		
 
-		
-
-		
-		
-		
-	
-	
-	
-	
 	/**
 	 * Method to check pairs of prime numbers which are anagram
 	 * @param num1
@@ -622,26 +612,32 @@ public class Utility {
 	public static void checkAnag(){
 		
 		int[] array = Utility.printPrime();
+		
 		for (int i = 0; i < 167; i++) {
 			for(int j=i+1 ; j< 168; j++) {
+				
 				String s1= Integer.toString(array[i]);
 				String s2= Integer.toString(array[j]);
-				int count=0;
-				for(int x=0 ; x<s1.length(); x++){
-					for(int y=0 ; y<s2.length(); y++) {
-						if(s1.charAt(x)==s2.charAt(y) ){
-							count++;
+				
+				if(s1.length()==s2.length()) {
+					int count=0;
+						for(int x=0 ; x<s1.length(); x++){
+							for(int y=0 ; y<s2.length(); y++) {
+								if(s1.charAt(x)==s2.charAt(y) ){
+									count++;
+								}
+							}
 						}
-					}
-				}
-					if(count==s1.length()) {
+				
+						if(count==s1.length()) {
 						System.out.println(s1 +" & "+ s2);
-					}
+					
+						}
 				}
-			
-			
-				}
+				
 			}
+		}
+	}
 	
 	/**
 	 * Method to check whether a given number is pallindrome
@@ -714,6 +710,12 @@ public class Utility {
 		}
 	
 	
+	/**
+	 * Generic method to perform binary search
+	 * @param ar
+	 * @param element
+	 * @return
+	 */
 	public static <T extends Comparable<T>> void  binSearchGenerics(T[] ar , T element){
 		int start=0;
 		int end =ar.length-1;
@@ -861,6 +863,35 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
 	}
 	return array;
 	}
+
+public static void compareElapsedTime(Integer[] array , String[] array1) {
+	
+	long starttime1=System.nanoTime();
+	Integer[] array2=insertSortGen(array);
+	long elapsedtime1=System.nanoTime()-starttime1;
+	System.out.println("The insertion sort output array is: ");
+	for (int i = 0; i < array2.length; i++) {
+		System.out.println(array2[i]+", ");
+	}
+	
+	
+	String[] array3=insertSortGen(array1);
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Method to play guess game

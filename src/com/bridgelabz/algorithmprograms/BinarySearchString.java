@@ -9,13 +9,13 @@ public class BinarySearchString {
 		System.out.println("Enter the size of array");
 		int size = Utility.userInputInteger();
 		String[] ar = new String[size];
-		System.out.println("Enter the string elements");
+		System.out.println("Enter the elements");
 		
 		for(int i=0; i<size; i++) {
 			ar[i] = Utility.userInputString();
 			}
 		
-		System.out.println("Enter the string you want to search");
+		System.out.println("Enter the element you want to search");
 		String element = Utility.userInputString();
 		
 		Arrays.sort(ar);

@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Purpose: This method performs insertion sort on integer values
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.algorithmprograms;
 
 import com.bridgelabz.util.Utility;
@@ -17,6 +25,7 @@ public class InsertionSortInteger {
 		long starttime=System.nanoTime();
 		int[] array1=Utility.insertSortInt(array);
 		long elapsedtime=System.nanoTime()-starttime;
+		
 		System.out.println("The sorted array is: ");
 		for(int i=0 ;i<size;i++) {
 			System.out.print(array1[i]+ ", ");
