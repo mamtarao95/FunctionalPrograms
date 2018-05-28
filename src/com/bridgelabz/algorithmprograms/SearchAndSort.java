@@ -23,7 +23,6 @@ public class SearchAndSort {
 		Utility.compareElapsedTime(array);
 		break;
 		
-		
 		case 2:
 		System.out.println("Enter the size of string array: ");
 		int sizeString=Utility.userInputInteger();
@@ -32,17 +31,8 @@ public class SearchAndSort {
 		for(int i=0 ; i<array1.length ; i++){
 			array1[i]=Utility.userInputString();
 		}
-		
-		Utility.compareElapsedTime(array,array1);
-		
+		Utility.compareElapsedTime(array1);
 		}
-		
-		
-		
-		
-		
-		
-		
 	}
 
 }

@@ -19,14 +19,18 @@ public class WordList {
     	 while(word!=null) {
     		 String[] str=word.split(",");
     		 for(int i=0;i<str.length;i++) {
-    			 count++;
+    			  System.out.println(str[i]);
+    			  count++;
     			 a.add(str[i]);
+    
     		 }
+    		 word=null;
     	 }
      }
     catch (Exception e) {
          e.printStackTrace();
     }
+   
      String[] str1=new String[count];
      for(int i=0; i<a.size();i++) {
     	 str1[i]=a.get(i);

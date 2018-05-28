@@ -1,5 +1,7 @@
 package com.bridgelabz.datastructureprograms;
 
+import java.util.Iterator;
+
 /**
  * @author administrator
  *
@@ -250,8 +252,10 @@ public class LinkedList<T extends Comparable<T>> {
 		            current = head;
 		 
 		            while (current.next != null &&
-		                   current.next.data .compareTo( new_node.data)<0)
-		                  current = current.next;
+		                   current.next.data .compareTo( new_node.data)<0) {
+		            	 current = current.next;
+		            }
+		                 
 		 
 		            new_node.next = current.next;
 		            current.next = new_node;
@@ -272,6 +276,7 @@ public class LinkedList<T extends Comparable<T>> {
 		}
 	}
 
+	
 
 	
 	

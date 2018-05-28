@@ -9,9 +9,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
+import com.bridgelabz.datastructureprograms.LinkedDequeue;
 import com.bridgelabz.datastructureprograms.LinkedList;
 import com.bridgelabz.datastructureprograms.LinkedStack;
+import com.bridgelabz.datastructureprograms.LinkedQueue;
 
 public class Utility {
 
@@ -31,10 +36,13 @@ public class Utility {
 	 * Method to take user input as string
 	 */
 	public static String userInputString() {
-		String str = scanner.next();
-		return str;
+		return scanner.next();
+
 	}
 
+	public static String userInputStringLine() {
+		return scanner.nextLine();
+	}
 	/*
 	 * Method to take user input as integer
 	 */
@@ -561,22 +569,37 @@ public class Utility {
 	 * @return
 	 */
 	public static boolean isAnagram(String s1,String s2) {
-        int count=0;
-		for(int x=0 ; x<s1.length(); x++){
-			for(int y=0 ; y<s2.length(); y++) {
-				if(s1.charAt(x)==s2.charAt(y)) {
-					count++;
-					}
-				}
-			}
+		String str1=s1.replaceAll("\\s","");
+		String str2=s2.replaceAll("\\s","");
 		
-			if(count==s1.length()) {
+		if(str1.length() == str2.length()) {
+			String string1=str1.toLowerCase();
+			String string2=str2.toLowerCase();
+			String sortedString1=sortStrings(string1);
+			String sortedString2=sortStrings(string2);
+			if(sortedString1.equals(sortedString2)) {
 				return true;
-				}
-			else {
-				return false;
 			}
 		}
+		return false;
+	}
+	
+	public static String sortStrings(String string) {
+		int size=string.length();
+		char[] array=string.toCharArray();
+		
+		for(int i=0;i<size-1;i++) {
+			for(int j=i+1 ; j<size ;j++) {
+				if(array[i]>(array[j])) {
+					char temp=array[i];
+					array[i]=array[j];
+					array[j]=temp;
+				}
+			}
+		}
+		return new String(array);
+		}
+		
 	
 	
 	
@@ -586,7 +609,7 @@ public class Utility {
 	 */
 	public static int[] printPrime(){
 		int[] array=new int[1000];
-		for (int num = 0; num <= 1000; num++) {
+		for (int num =0; num <= 1000; num++) {
 			int count=0;
 			for(int i=2 ; i<=num ;i++ ){
 				if(num%i==0){
@@ -610,54 +633,48 @@ public class Utility {
 	 * @param num2
 	 */
 	public static void checkAnag(){
-		
+		int count=0;
 		int[] array = Utility.printPrime();
-		
+		System.out.println("The anagram pairs of prime number from 0-1000 are: ");
 		for (int i = 0; i < 167; i++) {
 			for(int j=i+1 ; j< 168; j++) {
 				
 				String s1= Integer.toString(array[i]);
 				String s2= Integer.toString(array[j]);
-				
-				if(s1.length()==s2.length()) {
-					int count=0;
-						for(int x=0 ; x<s1.length(); x++){
-							for(int y=0 ; y<s2.length(); y++) {
-								if(s1.charAt(x)==s2.charAt(y) ){
-									count++;
-								}
-							}
-						}
-				
-						if(count==s1.length()) {
-						System.out.println(s1 +" & "+ s2);
-					
-						}
-				}
-				
+				boolean result=isAnagram(s1,s2);
+				if(result) {
+					System.out.println(s1+ " & "+s2);
+					count++;
+				}	
 			}
+			
 		}
+		System.out.println("Total "+ count +" pairs of anagrams exist");
 	}
 	
 	/**
 	 * Method to check whether a given number is pallindrome
 	 * @param num
-	 *//*
+	 */
 	public static void checkPallindrome(){
-		
+		System.out.println("The pallindrome prime number from 0-1000 are: ");
 		int[] array = Utility.printPrime();
-		for (int i = 0; i < 167; i++) {
-		String s1= String.valueOf(array[i]);
-		int lastIndex=s1.length()-1;
-		String res="";
-		for(int j=lastIndex ; j>=0 ; j--) {
-	    	res=res+s1.charAt(i);
-	    	}
-	    if (res.equals(s1)) {
-	    	System.out.println(s1 +" is a pallindrome ");
-	    }
-		}
-	}*/
+		StringBuilder bld = new StringBuilder();
+		for (int i = 2; i < 167; i++) {
+			String s1= String.valueOf(array[i]);
+			while(array[i]!=0) {
+			int last=array[i]%10;
+			  bld.append(String.valueOf(last));
+			}
+		
+			String str = bld.toString();
+			if(str.equals(s1)) {
+				System.out.println(s1 +" is a pallindrome ");
+			}
+	     }
+	}	
+		
+	
 	
 	
 	
@@ -729,6 +746,7 @@ public class Utility {
 		            else
 		                end = mid - 1;
 		     }
+		System.out.println("Element not found");
 		
 	}
 	
@@ -864,20 +882,36 @@ public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
 	return array;
 	}
 
-public static void compareElapsedTime(Integer[] array , String[] array1) {
+public static <T extends Comparable<T>> void compareElapsedTime(T[] array) {
 	
 	long starttime1=System.nanoTime();
-	Integer[] array2=insertSortGen(array);
+	T[] array2=insertSortGen(array);
 	long elapsedtime1=System.nanoTime()-starttime1;
 	System.out.println("The insertion sort output array is: ");
 	for (int i = 0; i < array2.length; i++) {
 		System.out.println(array2[i]+", ");
 	}
+	System.out.println("The elapsedtime is: "+elapsedtime1+"ms");
 	
+	System.out.println("***********************");
 	
-	String[] array3=insertSortGen(array1);
+	long starttime2=System.nanoTime();
+	T[] array3=bubbleSortGen(array);
+	long elapsedtime2=System.nanoTime()-starttime2;
+	System.out.println("The bubble sort output array is: ");
+	for (int i = 0; i < array3.length; i++) {
+		System.out.println(array3[i]+", ");
+	}
+	System.out.println("The elapsedtime is: "+elapsedtime2+"ms");
 
+	System.out.println("***********************");
 	
+	if(elapsedtime1>elapsedtime2) {
+		System.out.println("Insertion sort took more time than bubble sort!!");
+		}
+	else {
+		System.out.println("Bubble sort took more time than insertion sort!!");
+	}
 }
 
 
@@ -1112,17 +1146,13 @@ public static void compareElapsedTime(Integer[] array , String[] array1) {
     	 * @param num
     	 * @return
     	 */
-    	public static double sqrt(double t,double num) {
+    	public static double sqrt(double c) {
     		double epsilon=1e-15;
-    		
-    		if( ( Math.abs( ((t*t)-num)/t ) > (epsilon*t))){
-    			return t;
+    		double t=c;
+    		while((Math.abs(t-(c/t)) > (epsilon*t))){
+    			t= ((c/t) + t)/2;
     			}
-    		else {
-    			double replace=(num + (t*t) )/(2*t);
-        		sqrt(replace,num);
-    		}
-    		return -1;
+    		return t;
     		}
     	
     	
@@ -1383,6 +1413,7 @@ public static void compareElapsedTime(Integer[] array , String[] array1) {
     else {
    	 ilist.addSorted(integerToSearch);
    	 ilist.display();
+   	 
 		}
     
     
@@ -1426,6 +1457,404 @@ public static <T extends Comparable<T>> void checkParenthesis() {
 	   
    }
     
+
+
+/*
+ * Method to maintain available balance in the bank cash counter
+ */
+   public static <T extends Comparable<T>> void cashCounter() {
+	   LinkedQueue<Integer> linkedQueue=new LinkedQueue<Integer>();
+	   System.out.println("Enter the initial amount hold by Bank");
+	   double amount=userInputDouble();
+	   System.out.println("Enter the number of customers in the queue");
+	   int person=userInputInteger();
+	   
+	   //Adding customers to the queue
+	   for(int i=1 ; i<=person ; i++) {
+		   System.out.println("Adding customer no. "+i);
+		   linkedQueue.enQueue(i);
+		}
+	   int num=1;
+	   while(num<=person) {
+	   
+	   
+	   System.out.println("customer "+num);
+	   System.out.println("Enter your choice: ");
+	   System.out.println("1: Withdraw");
+	   System.out.println("2: Deposit");
+	   
+	   switch(userInputInteger()) {
+	   
+	   case 1: 
+		   System.out.println("Enter the amount you want to withdraw: "); 
+	   double withdrawAmnt=userInputDouble();
+	   if(withdrawAmnt<amount) {
+		   amount-=withdrawAmnt;
+		   linkedQueue.deQueue();
+		   System.out.println("the available balance is :" +amount);
+	   }else {
+		   System.out.println("There is no sufficient money in the bank!!!");
+		   linkedQueue.deQueue();
+		   System.out.println("the available balance is :" +amount);
+	   }
+		   break;
+		   
+		   
+	   case 2:
+		System.out.println("Enter the amount you want to deposit: "); 
+		   double depositAmnt=userInputDouble();
+		   amount+=depositAmnt;
+		   linkedQueue.deQueue();
+		   System.out.println("the available balance is :" +amount);
+		   break;
+		 }
+	   num++;
+	   }
+   }
+
+    
+    public static void pallindromeDeque(String string) {
+    LinkedDequeue<Character> linkedDequeue = new LinkedDequeue<Character>();
+    String string1=string.replaceAll("\\s","");
+    System.out.println(string1);
+    for(int i=string1.length()-1; i>=0 ; i--) {
+    	linkedDequeue.insertAtRear(string1.charAt(i));
+    }
+ 
+    linkedDequeue.displayDequeue();
+    char[] array=new char[linkedDequeue.getSize()];
+ 
+    for(int i=0;i<array.length; i++) {
+    	array[i]= linkedDequeue.removeAtFront();
+    }
+    
+    
+    String output=String.valueOf(array);
+   
+    if(output.equals(string1)) {
+    	System.out.println("The given string is a pallindrome");
+    }
+    else {
+    	System.out.println("The given string is not a pallindrome");
+    }
+    
+    
+  }   
+    
+    
+    
+   public static <T extends Comparable<T>> void hashingFunction() {
+	   LinkedList<Integer> orderedlinkedList=new LinkedList<Integer>();
+	   HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+	   File file=new File("/home/administrator/Documents/test3");
+	   FileReader fileReader=null;
+	   BufferedReader bufferedReader=null;
+	   try {
+		   	 String word=null;
+		   	 fileReader=new FileReader(file);
+		   	 bufferedReader=new  BufferedReader(fileReader);
+		   	
+		   	 while((word=bufferedReader.readLine())!=null) {
+		   		String[] array=word.split(",");
+		   		System.out.println("Reading from the file.....");
+		   		for(int i=0;i<array.length;i++) {
+		      		 System.out.println(array[i]);
+		      }
+		   		
+		   		int array1[]=new int[array.length];
+		   		for(int i=0;i<array.length;i++) {
+		   		 array1[i]=Integer.parseInt(array[i]);
+		   }
+		   		
+		   		int[] sortedArray=Utility.insertSortInt(array1);
+		   		for(int i=0;i<sortedArray.length;i++) {
+		   			orderedlinkedList.add(sortedArray[i]);
+		   		 }
+		   	 }
+		    }
+		   catch (Exception e) {
+		        e.printStackTrace();
+		   }
+	   System.out.println("Contents of linked list...");
+	   orderedlinkedList.display();
+	   
+	   System.out.println(map.isEmpty());
+    
+ for(int i=0 ; i< orderedlinkedList.getCount(); i++){
+	 int rem=(orderedlinkedList.getNth(i) )%11;
+	 
+	 if(rem>0 && rem<9) {
+		 map.put(rem,orderedlinkedList.getNth(i));
+	}
+ }
+   
+ System.out.println(map.get(0));
+ System.out.println(map.containsValue(77));
+ System.out.println();
+ 
+ System.out.println(map.isEmpty());
+   }
+    
+    
+    
+    
+    
+    
+ /**
+ * Method to find possible number of binary search trees
+ * @param testCase
+ */
+public static void numberOfBST(int testCase) {
+	  System.out.println("Enter total "+ testCase+  " number of nodes");
+	  int[] array= new int[testCase];
+	  for(int i=0 ; i<testCase ; i++) {
+		  array[i]=userInputInteger();
+	  }
+	  
+	  for(int i=0 ; i<testCase;i++) {
+		 int result= treeCount(array[i]);  
+		 System.out.println(result);
+	  }
+	  
+}  
+	 public static int treeCount(int number) {
+	        int intsum = 0;
+	        if (number == 0 || number == 1) {
+	            return 1;
+	        } else if (number == 2) {
+	            return 2;
+	        } else {
+	            for (int i = 0; i < number; i++) {
+	                intsum = intsum + treeCount(i) * treeCount(number-i-1);
+	            }
+	            return intsum;
+	        }
+	    }
+	
+    
+   
+    
+    
+   
+
+
+      public static int day(int month, int day, int year) {
+           int y = year - (14 - month) / 12;
+           int x = y + y/4 - y/100 + y/400;
+           int m = month + 12 * ((14 - month) / 12) - 2;
+           int d = (day + x + (31*m)/12) % 7;
+           return d;
+       }
+
+     
+       public static boolean isLeapYear(int year) {
+           if  ((year % 4 == 0) && (year % 100 != 0)) return true;
+           if  (year % 400 == 0) return true;
+           return false;
+       }
+
+
+	   public static void printCalender(int month,int year) {
+		   
+          int count=1;
+       String[] months = {"","January", "February", "March","April", "May", "June","July", "August",
+    		   "September","October", "November", "December"};
+               
+       int[] days = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+           // check for leap year
+      
+           if (month == 2 && isLeapYear(year)) {
+        	   days[month] = 29;
+           }
+           
+           // print calendar header
+            System.out.println("   " + months[month] + " " + year);
+           String[][] calenderArray=new String[7][13];
+           for(int i=0 ; i<7;i++) {
+        	   for(int j=0;j<13;j++) {
+        		   calenderArray[i][j]=" ";
+        	   }
+           }
+            String string= "S,M,T,W,T,F,S";
+            String[] str=string.split(",");
+      
+            
+            for(int i=0 ; i<=12; i++) {
+            	
+            	calenderArray[0][i]=str[i/2];
+            	if(i==12) {
+            		break;
+            	}
+            	calenderArray[0][i+1]=" ";
+            	i++;
+            
+          }
+           
+
+     
+           // starting day
+           int d = day(month,1,year);
+          
+
+           // print the calendar
+           
+           for (int i = 0; i < 2*d; i++) {
+        	   
+        	   calenderArray[1][i]=" ";
+           }
+           
+     
+           for (int i = 2*d; i <= 12; i++) {
+               calenderArray[1][i]=Integer.toString(count++);
+               if(i==12) {
+           		break;
+           	}
+               calenderArray[1][i+1]=" ";
+               i++;
+           }
+           
+        
+           for (int j = 2; j <= 6; j++) {
+        	   for(int i=0;i<=12;i++) {
+                   calenderArray[j][i]=Integer.toString(count++);
+                    	  if(i==12) {
+                         		break;
+                         	}
+                             calenderArray[j][i+1]=" ";
+                             i++;
+                             if(count>days[month]) {
+                            	 break;
+                             }
+        		   }
+           }
+        	
+           
+           for(int i=0 ;i<7;i++) {
+        	   for(int j=0;j<13;j++) {
+        		   
+        		   System.out.print(calenderArray[i][j]);
+        	   }
+        	   System.out.println();
+           }
+
+       }
+	   
+	   
+	   
+	   public static void twoDprime() {
+		   int[][] array= new int[10][25];
+		   int low=0;
+		   int high=100;
+		  while(high<1000) {
+
+			  
+		for(int row=0; row<10;row++) {
+			List<Integer> arrayList=printPrime(low,high);
+			int count=0;
+				for(int i=0 ;i <arrayList.size();i++) {
+					array[row][count]=arrayList.get(i);
+					count++;
+						}
+				low=low+100;
+				high=high+100;
+				}	
+	}	  
+		  
+		  
+		  //printing array
+		  for(int i=0; i<10 ; i++) {
+			   for(int j=0;j<25;j++) {
+				   if(array[i][j]==0) {
+					   continue;
+				   }
+				  System.out.print(array[i][j]+" ");
+				  
+				   }
+			   System.out.println();
+		   }
+		  
+		  
+  }
+		
+	   public static List<Integer> printPrime(int low,int high){
+			ArrayList<Integer> arrayList=new ArrayList<Integer>();
+			for (int num =low; num <= high; num++) {
+				int count=0;
+				for(int i=2 ; i<=num ;i++ ){
+					if(num%i==0){
+						count++;
+						}
+			       }
+				if(count==1) {
+					TOTAL++;
+						arrayList.add(num);
+				    }
+				    
+				}	
+			return arrayList;
+			}
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+   }
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    
+    
+    
+    
+    
+    
+    
+
     
     
     
@@ -1437,22 +1866,7 @@ public static <T extends Comparable<T>> void checkParenthesis() {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
+
     	
     	
     	
