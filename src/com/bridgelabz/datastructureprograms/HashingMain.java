@@ -28,7 +28,8 @@ public class HashingMain {
 				for (int i = 0; i < array.length; i++) {
 					array1[i] = Integer.parseInt(array[i]);
 				}
-
+				
+				HashTableChaining hash=new HashTableChaining(12);
 				int[] sortedArray = Utility.insertSortInt(array1);
 				for (int i = 0; i < sortedArray.length; i++) {
 					HashTableChaining.insert(sortedArray[i]);
@@ -42,10 +43,19 @@ public class HashingMain {
 		HashTableChaining.printHashTable ();
 		
 		
-		/*System.out.println("Enter the word you want to search");
-		int integerToSearch = Utility.userInputInteger();*/
+		System.out.println("Enter the word you want to search");
+		int integerToSearch = Utility.userInputInteger();
 		
+		if(HashTableChaining.contains(integerToSearch)) {
+			HashTableChaining.remove(integerToSearch);
+		}
 		
+		else {
+			HashTableChaining.insert(integerToSearch);
+		}
+		HashTableChaining.printHashTable ();
+		
+	
 		
 	}
 
