@@ -48,6 +48,7 @@ public class LinkedQueue<T extends Comparable<T>>  {
 			rear.next=new_node;
 			rear=new_node;
 		}
+		size++;
 	}
 	
 	

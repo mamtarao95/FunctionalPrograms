@@ -3,7 +3,7 @@ package com.bridgelabz.datastructureprograms;
 public class LinkedStack<T extends Comparable<T>>  {
     private Node<T> top = null;
 	private int size = 0;
-
+    LinkedList<T> linkedList=new LinkedList<>();
 	public static class Node<T extends Comparable<T>> {
 		private int top=0;
 		private Node<T> next;
@@ -14,9 +14,8 @@ public class LinkedStack<T extends Comparable<T>>  {
 			this.next=null;
 		}
 		
-		public Node(T data,Node<T> next) {
+		public Node(T data) {
 			this.data=data;
-			this.next=next;
 		}
 		
 	}
@@ -29,8 +28,11 @@ public class LinkedStack<T extends Comparable<T>>  {
 		return size;
 	}
 	
+	
 	public void push(T data) {
-		Node<T> new_node=new Node<T>(data,null);
+		//linkedList.addLast(data);
+
+		Node<T> new_node=new Node<T>(data);
 		if(top==null) {
 			top=new_node;
 		}
@@ -42,15 +44,15 @@ public class LinkedStack<T extends Comparable<T>>  {
 		
 }
 	
-	public void pop() {
+	public T pop() {
 		if(isEmpty()) {
 			System.out.println("underflow exception");
 		}
-		else {
-			Node<T> temp=top;
+		Node<T> temp=top;
 			top=temp.next;
 			size--;
-		}
+		
+		return temp.data;
 	}
 	
 	

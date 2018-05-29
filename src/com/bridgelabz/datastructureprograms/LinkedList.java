@@ -1,7 +1,7 @@
 package com.bridgelabz.datastructureprograms;
 
 public class LinkedList<T extends Comparable<T>> {
-	private Node<T> head = null;
+	private Node<T> head;
 	private int size = 0;
 
 	public static class Node<T extends Comparable<T>> {
@@ -10,25 +10,21 @@ public class LinkedList<T extends Comparable<T>> {
 
 		public Node(T data) {
 			this.data = data;
-
 		}
 
 		public T getValue() {
 			return data;
 		}
 
-		public int compareTo(Object object) {
-			return 0;
-		}
 	}
 
-	
 	
 	/**
 	 * Method to add element
 	 * @param data Add data into the list
 	 */
 	public void add(T data) {
+	
 		Node<T> new_node = new Node<T>(data);
 		if (head == null) {
 			head = new_node;
@@ -38,12 +34,11 @@ public class LinkedList<T extends Comparable<T>> {
 		Node<T> temp = head;
 		while (temp.next != null) {
 			temp = (Node<T>) temp.next;
-
-		}
+			}
 		temp.next = new_node;
 		size++;
 	}
-
+	 
 	
 	
 	/**
@@ -90,8 +85,7 @@ public class LinkedList<T extends Comparable<T>> {
 		}
 	}
 
-	
-	
+
 	/**
 	 * Method to display linked list
 	 */
