@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -69,7 +68,7 @@ public class Utility {
 	
 	/**
 	 * Method to replace the a string with the user input name
-	 * @param temp
+	 * @param temp 
 	 * @return
 	 */
 	public static String replaceUserName(String temp) {
@@ -770,7 +769,12 @@ return array;
 	}
 
 	/*
+	 *
+	 */
+	/**
 	 * Method to perform insertion sort in string
+	 * @param size
+	 * @return
 	 */
 	public static String[] insertSortStr(int size) {
 		String[] str=new String[size];
@@ -1361,10 +1365,11 @@ public static <T extends Comparable<T>> void compareElapsedTime(T[] array) {
 }
     
     
-    /**
-     * Method to read a file to linked list,search the integer and save the linked list back to file
-     * @throws FileNotFoundException
-     */
+   /**
+    * Method to read a file to linked list,search the integer and save the linked list back to file
+    * @throws FileNotFoundException
+    * 
+    */
     public  <T extends Comparable<T>> void orderedList() throws FileNotFoundException {
 	File file=new File("/home/administrator/Documents/test2");
     FileReader fileReader=null;
@@ -1512,7 +1517,9 @@ public static <T extends Comparable<T>> void checkParenthesis() {
 	   }
    }
 
-    
+    /*
+     * Method to cheque pallindrome numbers using dequeue
+     */
     public static void pallindromeDeque(String string) {
     LinkedDequeue<Character> linkedDequeue = new LinkedDequeue<Character>();
     String string1=string.replaceAll("\\s","");
@@ -1542,7 +1549,9 @@ public static <T extends Comparable<T>> void checkParenthesis() {
   }   
     
     
-    
+    /*
+     * Method to solve chaining collision using hashing function
+     */
    public static <T extends Comparable<T>> void hashingFunction() {
 	   LinkedList<Integer> orderedlinkedList=new LinkedList<Integer>();
 	   HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
@@ -1596,10 +1605,7 @@ public static <T extends Comparable<T>> void checkParenthesis() {
    }
     
     
-    
-    
-    
-    
+       
  /**
  * Method to find possible number of binary search trees
  * @param testCase
@@ -1636,9 +1642,10 @@ public static void numberOfBST(int testCase) {
     
     
    
-
-
-      public static int day(int month, int day, int year) {
+/*
+ * Method to print calendar using 2D array
+ */
+	 	public static int day(int month, int day, int year) {
            int y = year - (14 - month) / 12;
            int x = y + y/4 - y/100 + y/400;
            int m = month + 12 * ((14 - month) / 12) - 2;
@@ -1647,6 +1654,7 @@ public static void numberOfBST(int testCase) {
        }
 
      
+	 	
        public static boolean isLeapYear(int year) {
            if  ((year % 4 == 0) && (year % 100 != 0)) return true;
            if  (year % 400 == 0) return true;
@@ -1690,9 +1698,6 @@ public static void numberOfBST(int testCase) {
             	i++;
             
           }
-           
-
-     
            // starting day
            int d = day(month,1,year);
           
@@ -1740,8 +1745,13 @@ public static void numberOfBST(int testCase) {
 
        }
 	   
+	  
 	   
 	   
+	   
+	   /*
+	    * Method to print prime numbers in the certain ranges using 2 D array
+	    */
 	   public static void twoDprime() {
 		   int[][] array= new int[10][25];
 		   int low=0;
@@ -1750,10 +1760,10 @@ public static void numberOfBST(int testCase) {
 
 			  
 		for(int row=0; row<10;row++) {
-			List<Integer> arrayList=printPrime(low,high);
+			LinkedList<Integer> linkedList=printPrime(low,high);
 			int count=0;
-				for(int i=0 ;i <arrayList.size();i++) {
-					array[row][count]=arrayList.get(i);
+				for(int i=0 ;i <linkedList.getCount();i++) {
+					array[row][count]=linkedList.getNth(i);
 					count++;
 						}
 				low=low+100;
@@ -1777,8 +1787,8 @@ public static void numberOfBST(int testCase) {
 		  
   }
 		
-	   public static List<Integer> printPrime(int low,int high){
-			ArrayList<Integer> arrayList=new ArrayList<Integer>();
+	   public static LinkedList<Integer> printPrime(int low,int high){
+		   LinkedList<Integer> linkedList=new LinkedList<Integer>();
 			for (int num =low; num <= high; num++) {
 				int count=0;
 				for(int i=2 ; i<=num ;i++ ){
@@ -1788,24 +1798,107 @@ public static void numberOfBST(int testCase) {
 			       }
 				if(count==1) {
 					TOTAL++;
-						arrayList.add(num);
+					linkedList.add(num);
 				    }
 				    
 				}	
-			return arrayList;
+		
+			return linkedList;
 			}
 	   
+	  
 	   
 	   
 	   
+	   /*
+	    * Method to print anagram in the range
+	    */
+	   public static void primeAnagrams() {
+		   int[][] array= new int[10][100];
+		   int[][] nonAnagram=new int[10][100];
+		   LinkedList<Integer> linkedList=new LinkedList<>();
+		   LinkedList<Integer> linkedList1=new LinkedList<>();
+		   int low=0;
+		   int high=100;
+		 
+		    while(high<1000) {
+			 for(int row=0; row<10;row++) {
+				 linkedList=printPrime(low,high);
+				 linkedList1=isAnagramRange(linkedList);
+					int count=0;
+					int count1=0;
+						for(int i=0 ;i <linkedList1.getCount();i++) {
+							array[row][count]=linkedList1.getNth(i);
+							count++;
+								}
+						for(int i=0 ;i <linkedList.getCount();i++) {
+							nonAnagram[row][count1]=linkedList.getNth(i);
+							count1++;
+								}
+						low=low+100;
+						high=high+100;
+						}	
+		    }
+
+		 //printing array
+		  for(int i=0; i<10 ; i++) { 
+			   for(int j=0;j<100;j++) {
+				   if(array[i][j]==0) {
+					 continue;
+				   }
+				  System.out.print(array[i][j]+" ");
+				  
+				   }
+			   System.out.println();
+		   }
+		    
+		  System.out.println("*************");
+		  System.out.println("***************");
+		  
+		  for(int i=0;i<linkedList.getCount();i++) {
+			  for(int j=0;j<linkedList1.getCount();j++)
+				  if(linkedList.getNth(i)==linkedList1.getNth(j)) {
+					  linkedList.remove(linkedList.getNth(i));
+					  }
+			  }
+		  
+	
+		
+		  for(int i=0; i<10 ; i++) {
+			   for(int j=0;j<100;j++) {
+				   if(nonAnagram[i][j]==0 ) {
+					   continue;
+				   }
+				  System.out.print(nonAnagram[i][j]+" ");
+				  
+				   }
+			   System.out.println();
+		   }
+		  
+		  
+		  
+		  
+		   
+	   }
 	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+	   public static LinkedList<Integer> isAnagramRange(LinkedList<Integer> linkedList) {
+		   LinkedList<Integer> linkedList2=new LinkedList<Integer>();
+		   for(int i=0 ; i<linkedList.getCount()-1; i++) {
+			   for(int j=i+1 ; j<linkedList.getCount() ; j++) {
+				   String s1= Integer.toString(linkedList.getNth(i));
+					String s2= Integer.toString(linkedList.getNth(j));
+					
+					if(isAnagram(s1,s2)) {
+						linkedList2.add(linkedList.getNth(i));
+						linkedList2.add(linkedList.getNth(j));
+			   }
+					
+		   }
+		   
+	   }
+		   return linkedList2;
+	  	
+		}
 	   
 	   
 	   

@@ -1,9 +1,6 @@
 package com.bridgelabz.datastructureprograms;
 
-import com.bridgelabz.datastructureprograms.LinkedStack.Node;
-
 public class LinkedDequeue<T extends Comparable<T>> {
-	private T data;
 	private Node<T> front,rear;
 	private int size=0;
 	
@@ -18,7 +15,6 @@ public class LinkedDequeue<T extends Comparable<T>> {
 		
 		public Node(T data) {
 			this.data=data;
-			//this.next=next;
 		}
 		
 		public T getData() {
@@ -100,8 +96,8 @@ public class LinkedDequeue<T extends Comparable<T>> {
 			System.out.println("Empty queue!!");
 			}
 		T element=rear.getData();
-		Node s=front;
-		Node t=front;
+		Node<T> s=front;
+		Node<T> t=front;
 		while(s!=rear) {
 			t=s;
 			s=s.next;
@@ -112,6 +108,8 @@ public class LinkedDequeue<T extends Comparable<T>> {
 		return element;
 	}
 		
+	
+	
 	public void displayDequeue(){
 		if (size == 0) {
 			System.out.println("Empty Dequeue");
@@ -123,7 +121,10 @@ public class LinkedDequeue<T extends Comparable<T>> {
 			temp = temp.next;
 		}
 	}
-		public void displayDequeueat(){
+	
+	
+	
+	public void displayDequeueat(){
 			if (size == 0) {
 				System.out.println("Empty Dequeue");
 				return;

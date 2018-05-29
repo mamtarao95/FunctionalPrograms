@@ -3,14 +3,12 @@ package com.bridgelabz.datastructureprograms;
 public class LinkedQueue<T extends Comparable<T>>  {
     private Node<T> front,rear;
 	private int size = 0;
-	private Node<T> temp;
 	
 	public static class Node<T extends Comparable<T>> {
 		private Node<T> next;
 		public T data;
 		
 		public Node() {
-			T data=null;
 			this.next=null;
 		}
 		

@@ -1,12 +1,5 @@
 package com.bridgelabz.datastructureprograms;
 
-import java.util.Iterator;
-
-/**
- * @author administrator
- *
- * @param <T>
- */
 public class LinkedList<T extends Comparable<T>> {
 	private Node<T> head = null;
 	private int size = 0;
@@ -14,11 +7,6 @@ public class LinkedList<T extends Comparable<T>> {
 	public static class Node<T extends Comparable<T>> {
 		private T data;
 		private Node<T> next;
-
-		public Node(T data, Node<T> next) {
-			this.data = data;
-			this.next = next;
-		}
 
 		public Node(T data) {
 			this.data = data;
@@ -34,10 +22,11 @@ public class LinkedList<T extends Comparable<T>> {
 		}
 	}
 
+	
+	
 	/**
 	 * Method to add element
-	 * 
-	 * @param data
+	 * @param data Add data into the list
 	 */
 	public void add(T data) {
 		Node<T> new_node = new Node<T>(data);
@@ -55,8 +44,11 @@ public class LinkedList<T extends Comparable<T>> {
 		size++;
 	}
 
+	
+	
 	/**
 	 * Method to add element at first of linked list
+	 * @param data    The data to be added at the first
 	 */
 	public void addFirst(T data) {
 		Node<T> new_node = new Node<T>(data);
@@ -65,8 +57,11 @@ public class LinkedList<T extends Comparable<T>> {
 		size++;
 	}
 
+	
+	
 	/**
 	 * Method to add element at the last node of linked list
+	 * @param data    The data to be added at the last
 	 */
 	public void addLast(T data) {
 		if (head == null) {
@@ -76,24 +71,27 @@ public class LinkedList<T extends Comparable<T>> {
 			while (temp.next != null) {
 				temp = temp.next;
 			}
-			temp.next = new Node<T>(data, null);
+			temp.next = new Node<T>(data);
 			size++;
 		}
 	}
 
+	
+	
 	/**
 	 * Method to add element after the reference element of linked list
+	 * @param data    	 The data to be added
+	 * @param reference  The reference key after which data is inserted
 	 */
 	public void insertAfter(T data, T reference) {
 		Node<T> temp = head;
 		while (temp != null && !temp.data.equals(reference)) {
 			temp = temp.next;
 		}
-
-		if (temp != null)
-			temp.next = new Node<T>(data, temp.next);
 	}
 
+	
+	
 	/**
 	 * Method to display linked list
 	 */
@@ -109,11 +107,12 @@ public class LinkedList<T extends Comparable<T>> {
 		}
 	}
 
+	
+		
 	/**
 	 * Method to search the element in a linked list
-	 * 
-	 * @param value
-	 * @return
+	 * @param value  	The value which is to be searched
+	 * @return  boolean  
 	 */
 	public boolean search(T value) {
 		Node<T> temp = head;
@@ -125,8 +124,12 @@ public class LinkedList<T extends Comparable<T>> {
 		return false;
 	}
 
+	
+	
+	
 	/**
 	 * Method to find size
+	 * @return integer The size of list
 	 */
 	public int getCount() {
 		Node<T> temp = head;
@@ -138,15 +141,20 @@ public class LinkedList<T extends Comparable<T>> {
 		return count;
 	}
 
+	
 	/**
 	 * Method to check whether list is empty or not
+	 * @return boolean True if size is 0
 	 */
 	public boolean isEmpty() {
 		return size == 0;
 	}
 
+	
 	/**
 	 * Method to remove element at index
+	 * @param index 	The index value at which data is removed
+	 * @return		    The removed data
 	 */
 	public T removeAt(int index) {
 		if (index == 0) {
@@ -167,16 +175,17 @@ public class LinkedList<T extends Comparable<T>> {
 		return temp;
 	}
 
+	
+	
 	/**
-	 * Method to remove reference element node
-	 * 
-	 * @param reference
+	 * Method to remove data element 
+	 * @param data		The data to be removed
 	 */
-	public void remove(T reference) {
+	public void remove(T data) {
 		if (head == null) {
 			System.out.println("Head cannot be null!!");
 			}
-		if (head.data.equals(reference)) {
+		if (head.data.equals(data)) {
 			head = head.next;
 			return;
 		}
@@ -184,7 +193,7 @@ public class LinkedList<T extends Comparable<T>> {
 		Node<T> cur = head;
 		Node<T> prev = null;
 
-		while (cur != null && !cur.data.equals(reference)) {
+		while (cur != null && !cur.data.equals(data)) {
 			prev = cur;
 			cur = cur.next;
 		}
@@ -195,6 +204,13 @@ public class LinkedList<T extends Comparable<T>> {
 		prev.next = cur.next;
 	}
 
+	
+	
+	
+	/**
+	 * Method to remove first node
+	 * @return First node element
+	 */
 	public Object removeFirst() {
 		Object temp = head.data;
 		head = (Node<T>) head.next;
@@ -202,16 +218,11 @@ public class LinkedList<T extends Comparable<T>> {
 		return temp;
 	}
 
-	public void reverse(Node<T> start) {
-		if (start.next != null) {
-			reverse(start.next);
-		}
-	}
 
-	public void reverse() {
-		reverse(head);
-	}
 
+	/**
+	 * Method to display mid element of list
+	 */
 	public void displayMid() {
 		Node<T> mid = head;
 		int count = 0;
@@ -222,6 +233,14 @@ public class LinkedList<T extends Comparable<T>> {
 		System.out.println(mid.data);
 	}
 
+	
+	
+	
+	/**
+	 * Method to get the ith index element
+	 * @param index   The index value at which data is required
+	 * @return data at the given index
+	 */
 	public T getNth(int index) {
 		Node<T> temp = head;
 		int count = 0;
@@ -238,44 +257,28 @@ public class LinkedList<T extends Comparable<T>> {
 	
 	
 
+	/**
+	 * Method to add data in the sorted order
+	 * @param data  The data to be added in the list
+	 */
 	public void addSorted(T data) {
-		       Node<T> current;
-		       Node<T> new_node = new Node<T>(data);
-		         if (head == null || head.data .compareTo(new_node.data)>=0 )
-		         {
-		            new_node.next = head;
-		            head = new_node;
-		         }
-		         else {
-		 
-		           
-		            current = head;
-		 
-		            while (current.next != null &&
-		                   current.next.data .compareTo( new_node.data)<0) {
-		            	 current = current.next;
-		            }
-		                 
-		 
+		Node<T> current;
+		Node<T> new_node = new Node<T>(data);
+	   if (head == null || head.data .compareTo(new_node.data)>=0 ) {
+		      new_node.next = head;
+		      head = new_node;
+		    }
+	   else {
+		current = head;
+		while (current.next != null && current.next.data .compareTo( new_node.data)<0) {
+		    current = current.next;
+		        }
 		            new_node.next = current.next;
 		            current.next = new_node;
 		         }
 		     }
 	
 	
-	public void displaySorted() {
-		if (size == 0) {
-			System.out.println("Empty");
-			return;
-		}
-		
-		Node<T> temp = head;
-		while (temp != null) {
-			System.out.println(temp.data);
-			temp = temp.next;
-		}
-	}
-
 	
 
 	
@@ -306,7 +309,4 @@ public class LinkedList<T extends Comparable<T>> {
 	
 	
 	
-	
-	
-
 }

@@ -3,7 +3,7 @@ package com.bridgelabz.datastructureprograms;
 public class LinkedStack<T extends Comparable<T>>  {
     private Node<T> top = null;
 	private int size = 0;
-	private Node<T> temp;
+
 	public static class Node<T extends Comparable<T>> {
 		private int top=0;
 		private Node<T> next;
@@ -61,6 +61,7 @@ public class LinkedStack<T extends Comparable<T>>  {
 		}
 		return top.data;
 	}
+	
 	
 	public void display() {
 		System.out.println("Stack contains: ");
