@@ -1,8 +1,11 @@
 package com.bridgelabz.datastructureprograms;
 
+import com.bridgelabz.datastructureprograms.LinkedQueue.Node;
+
 public class LinkedList<T extends Comparable<T>> {
 	private Node<T> head;
 	private int size = 0;
+
 
 	public static class Node<T extends Comparable<T>> {
 		private T data;
@@ -13,6 +16,9 @@ public class LinkedList<T extends Comparable<T>> {
 		}
 
 		public T getValue() {
+			return data;
+		}
+		public T getData() {
 			return data;
 		}
 
@@ -271,6 +277,42 @@ public class LinkedList<T extends Comparable<T>> {
 		            current.next = new_node;
 		         }
 		     }
+	
+	
+
+	public void displayCalender() {
+		if(size==0) {
+			System.out.println("Empty Queue");
+			return;
+		}
+		Node<T> temp=head;
+	
+		for(int i=0;i<6;i++){
+         for(int j=0;j<7;j++){
+        	 
+        	 if(temp!=null) {
+        	 System.out.print(temp.getData()+" ");
+        	temp=temp.next;}
+        	}
+         System.out.println();
+	}
+
+	}
+		
+	
+	public void displayInLine() {
+		if(size==0) {
+			System.out.println("Empty Queue");
+			return;
+		}
+		
+		Node<T> temp=head;
+		while(temp!=null) {
+			System.out.print(temp.getData());
+			temp=temp.next;
+		}
+		System.out.println();
+	}
 	
 	
 	

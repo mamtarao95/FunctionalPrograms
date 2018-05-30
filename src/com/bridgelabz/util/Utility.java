@@ -611,7 +611,10 @@ public class Utility {
 	 */
 	public static void checkAnag() {
 		int count = 0;
-		int[] array = Utility.printPrime();
+		int[] array = printPrime();
+		for(int i=0 ;i<array.length;i++) {
+			System.out.println(array[i]);
+		}
 		System.out.println("The anagram pairs of prime number from 0-1000 are: ");
 		for (int i = 0; i < 167; i++) {
 			for (int j = i + 1; j < 168; j++) {
@@ -636,20 +639,30 @@ public class Utility {
 	 */
 	public static void checkPallindrome() {
 		System.out.println("The pallindrome prime number from 0-1000 are: ");
-		int[] array = Utility.printPrime();
-		StringBuilder bld = new StringBuilder();
-		for (int i = 2; i < 167; i++) {
-			String s1 = String.valueOf(array[i]);
-			while (array[i] != 0) {
-				int last = array[i] % 10;
-				bld.append(String.valueOf(last));
+		int[] array1 = printPrime();
+		for(int i=0 ;i<array1.length;i++) {
+			System.out.println(array1[i]);
+		}
+		
+		String res="";
+		
+		/*for (int i=0 ; i<array1.length;i++) {
+			if(array1[i]==0) {
+				continue;
+			}*/
+			
+		/*	String s1 = String.valueOf(array1[i]);
+			int num=array1[i];
+			while (num != 0) {
+				int last = num % 10;
+				res=res+last;
+				num=num/10;
 			}
-
-			String str = bld.toString();
-			if (str.equals(s1)) {
+			if (res.equals(s1)) {
 				System.out.println(s1 + " is a pallindrome ");
 			}
-		}
+		}*/
+		
 	}
 
 	/**
@@ -1545,93 +1558,190 @@ public class Utility {
 		}
 	}
 
-	/*
+/*
 	 * Method to print calendar using 2D array
-	 */
+	 * 
+	 */ 
+	public static void printCalender(int month,int year) {
+        String[][] a = new String[6][7];
+        int d = 1;
+        String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+                           "October", "November", "December" };
+        String[] days = { " S", " M", " T", " W", "Th", " F", " Sa" };
+        for (int i = 0; i < 6; i++){
+            for (int j = 0; j < 7; j++){
+                a[i][j] = "  ";
+            }
+        }
+       
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (checkMonth(d, month, year))
+                {
+                    j = dayOfWeek(d, month, year);
+                    if (d < 10) {
+                        a[i][j] = " " + d++;
+                    } else {
+                        a[i][j] = "" + d++;
+                    }
+                }
 
-	public static boolean isLeapYear(int year) {
-		if ((year % 4 == 0) && (year % 100 != 0))
-			return true;
-		if (year % 400 == 0)
-			return true;
-		return false;
+            }
+        }
+
+        System.out.println(months[month] + " " + year);
+        System.out.println();
+        for (int i = 0; i < 7; i++)
+        {
+            System.out.print(days[i] + "  ");
+        }
+        System.out.println();
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                System.out.print(a[i][j] + "  ");
+            }
+            System.out.println();
+        }
+    }
+	
+//to check month
+    public static boolean checkMonth(int d, int m, int y) {
+
+        boolean st = true;
+        if(((m == 4 || m == 6 || m == 9 || m == 11) && (d >30))
+                || (d>31)
+                || (m==2 && y % 100 == 0 && y % 400 != 0 && d > 28)
+                || (m==2 && y % 400 == 0 && d > 29)
+                || (m==2 && y % 100 != 0 && y % 4 != 0 && d > 28)
+                || (m==2 && y % 100 != 0 && y % 4 == 0 && d > 29))
+        {
+            st = false;
+        }
+        else {
+            st=true;
+        }       
+        return st;
+}
+  
+
+    /*
+     * Method to print calender using queue
+     */
+	public static void calenderQueue(int month,int year) {
+		 LinkedQueue<String> linkedQueueWeek =new LinkedQueue<String>();
+		 LinkedQueue<String> linkedQueueDays =new LinkedQueue<String>();
+        String[][] a = new String[6][7];
+        int d = 1;
+        String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+                           "October", "November", "December" };
+        String[] days = { " S ", " M ", " T ", " W ", " Th ", "F", " Sa" };
+        
+
+        for(int i=0 ; i<days.length;i++) {
+       	 linkedQueueWeek.enQueue(days[i]);
+       }
+        for (int i = 0; i < 6; i++){
+            for (int j = 0; j < 7; j++){
+                a[i][j] = "  ";
+            }
+        }
+        int startday = dayOfWeek(d, month, year);
+        for(int i=0 ; i<startday;i++) {
+        	linkedQueueDays.enQueue("  ");
+        }
+        
+       
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (checkMonth(d, month, year))
+                {
+                    j = dayOfWeek(d, month, year);
+                    if (d < 10) {
+                        a[i][j] = " " + d++;
+                        linkedQueueDays.enQueue(a[i][j]);
+                    } 
+                    else {
+                        a[i][j] = "" + d++;
+                        linkedQueueDays.enQueue(a[i][j]);
+                    }
+                    
+                }
+
+            }
+        }
+
+        System.out.println(months[month] + " " + year);
+        System.out.println();
+
+        linkedQueueWeek.displayInLine();
+        linkedQueueDays.displayCalender();
+    }
+	
+	public static void calenderStack(int month,int year) {
+		
+			LinkedStack<String> linkedStackWeek =new LinkedStack<String>();
+			LinkedStack<String> linkedStackDays =new LinkedStack<String>();
+			LinkedStack<String> linkedStackReverse =new LinkedStack<String>();
+	        String[][] a = new String[6][7];
+	        int d = 1;
+	        String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+	                           "October", "November", "December" };
+	        String[] days = { " S ", " M ", " T ", " W ", " Th ", "F", " Sa" };
+	        
+
+	        for(int i=days.length -1; i>=0;i--) {
+	       	 linkedStackWeek.push(days[i]);
+	       }
+	        for (int i = 0; i < 6; i++){
+	            for (int j = 0; j < 7; j++){
+	                a[i][j] = "  ";
+	            }
+	        }
+	        int startDay = dayOfWeek(d, month, year);
+	        for(int i=startDay ; i<startDay;i++) {
+	        	linkedStackDays.push("  ");
+	        }
+	        
+	       
+	        for (int i = 0; i < 6; i++) {
+	            for (int j = 0; j < 7; j++) {
+	                if (checkMonth(d, month, year))
+	                {
+	                    j = dayOfWeek(d, month, year);
+	                    if (d < 10) {
+	                        a[i][j] = " " + d++;
+	                        linkedStackDays.push(a[i][j]);
+	                    } 
+	                    else {
+	                        a[i][j] = "" + d++;
+	                        linkedStackDays.push(a[i][j]);
+	                    }
+	                    
+	                }
+
+	            }
+	        }
+	        System.out.println(linkedStackDays.size());
+	        int index=linkedStackDays.size();
+
+	        for(int i=0 ; i<index;i++) {
+	        	 linkedStackReverse.push(linkedStackDays.pop());
+	        	
+	        }
+	        
+	        System.out.println(linkedStackReverse.size());
+	        System.out.println(months[month] + " " + year);
+	        System.out.println();
+	        
+	       
+	        linkedStackWeek.displayInLine();
+	        
+	        linkedStackReverse.displayCalender();
+	    
+		
 	}
 
-	public static void printCalender(int month, int year) {
-
-		int count = 1;
-		String[] months = { "", "January", "February", "March", "April", "May", "June", "July", "August", "September",
-				"October", "November", "December" };
-		int[] days = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-		// check for leap year
-		if (month == 2 && isLeapYear(year)) {
-			days[month] = 29;
-		}
-
-		// print calendar header
-		System.out.println("   " + months[month] + " " + year);
-		String[][] calenderArray = new String[7][13];
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 13; j++) {
-				calenderArray[i][j] = " ";
-			}
-		}
-		String string = "S ,M ,T ,W ,T ,F ,S ";
-		String[] str = string.split(",");
-
-		for (int i = 0; i <= 12; i++) {
-
-			calenderArray[0][i] = str[i / 2];
-			if (i == 12) {
-				break;
-			}
-			calenderArray[0][i + 1] = " ";
-			i++;
-
-		}
-		
-		// starting day
-		int d = dayOfWeek(1,month,year);
-
-		// print the calendar
-		for (int i = 0; i < 2 * d; i++) {
-			calenderArray[1][i] = " ";
-		}
-
-		for (int i = 2 * d; i <= 12; i++) {
-			calenderArray[1][i] = Integer.toString(count++);
-			if (i == 12) {
-				break;
-			}
-			calenderArray[1][i + 1] = " ";
-			i++;
-		}
-
-		for (int j = 2; j <= 6; j++) {
-			for (int i = 0; i <= 12; i++) {
-				calenderArray[j][i] = Integer.toString(count++);
-				if (i == 12) {
-					break;
-				}
-				calenderArray[j][i + 1] =" ";
-				i++;
-				if (count > days[month]) {
-					break;
-				}
-				
-			}
-			if (count > days[month]) break;
-		}
-
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 13; j++) {
-				System.out.print(calenderArray[i][j]);
-			}
-			System.out.println();
-		}
-}
-
+	
 	/*
 	 * Method to print prime numbers in the certain ranges using 2 D array
 	 */

@@ -7,12 +7,12 @@ class HashTableChaining {
 		SLLNode next;
 		int data;
 
-		public SLLNode(int x){
+		public SLLNode(int x) {
 			data = x;
 			next = null;
 		}
 
-}
+	}
 
 	private static SLLNode[] table;
 	private static int size;
@@ -20,45 +20,43 @@ class HashTableChaining {
 	public HashTableChaining(int tableSize) {
 		table = new SLLNode[nextPrime(tableSize)];
 		size = 0;
-		}
+	}
 
-
-	public boolean isEmpty(){
+	public boolean isEmpty() {
 		return size == 0;
-		}
+	}
 
-	public void makeEmpty(){
+	public void makeEmpty() {
 		int l = table.length;
 		table = new SLLNode[l];
 		size = 0;
 	}
 
-	public int getSize(){
+	public int getSize() {
 		return size;
 
 	}
 
 	/* Function to insert an element */
 
-	public static void insert(int val){
+	public static void insert(int val) {
 		size++;
 		int pos = myhash(val);
 		SLLNode nptr = new SLLNode(val);
 		if (table[pos] == null)
 			table[pos] = nptr;
-		else{
+		else {
 			nptr.next = table[pos];
 			table[pos] = nptr;
 		}
-}
+	}
 
-
-	public static void remove(int val){
+	public static void remove(int val) {
 		int pos = myhash(val);
 		SLLNode start = table[pos];
 		SLLNode end = start;
 
-		if (start.data == val){
+		if (start.data == val) {
 			size--;
 			table[pos] = start.next;
 			return;
@@ -67,7 +65,7 @@ class HashTableChaining {
 		while (end.next != null && end.next.data != val)
 			end = end.next;
 
-		if (end.next == null){
+		if (end.next == null) {
 			System.out.println("\nElement not found\n");
 			return;
 
@@ -75,7 +73,7 @@ class HashTableChaining {
 
 		size--;
 
-		if (end.next.next == null){
+		if (end.next.next == null) {
 			end.next = null;
 			return;
 		}
@@ -87,7 +85,7 @@ class HashTableChaining {
 
 	/* Function myhash */
 
-	public static int myhash(Integer x){
+	public static int myhash(Integer x) {
 		int hashVal = x.hashCode();
 		hashVal %= table.length;
 		if (hashVal < 0)
@@ -98,7 +96,7 @@ class HashTableChaining {
 
 	/* Function to generate next prime number >= n */
 
-	public static int nextPrime(int n){
+	public static int nextPrime(int n) {
 		if (n % 2 == 0)
 			n++;
 		for (; !isPrime(n); n += 2)
@@ -109,7 +107,7 @@ class HashTableChaining {
 
 	/* Function to check if given number is prime */
 
-	public static boolean isPrime(int n){
+	public static boolean isPrime(int n) {
 
 		if (n == 2 || n == 3)
 

@@ -4,6 +4,7 @@ public class LinkedQueue<T extends Comparable<T>>  {
     private Node<T> front,rear;
 	private int size = 0;
 	
+	LinkedList<Integer> list=new LinkedList<Integer>();
 	public static class Node<T extends Comparable<T>> {
 		private Node<T> next;
 		public T data;
@@ -12,9 +13,8 @@ public class LinkedQueue<T extends Comparable<T>>  {
 			this.next=null;
 		}
 		
-		public Node(T data,Node<T> next) {
+		public Node(T data) {
 			this.data=data;
-			this.next=next;
 		}
 		
 		public T getData() {
@@ -39,7 +39,7 @@ public class LinkedQueue<T extends Comparable<T>>  {
 	
 	
 	public void enQueue(T data) {
-		Node<T> new_node=new Node<T>(data,null);
+		Node<T> new_node=new Node<T>(data);
 		if(rear==null && front==null) {
 			front=new_node;
 			rear=new_node;
@@ -48,6 +48,7 @@ public class LinkedQueue<T extends Comparable<T>>  {
 			rear.next=new_node;
 			rear=new_node;
 		}
+		//list.add((Integer) data);
 		size++;
 	}
 	
@@ -91,8 +92,39 @@ public class LinkedQueue<T extends Comparable<T>>  {
 	}
 		
 
+	public void displayCalender() {
+		if(size==0) {
+			System.out.println("Empty Queue");
+			return;
+		}
+		Node<T> temp=front;
+	
+		for(int i=0;i<6;i++){
+         for(int j=0;j<7;j++){
+        	 
+        	 if(temp!=null) {
+        	 System.out.print(temp.getData()+" ");
+        	temp=temp.next;}
+        	}
+         System.out.println();
+	}
+
+	}
 		
+	
+	public void displayInLine() {
+		if(size==0) {
+			System.out.println("Empty Queue");
+			return;
+		}
 		
+		Node<T> temp=front;
+		while(temp!=null) {
+			System.out.print(temp.getData());
+			temp=temp.next;
+		}
+		System.out.println();
+	}
 	
 	
 	
@@ -101,9 +133,7 @@ public class LinkedQueue<T extends Comparable<T>>  {
 	
 	
 	
+	}	
 	
-	
-	
-	
-}
+
 	
