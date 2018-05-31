@@ -1,6 +1,8 @@
 package com.bridgelabz.util;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,9 +10,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import com.bridgelabz.datastructureprograms.LinkedDequeue;
 import com.bridgelabz.datastructureprograms.LinkedList;
@@ -585,7 +588,7 @@ public class Utility {
 	 * @param num
 	 */
 	public static int[] printPrime() {
-		int[] array = new int[1000];
+		int[] array = new int[168];
 		for (int num = 0; num <= 1000; num++) {
 			int count = 0;
 			for (int i = 2; i <= num; i++) {
@@ -639,10 +642,10 @@ public class Utility {
 	 */
 	public static void checkPallindrome() {
 		System.out.println("The pallindrome prime number from 0-1000 are: ");
-		int[] array1 = printPrime();
-		for(int i=0 ;i<array1.length;i++) {
-			System.out.println(array1[i]);
-		}
+		int[] array = Utility.printPrime();
+		for (int i = 0;i<array.length; i++) {
+			System.out.println(array[i]);
+			}
 		
 		String res="";
 		
@@ -1251,6 +1254,7 @@ public class Utility {
 	 * @throws FileNotFoundException
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends Comparable<T>> void unOrderedList() throws FileNotFoundException {
 
 		File file = new File("/home/administrator/Documents/test1");
@@ -1305,6 +1309,7 @@ public class Utility {
 	 * @throws FileNotFoundException
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends Comparable<T>> void orderedList() throws FileNotFoundException {
 		File file = new File("/home/administrator/Documents/test2");
 		FileReader fileReader = null;
@@ -1672,7 +1677,7 @@ public class Utility {
 
         System.out.println(months[month] + " " + year);
         System.out.println();
-
+        System.out.println(linkedQueueDays.getSize());
         linkedQueueWeek.displayInLine();
         linkedQueueDays.displayCalender();
     }
@@ -1698,8 +1703,10 @@ public class Utility {
 	            }
 	        }
 	        int startDay = dayOfWeek(d, month, year);
-	        for(int i=startDay ; i<startDay;i++) {
+	        for(int i=0 ; i<startDay;i++) {
+	        	
 	        	linkedStackDays.push("  ");
+	        	
 	        }
 	        
 	       
@@ -1721,7 +1728,7 @@ public class Utility {
 
 	            }
 	        }
-	        System.out.println(linkedStackDays.size());
+	    
 	        int index=linkedStackDays.size();
 
 	        for(int i=0 ; i<index;i++) {
@@ -1729,7 +1736,7 @@ public class Utility {
 	        	
 	        }
 	        
-	        System.out.println(linkedStackReverse.size());
+
 	        System.out.println(months[month] + " " + year);
 	        System.out.println();
 	        
@@ -1930,12 +1937,72 @@ public class Utility {
 	
 	
 	
+	public static void replaceRegExp(String userName,String fullName,String number,String template) {
+		String regex1 = "(\\<<)(name)(\\>>)";
+		String regex2 = "(\\<<)(full name)(\\>>)";
+		String regex3 = "(01/01/2016)";
+		String regex4 = "(xxxxxxxxxx)";
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String date = dateFormat.format(new Date());
+		template = regexReplacement(template, regex1, userName);
+		template =regexReplacement(template, regex2, fullName);
+		template =regexReplacement(template, regex3, date);
+		template = regexReplacement(template, regex4, number);
+		System.out.println(template);
 	
+	  }
+	public static String regexReplacement(String template, String regex, String replaceWith) {
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(template);
+			template = matcher.replaceAll(replaceWith);
+			return template;
+		}
+		
+public static void playCard(String[] suits, String[] ranks,int[] deck) {
 	
+	String[][] array=new String[4][9];
+	int player=0;
+	int rank1=0;
+	int suit1=0;
 	
-	
-	
+	while(player<4) {
+		
+		for(int noOfCards=0 ;noOfCards<9;noOfCards++) {
+			int rankNum=ran.nextInt(13);
+			int suitNum=ran.nextInt(4);
+			
+			if(Integer.toString(rankNum) +Integer.toString(suitNum)
+			!= Integer.toString(rank1)+Integer.toString(suit1)) {
+				
+				array[player][noOfCards]=(ranks[rankNum]+"-"+suits[suitNum]);
+				
+				rank1=rankNum;
+				suit1=suitNum;
+				}
+			noOfCards--;
+		   }
+		player++;
+	}
+		
+		for(int i=0; i <array.length;i++) {
+			for(int j=i ; j <array[i].length;j++ ) {
+				System.out.println(array[i][j]+", ");
+				
+			}
+		
+		
+		
+		
+	}
 
+	
+	
+	
+	
+	
+	
+	
+}
 	
 	
 	

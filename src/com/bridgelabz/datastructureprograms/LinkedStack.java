@@ -1,7 +1,5 @@
 package com.bridgelabz.datastructureprograms;
 
-import com.bridgelabz.datastructureprograms.LinkedList.Node;
-
 public class LinkedStack<T extends Comparable<T>>  {
     private Node<T> top = null;
 	private int size = 0;
@@ -23,7 +21,6 @@ public class LinkedStack<T extends Comparable<T>>  {
 			return data;
 		}
 
-		
 	}
 	
 	public boolean isEmpty() {
@@ -36,9 +33,9 @@ public class LinkedStack<T extends Comparable<T>>  {
 	
 	
 	public void push(T data) {
-		linkedList.add(data);
+		//linkedList.add(data);
 
-		/*Node<T> new_node=new Node<T>(data);
+		Node<T> new_node=new Node<T>(data);
 		if(top==null) {
 			top=new_node;
 		}
@@ -47,20 +44,20 @@ public class LinkedStack<T extends Comparable<T>>  {
 			top=new_node;
 			}
 		size++;
-		*/
-}
+		}
+	
 	
 	public T pop() {
-		/*if(isEmpty()) {
+		if(isEmpty()) {
 			System.out.println("underflow exception");
 		}
 		Node<T> temp=top;
 			top=temp.next;
 			size--;
 		
-		return temp.data;*/
+		return temp.data;
 		
-		return linkedList.removeAt(linkedList.getCount()-1);
+		//return linkedList.removeAt(linkedList.getCount()-1);
 	}
 	
 	
@@ -74,19 +71,20 @@ public class LinkedStack<T extends Comparable<T>>  {
 	
 	
 	public void display() {
-		linkedList.display();
-		/*System.out.println("Stack contains: ");
+		//linkedList.display();
+		System.out.println("Stack contains: ");
 		
 		if(size==0) {
 			System.out.println("Empty stack!!");
 			return;
 		}
+		
 		Node<T> temp=top;
 		while(temp!=null) {
 			System.out.println(temp.data);
 			temp=temp.next;
 		}
-		System.out.println();*/
+		System.out.println();
 	}
 	
 	

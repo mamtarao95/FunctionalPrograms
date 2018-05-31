@@ -1,7 +1,5 @@
 package com.bridgelabz.datastructureprograms;
 
-import java.util.Scanner;
-
 class HashTableChaining {
 	public static class SLLNode {
 		SLLNode next;

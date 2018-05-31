@@ -8,7 +8,6 @@ import com.bridgelabz.util.Utility;
 
 public class HashingMain {
 	public static void main(String[] args) throws Exception {
-		LinkedList<Integer> linkedList=new LinkedList<>();
 		File file = new File("/home/administrator/Documents/Hashtest");
 		FileReader fileReader = null;
 		BufferedReader bufferedReader = null;
@@ -29,7 +28,7 @@ public class HashingMain {
 					array1[i] = Integer.parseInt(array[i]);
 				}
 				
-				HashTableChaining hash=new HashTableChaining(12);
+				new HashTableChaining(12);
 				int[] sortedArray = Utility.insertSortInt(array1);
 				for (int i = 0; i < sortedArray.length; i++) {
 					HashTableChaining.insert(sortedArray[i]);

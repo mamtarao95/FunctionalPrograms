@@ -14,7 +14,7 @@ public class Prime {
 
 	public static void main(String[] args) {
 	int[] array = Utility.printPrime();
-		for (int i = 0;array[i]!=0; i++) {
+		for (int i = 0;i<array.length; i++) {
 			System.out.println(array[i]);
 			}
 	System.out.println("There are a total of " + Utility.TOTAL + " numbers of primenumber between 0-1000");

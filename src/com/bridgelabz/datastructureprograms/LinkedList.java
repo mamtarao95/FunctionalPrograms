@@ -1,7 +1,5 @@
 package com.bridgelabz.datastructureprograms;
 
-import com.bridgelabz.datastructureprograms.LinkedQueue.Node;
-
 public class LinkedList<T extends Comparable<T>> {
 	private Node<T> head;
 	private int size = 0;
