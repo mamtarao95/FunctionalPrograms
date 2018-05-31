@@ -800,7 +800,7 @@ public class Utility {
 		for (int i = 1; i < ar.length; i++) {
 			T key = ar[i];
 			int j = i - 1;
-			while (j >= 0 && key.compareTo(ar[j]) < 0) {
+			while (j >= 0 && ar[j].compareTo(key) > 0) {
 				ar[j + 1] = ar[j];
 				j = j - 1;
 			}
@@ -1958,27 +1958,25 @@ public class Utility {
 			return template;
 		}
 		
-public static void playCard(String[] suits, String[] ranks,int[] deck) {
+public static String[][] playCard(String[] suits, String[] ranks,int[] deck) {
 	
 	String[][] array=new String[4][9];
 	int player=0;
-	int rank1=0;
-	int suit1=0;
+	int i=0;
 	
 	while(player<4) {
 		
-		for(int noOfCards=0 ;noOfCards<9;noOfCards++) {
-			int rankNum=ran.nextInt(13);
-			int suitNum=ran.nextInt(4);
+			for(int noOfCards=0 ;noOfCards<9;noOfCards++) {
 			
-			if(Integer.toString(rankNum) +Integer.toString(suitNum)
-			!= Integer.toString(rank1)+Integer.toString(suit1)) {
+
+					
+				int rankNum=ran.nextInt(13);
+				int suitNum=ran.nextInt(4);
+				if(checkDistinct(rankNum,suitNum,i++)) {
 				
-				array[player][noOfCards]=(ranks[rankNum]+" of "+suits[suitNum]);
-				
-				rank1=rankNum;
-				suit1=suitNum;
+					array[player][noOfCards]=(ranks[rankNum]+"-"+suits[suitNum]);
 				}
+
 			else {
 				noOfCards--;
 			}
@@ -1986,20 +1984,32 @@ public static void playCard(String[] suits, String[] ranks,int[] deck) {
 		   }
 		player++;
 	}
-		//Print the array
-		for(int i=0; i <4;i++) {
-			for(int j=0 ; j<9;j++ ) {
-				System.out.print(array[i][j]+", ");
-				
+	
+	
+	return array;
+	
+	
+}
+
+public static boolean checkDistinct(int rankNum,int suitNum,int i) {
+	String[] ar=new String[36];
+
+	ar[i]=Integer.toString(rankNum)+Integer.toString(suitNum);
+		if (i != 0) {
+			for (int j = i - 1; j >= 0; j--) {
+				if (ar[i] == ar[j])
+					return false;
 			}
-			System.out.println();
-	}
+		}
+		else {
+				return true;
+			
+		}
+		return true;
+		
+}
 
-	
-	
-	
-	
-	
+
 	
 	
 }
@@ -2009,6 +2019,4 @@ public static void playCard(String[] suits, String[] ranks,int[] deck) {
 	
 	
 	
-	
 
-}

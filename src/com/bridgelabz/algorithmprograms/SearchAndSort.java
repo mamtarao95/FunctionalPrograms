@@ -35,6 +35,8 @@ public class SearchAndSort {
 		break;
 		
 		default:System.out.println("Enter valid data"); 
+		break;
+		
 
 		}
 	}

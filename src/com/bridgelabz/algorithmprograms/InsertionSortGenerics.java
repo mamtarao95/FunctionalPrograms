@@ -28,12 +28,12 @@ public class InsertionSortGenerics {
 			int size1=Utility.userInputInteger();
 			String[] ar1=new String[size1];
 			System.out.println("Enter the elements in the array");
-			for(int i=0 ; i<ar.length ; i++){
+			for(int i=0 ; i<ar1.length ; i++){
 				ar1[i]=Utility.userInputString();
 			}
 			 ar1=Utility.insertSortGen(ar1);
 			System.out.println("The sorted array is: ");
-			for(int i=0 ;i<size;i++) {
+			for(int i=0 ;i<size1;i++) {
 				System.out.print(ar1[i]+ ", ");
 			}
 			
