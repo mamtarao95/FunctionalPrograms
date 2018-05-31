@@ -10,7 +10,22 @@ public class DeckOfCards {
 	    
 Utility.playCard(suits,ranks,deck);
 	    
+		}
+
+}
+
+class Player{
+	
+	Player(){
+		LinkedQueue<String> linkedQueue= new LinkedQueue<String>();
+		
 		
 	}
-
+	
+	
+	
+	
+	
+	
+	
 }

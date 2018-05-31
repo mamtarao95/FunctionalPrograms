@@ -32,6 +32,10 @@ public class SearchAndSort {
 			array1[i]=Utility.userInputString();
 		}
 		Utility.compareElapsedTime(array1);
+		break;
+		
+		default:System.out.println("Enter valid data"); 
+
 		}
 	}
 

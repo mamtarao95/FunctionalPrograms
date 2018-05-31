@@ -1974,25 +1974,25 @@ public static void playCard(String[] suits, String[] ranks,int[] deck) {
 			if(Integer.toString(rankNum) +Integer.toString(suitNum)
 			!= Integer.toString(rank1)+Integer.toString(suit1)) {
 				
-				array[player][noOfCards]=(ranks[rankNum]+"-"+suits[suitNum]);
+				array[player][noOfCards]=(ranks[rankNum]+" of "+suits[suitNum]);
 				
 				rank1=rankNum;
 				suit1=suitNum;
 				}
-			noOfCards--;
+			else {
+				noOfCards--;
+			}
+			
 		   }
 		player++;
 	}
-		
-		for(int i=0; i <array.length;i++) {
-			for(int j=i ; j <array[i].length;j++ ) {
-				System.out.println(array[i][j]+", ");
+		//Print the array
+		for(int i=0; i <4;i++) {
+			for(int j=0 ; j<9;j++ ) {
+				System.out.print(array[i][j]+", ");
 				
 			}
-		
-		
-		
-		
+			System.out.println();
 	}
 
 	
