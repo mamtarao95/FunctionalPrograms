@@ -1,3 +1,12 @@
+/******************************************************************************
+ *  Purpose: ­> Purpose to check whether two strings are anagram or not.
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
+
 package com.bridgelabz.algorithmprograms;
 
 import com.bridgelabz.util.Utility;

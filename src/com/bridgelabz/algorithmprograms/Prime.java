@@ -13,7 +13,7 @@ import com.bridgelabz.util.Utility;
 public class Prime {
 
 	public static void main(String[] args) {
-	int[] array = Utility.printPrime();
+	int[] array = Utility.printPrime(0);
 		for (int i = 0;i<array.length; i++) {
 			System.out.println(array[i]);
 			}

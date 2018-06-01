@@ -1,3 +1,11 @@
+/*******************************************************************************
+ *  Purpose: This method performs generic bubble sort 
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.algorithmprograms;
 
 import com.bridgelabz.util.Utility;
@@ -18,9 +26,6 @@ public class BubbleSortGenerics {
 		for(int i=0 ;i<size;i++) {
 			System.out.print(ar[i]+ ", ");
 		}
-		
-		
-		
 		
 		
 		

@@ -20,6 +20,10 @@ import com.bridgelabz.datastructureprograms.LinkedList;
 import com.bridgelabz.datastructureprograms.LinkedStack;
 import com.bridgelabz.datastructureprograms.LinkedQueue;
 
+/**
+ * @author administrator
+ *
+ */
 public class Utility {
 
 	public static int count = 0;
@@ -106,7 +110,7 @@ public class Utility {
 	/**
 	 * Method to check given year is leap year or not
 	 * 
-	 * @param year
+	 * @param year to be checked for leap
 	 * @return
 	 */
 	public static String checkLeapYear(String year) {
@@ -546,8 +550,8 @@ public class Utility {
 	/**
 	 * Method to check whether the two strings are anagrams or not
 	 * 
-	 * @param s1
-	 * @param s2
+	 * @param s1 String1 to be checked for anagram
+	 * @param s2 String2 to be checked for anagram
 	 * @return
 	 */
 	public static boolean isAnagram(String s1, String s2) {
@@ -566,6 +570,12 @@ public class Utility {
 		return false;
 	}
 
+	
+	/**
+	 * Method to sort the strings
+	 * @param string String to be sorted
+	 * @return
+	 */
 	public static String sortStrings(String string) {
 		int size = string.length();
 		char[] array = string.toCharArray();
@@ -584,10 +594,9 @@ public class Utility {
 
 	/**
 	 * Method to print all the prime numbers between 0 to 1000
-	 * 
-	 * @param num
+	 * @return integer array consisting of prime number between 0 t0 1000
 	 */
-	public static int[] printPrime() {
+	public static int[] printPrime(int indexOfArray) {
 		int[] array = new int[168];
 		for (int num = 0; num <= 1000; num++) {
 			int count = 0;
@@ -609,15 +618,10 @@ public class Utility {
 	/**
 	 * Method to check pairs of prime numbers which are anagram
 	 * 
-	 * @param num1
-	 * @param num2
 	 */
-	public static void checkAnag() {
+	public static void checkAnagram() {
 		int count = 0;
-		int[] array = printPrime();
-		for(int i=0 ;i<array.length;i++) {
-			System.out.println(array[i]);
-		}
+		int[] array = printPrime(0);
 		System.out.println("The anagram pairs of prime number from 0-1000 are: ");
 		for (int i = 0; i < 167; i++) {
 			for (int j = i + 1; j < 168; j++) {
@@ -638,52 +642,44 @@ public class Utility {
 	/**
 	 * Method to check whether a given number is pallindrome
 	 * 
-	 * @param num
 	 */
 	public static void checkPallindrome() {
 		System.out.println("The pallindrome prime number from 0-1000 are: ");
-		int[] array = Utility.printPrime();
-		for (int i = 0;i<array.length; i++) {
-			System.out.println(array[i]);
-			}
+		int indexOfArray=0;
+		int[] array = Utility.printPrime(indexOfArray);
 		
-		String res="";
-		
-		/*for (int i=0 ; i<array1.length;i++) {
-			if(array1[i]==0) {
-				continue;
-			}*/
-			
-		/*	String s1 = String.valueOf(array1[i]);
-			int num=array1[i];
-			while (num != 0) {
-				int last = num % 10;
-				res=res+last;
+		for(int i=0 ;i<array.length;i++) {
+
+			int var=array[i];
+			int num=array[i];
+			int reverse=0;
+			while (num >0) {
+				reverse=reverse*10 + num%10;
 				num=num/10;
 			}
-			if (res.equals(s1)) {
-				System.out.println(s1 + " is a pallindrome ");
+			if (reverse==var) {
+				System.out.println(var);
 			}
-		}*/
+		}
 		
 	}
 
 	/**
 	 * Method to perform binary search to find the integer element
 	 * 
-	 * @param ar
-	 * @param element
+	 * @param ar array which contains elements
+	 * @param element to be searched for in the array
 	 * @return
 	 */
-	public static int binSearchInt(int[] ar, int element) {
+	public static int binSearchInt(int[] array, int element) {
 		int start = 0;
-		int end = ar.length - 1;
+		int end = array.length - 1;
 
 		while (start <= end) {
 			int mid = start + (end - start) / 2;
-			if (ar[mid] == element)
+			if (array[mid] == element)
 				return mid;
-			if (ar[mid] < (element))
+			if (array[mid] < (element))
 				start = mid + 1;
 			else
 				end = mid - 1;
@@ -694,22 +690,22 @@ public class Utility {
 	/**
 	 * Method to perform binary search to find the string element
 	 * 
-	 * @param ar
-	 * @param element
+	 * @param ar array which contains elements 
+	 * @param element to be searched for in the array
 	 * @return
 	 */
 
-	public static int binSearchStr(String[] ar, String element) {
+	public static int binSearchStr(String[] array, String element) {
 
 		int start = 0;
-		int end = ar.length - 1;
+		int end = array.length - 1;
 
 		while (start <= end) {
 			int mid = start + (end - start) / 2;
 
-			if (ar[mid].equals(element))
+			if (array[mid].equals(element))
 				return mid;
-			if (ar[mid].compareTo(element) < 0)
+			if (array[mid].compareTo(element) < 0)
 				start = mid + 1;
 			else
 				end = mid - 1;
@@ -720,19 +716,22 @@ public class Utility {
 	/**
 	 * Generic method to perform binary search
 	 * 
-	 * @param ar
-	 * @param element
+	 * @param ar Array to be searched
+	 * @param element Element to be found in the array
 	 * @return
 	 */
-	public static <T extends Comparable<T>> void binSearchGenerics(T[] ar, T element) {
+	public static <T extends Comparable<T>> void binSearchGenerics(T[] array, T element) {
 		int start = 0;
-		int end = ar.length - 1;
+		int end = array.length - 1;
 
 		while (start <= end) {
 			int mid = start + (end - start) / 2;
-			if (ar[mid].compareTo(element) == 0)
+			if (array[mid].compareTo(element) == 0) {
 				System.out.println("Element found at " + "index " + mid);
-			if (ar[mid].compareTo(element) < 0)
+				return;	
+			}
+			
+			if (array[mid].compareTo(element) < 0)
 				start = mid + 1;
 			else
 				end = mid - 1;
@@ -743,9 +742,8 @@ public class Utility {
 
 	/**
 	 * Method to perform insertion sort on integer
-	 * 
-	 * @param size
-	 * @return
+	 * @param array Array to be searched
+	 * @return sorted array
 	 */
 	public static int[] insertSortInt(int[] array) {
 
@@ -761,40 +759,40 @@ public class Utility {
 		return array;
 	}
 
-	/*
-	 *
-	 */
+
+
 	/**
 	 * Method to perform insertion sort in string
 	 * 
-	 * @param size
-	 * @return
+	 * @param size Size of the array
+	 * @return sorted string array
 	 */
 	public static String[] insertSortStr(int size) {
-		String[] str = new String[size];
+		String[] string = new String[size];
 		System.out.println("Enter the elements in the array");
 
 		for (int i = 0; i < size; i++) {
-			str[i] = userInputString();
+			string[i] = userInputString();
 		}
 
 		for (int i = 1; i < size; i++) {
-			String key = str[i];
+			String key = string[i];
 			int j = i - 1;
-			while (j >= 0 && (key.compareTo(str[j]) < 0)) {
-				str[j + 1] = str[j];
+			while (j >= 0 && (key.compareTo(string[j]) < 0)) {
+				string[j + 1] = string[j];
 				j = j - 1;
 			}
-			str[j + 1] = key;
+			string[j + 1] = key;
 		}
-		return str;
+		return string;
 	}
 
+	
 	/**
 	 * Generic insertion sort that takes both string and integer as input
 	 * 
-	 * @param size
-	 * @return
+	 * @param size Size of the array
+	 * @return sorted array
 	 */
 	public static <T extends Comparable<T>> T[] insertSortGen(T[] ar) {
 		for (int i = 1; i < ar.length; i++) {
@@ -812,8 +810,8 @@ public class Utility {
 	/**
 	 * Method to perform bubble sort on integer
 	 * 
-	 * @param size
-	 * @return
+	 *@param size Size of the array
+	 * @return sorted array
 	 */
 	public static int[] bubbleSortInt(int size) {
 		int[] ar = new int[size];
@@ -835,9 +833,11 @@ public class Utility {
 		return ar;
 	}
 
-	/*
-	 * Method to perform bubble sort in string
+	/**
+	 * Method to perform bubble sort on string
 	 * 
+	 *@param size Size of the array
+	 * @return sorted array
 	 */
 	public static String[] bubbleSortStr(int size) {
 		String[] ar = new String[size];
@@ -862,8 +862,8 @@ public class Utility {
 	/**
 	 * Generic method for bubble sort: takes both string and integer as input
 	 * 
-	 * @param ar
-	 * @return
+	 * @param ar array that needs to be sorted
+	 * @return sorted array
 	 */
 	public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
 		for (int i = 0; i < array.length - 1; i++) {
@@ -879,6 +879,12 @@ public class Utility {
 		return array;
 	}
 
+	
+	
+	
+	/**Method to compare elapsed time in different sorting techniques
+	 * @param array Array containing elements that needs to be sorted
+	 */
 	public static <T extends Comparable<T>> void compareElapsedTime(T[] array) {
 
 		long starttime1 = System.nanoTime();
@@ -911,9 +917,11 @@ public class Utility {
 	}
 
 	/**
-	 * Method to play guess game
+	 * Method to play guessing game
 	 * 
-	 * @param num
+	 * @param low Range of number
+	 * @param high high Range of number
+	 * @return
 	 */
 	public static int guessGame(int low, int high) {
 		if (high - low == 1) {
@@ -929,7 +937,7 @@ public class Utility {
 	}
 
 	/**
-	 * Method to find a word using binary search froma file
+	 * Method to find a word using binary search from a file
 	 * 
 	 * @throws IOException
 	 */
@@ -958,34 +966,17 @@ public class Utility {
 	/**
 	 * Method to perform merge sort
 	 *
-	 * @param ar
-	 * @param l
-	 * @param r
+	 * @param arr containing elements that needs to be sorted
+	 * @param l low range
+	 * @param r high range
 	 */
-
-	public static String[] mergeArray(String[] left, String[] right) {
-		String[] merged = new String[left.length + right.length];
-		int lIndex = 0;
-		int rIndex = 0;
-		int mIndex = 0;
-		int comp = 0;
-		while (lIndex < left.length || rIndex < right.length) {
-			if (lIndex == left.length) {
-				merged[mIndex++] = right[rIndex++];
-			} else if (rIndex == right.length) {
-				merged[mIndex++] = left[lIndex++];
-			} else {
-				comp = left[lIndex].compareTo(right[rIndex]);
-				if (comp > 0) {
-					merged[mIndex++] = right[rIndex++];
-				} else if (comp < 0) {
-					merged[mIndex++] = left[lIndex++];
-				} else {
-					merged[mIndex++] = left[lIndex++];
-				}
-			}
+	public static void sort(String arr[], int l, int r) {
+		if (l < r) {
+			int m = (l + r) / 2;
+			sort(arr, l, m);
+			sort(arr, m + 1, r);
+			merge(arr, l, m, r);
 		}
-		return merged;
 	}
 
 	public static void merge(String arr[], int l, int m, int r) {
@@ -995,9 +986,9 @@ public class Utility {
 		String R[] = new String[n2];
 
 		for (int i = 0; i < n1; ++i)
-			L[i] = arr[l + i];
+			L[i] = (String)arr[l + i];
 		for (int j = 0; j < n2; ++j)
-			R[j] = arr[m + 1 + j];
+			R[j] = (String)arr[m + 1 + j];
 		int i = 0, j = 0, k = l;
 
 		while (i < n1 && j < n2) {
@@ -1024,29 +1015,24 @@ public class Utility {
 		}
 	}
 
-	public static void sort(String arr[], int l, int r) {
-		if (l < r) {
-			int m = (l + r) / 2;
-			sort(arr, l, m);
-			sort(arr, m + 1, r);
-			merge(arr, l, m, r);
-		}
-	}
-
 	public static void printArray(String arr[]) {
 		int n = arr.length;
 		for (int i = 0; i < n; ++i)
 			System.out.print(arr[i] + " ");
 		System.out.println();
 	}
+	
+	
 
+
+	
 	/**
 	 * Method to find the day of the week using gregorian calender
 	 * 
 	 * @param day
 	 * @param month
 	 * @param year
-	 * @return
+	 * @return day of the week
 	 */
 	public static int dayOfWeek(int day, int month, int year) {
 		int y1 = year - (14 - month) / 12;
@@ -1056,11 +1042,12 @@ public class Utility {
 		return d1;
 	}
 
+	
 	/**
 	 * Method for temperature conversion : celsius to farenheit and vice versa
 	 * 
-	 * @param choice
-	 * @return
+	 * @param choice to specify which conversion method is opted by user
+	 * @return result of conversion
 	 */
 	public static double temperatureConversion(int choice) {
 		if (choice == 1) {
@@ -1076,12 +1063,13 @@ public class Utility {
 		}
 	}
 
+	
 	/**
 	 * Method to calculate monthly payment
 	 * 
-	 * @param P
-	 * @param Y
-	 * @param R
+	 * @param P Principle amount
+	 * @param Y year
+	 * @param R rate of interest
 	 * @return
 	 */
 	public static double monthlyPayment(double P, double Y, double R) {
@@ -1094,7 +1082,7 @@ public class Utility {
 	/**
 	 * Method to find square root using Newton's raphson's method
 	 * 
-	 * @param t
+	 * @param t 
 	 * @param num
 	 * @return
 	 */
@@ -1967,47 +1955,45 @@ public static String[][] playCard(String[] suits, String[] ranks,int[] deck) {
 	while(player<4) {
 		
 			for(int noOfCards=0 ;noOfCards<9;noOfCards++) {
-			
-
-					
-				int rankNum=ran.nextInt(13);
+			int rankNum=ran.nextInt(13);
 				int suitNum=ran.nextInt(4);
 				if(checkDistinct(rankNum,suitNum,i++)) {
+					
 				
 					array[player][noOfCards]=(ranks[rankNum]+"-"+suits[suitNum]);
-				}
+					}
+else {
 
-			else {
 				noOfCards--;
 			}
 			
 		   }
 		player++;
 	}
-	
-	
 	return array;
 	
 	
 }
-
+static String[] randomArray=new String[36];
 public static boolean checkDistinct(int rankNum,int suitNum,int i) {
-	String[] ar=new String[36];
-
-	ar[i]=Integer.toString(rankNum)+Integer.toString(suitNum);
-		if (i != 0) {
-			for (int j = i - 1; j >= 0; j--) {
-				if (ar[i] == ar[j])
-					return false;
-			}
-		}
-		else {
-				return true;
-			
-		}
+	
+	String check=Integer.toString(rankNum)+Integer.toString(suitNum);
+	if(i==0) {
+		randomArray[0]=check;
 		return true;
+	}
+
+     if (i != 0) {
+			for (int j = i - 1; j >= 0; j--) {
+				if (check ==randomArray[j] )
+					return false;
+				}
+	}
+			randomArray[i]=Integer.toString(rankNum)+Integer.toString(suitNum);
+			return true;
 		
-}
+		
+	}
 
 
 	
