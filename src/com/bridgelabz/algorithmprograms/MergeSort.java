@@ -1,3 +1,11 @@
+/*******************************************************************************
+ *  Purpose: This method performs merge sorting on the given elements
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.algorithmprograms;
 
 import com.bridgelabz.util.Utility;
@@ -15,7 +23,7 @@ public class MergeSort {
 		System.out.println("Given Array");
        Utility.printArray(array);
        
-       Utility.sort(array, 0, array.length-1);
+       Utility.mergeSort(array, 0, array.length-1);
        System.out.println("\nSorted array");
        Utility.printArray(array);
 	    }

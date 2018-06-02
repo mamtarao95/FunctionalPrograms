@@ -49,6 +49,12 @@ class HashTableChaining {
 		}
 	}
 
+	
+	
+	/**
+	 * Method to remove a value from the hash table
+	 * @param val
+	 */
 	public static void remove(int val) {
 		int pos = myhash(val);
 		SLLNode start = table[pos];
@@ -62,7 +68,6 @@ class HashTableChaining {
 
 		while (end.next != null && end.next.data != val)
 			end = end.next;
-
 		if (end.next == null) {
 			System.out.println("\nElement not found\n");
 			return;
@@ -75,16 +80,18 @@ class HashTableChaining {
 			end.next = null;
 			return;
 		}
-
 		end.next = end.next.next;
 		table[pos] = start;
+		}
 
-	}
 
-	/* Function myhash */
-
-	public static int myhash(Integer x) {
-		int hashVal = x.hashCode();
+	/**
+	 * Method to evaluate the hash value for the given number
+	 * @param num Number to find hash value of
+	 * @return hashvalue
+	 */
+	public static int myhash(Integer num) {
+		int hashVal = num.hashCode();
 		hashVal %= table.length;
 		if (hashVal < 0)
 			hashVal += table.length;
@@ -97,8 +104,8 @@ class HashTableChaining {
 	public static int nextPrime(int n) {
 		if (n % 2 == 0)
 			n++;
-		for (; !isPrime(n); n += 2)
-			;
+		for (; !isPrime(n); n += 2) {}
+			
 		return n;
 
 	}
@@ -106,79 +113,58 @@ class HashTableChaining {
 	/* Function to check if given number is prime */
 
 	public static boolean isPrime(int n) {
-
 		if (n == 2 || n == 3)
-
 			return true;
 
 		if (n == 1 || n % 2 == 0)
-
 			return false;
 
 		for (int i = 3; i * i <= n; i += 2)
-
 			if (n % i == 0)
-
 				return false;
-
 		return true;
 
 	}
 
-	public static boolean contains(int key)
-
-	{
-
-		for (int i = 0; i < table.length; i++)
-
-		{
+	
+	
+	
+	/**
+	 * Method to check a key value is present or not
+	 * @param key Key whose value needs to be checked for its existence
+	 * @return boolean
+	 */
+	public static boolean contains(int key){
+		for (int i = 0; i < table.length; i++){
 			SLLNode start = table[i];
-
-			while (start != null)
-
-			{
-
+			while (start != null){
 				if (start.data == key) {
 					return true;
 				}
-
 				start = start.next;
-
+				}
 			}
-
-		}
 		return false;
 
 	}
 
-	public static void printHashTable()
-
-	{
-
+	
+	
+	/**
+	 * Method to print hash table
+	 */
+	public static void printHashTable(){
 		System.out.println();
-
-		for (int i = 0; i < table.length; i++)
-
-		{
-
+		for (int i = 0; i < table.length; i++){
 			System.out.print("Bucket " + i + ":  ");
-
 			SLLNode start = table[i];
 
-			while (start != null)
-
-			{
-
+			while (start != null){
 				System.out.print(start.data + " ");
-
 				start = start.next;
-
-			}
+				}
 
 			System.out.println();
-
+			}
 		}
-
 	}
-
-}

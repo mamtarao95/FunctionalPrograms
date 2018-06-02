@@ -8,12 +8,15 @@ public class SampleTest {
 		stk.push(11);
 		stk.push(55);
 		stk.push(43);
+		stk.display();
+		System.out.println(stk.size());
 		System.out.println(stk.isEmpty());
-		stk.display();
-		stk.pop();
-		stk.pop();
-		stk.display();
 		
+		System.out.println(stk.pop());
+		System.out.println(stk.pop());
+	
+		stk.display();
+		System.out.println(stk.size());
 
 	}
 

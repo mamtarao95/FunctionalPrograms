@@ -32,9 +32,10 @@ public class Utility {
 	public static int indexOfArray = 0;
 	public static int temp = 0;
 	public static int index = 0;
+	public static int countOfNotes=0;
 	public static ArrayList<Integer> arrayList = new ArrayList<Integer>();
-	private LinkedList<String> list = new LinkedList<String>();
-	private LinkedList<Integer> ilist = new LinkedList<Integer>();
+	static private LinkedList<String> list = new LinkedList<String>();
+	static private LinkedList<Integer> ilist = new LinkedList<Integer>();
 	public static Scanner scanner = new Scanner(System.in);
 	public static Random ran = new Random();
 
@@ -600,7 +601,7 @@ public class Utility {
 		int[] array = new int[168];
 		for (int num = 0; num <= 1000; num++) {
 			int count = 0;
-			for (int i = 2; i <= num; i++) {
+			for (int i = 2; i <=num; i++) {
 				if (num % i == 0) {
 					count++;
 				}
@@ -695,7 +696,7 @@ public class Utility {
 	 * @return
 	 */
 
-	public static int binSearchStr(String[] array, String element) {
+	public static <T extends Comparable<T>> int binSearchStr(String[] array, String element) {
 
 		int start = 0;
 		int end = array.length - 1;
@@ -703,7 +704,7 @@ public class Utility {
 		while (start <= end) {
 			int mid = start + (end - start) / 2;
 
-			if (array[mid].equals(element))
+			if (array[mid].compareTo(element)==0)
 				return mid;
 			if (array[mid].compareTo(element) < 0)
 				start = mid + 1;
@@ -942,7 +943,10 @@ public class Utility {
 	 * @throws IOException
 	 */
 	public static void searchWord() throws IOException {
-		BufferedReader in = new BufferedReader(new FileReader("/home/administrator/Documents/test"));
+		String path="test";
+		File file=new File(path);
+		
+		BufferedReader in = new BufferedReader(new FileReader(file));
 		String str;
 		while ((str = in.readLine()) != null) {
 			String[] arr = str.split("");
@@ -963,6 +967,50 @@ public class Utility {
 		in.close();
 	}
 
+	
+	/**Method to search a word fromafile using binary search
+	 * @param file File to be read
+	 */
+	public static void wordSearch(File file) {
+		
+	 FileReader fr=null;
+     int count=0;
+     ArrayList<String> a=new ArrayList<String>();
+     BufferedReader fo=null;
+     try {
+    	 fr=new FileReader(file);
+    	 fo=new  BufferedReader(fr);
+    	 String word=fo.readLine();
+    	 System.out.println(word);
+    	 while(word!=null) {
+    		 String[] str=word.split(",");
+    		 for(int i=0;i<str.length;i++) {
+    			  System.out.println(str[i]);
+    			  count++;
+    			 a.add(str[i]);
+    
+    		 }
+    		 word=null;
+    	 }
+     }
+    catch (Exception e) {
+         e.printStackTrace();
+    }
+   
+     String[] str1=new String[count];
+     for(int i=0; i<a.size();i++) {
+    	 str1[i]=a.get(i);
+     }
+     System.out.println("enter the word you want to search");
+     String word=Utility.userInputString();
+    int result= Utility.binSearchStr(str1,word);
+     if (result == -1)
+			System.out.println("Element not present");
+		else
+			System.out.println("Element found at " + "index " + result);
+     }
+    
+  
 	/**
 	 * Method to perform merge sort
 	 *
@@ -970,27 +1018,34 @@ public class Utility {
 	 * @param l low range
 	 * @param r high range
 	 */
-	public static void sort(String arr[], int l, int r) {
+	public static void mergeSort(String arr[], int l, int r) {
 		if (l < r) {
 			int m = (l + r) / 2;
-			sort(arr, l, m);
-			sort(arr, m + 1, r);
+			mergeSort(arr, l, m);
+			mergeSort(arr, m + 1, r);
 			merge(arr, l, m, r);
 		}
 	}
 
 	public static void merge(String arr[], int l, int m, int r) {
+		// find length of sub arrays
 		int n1 = m - l + 1;
 		int n2 = r - m;
+		
+		//create left and right sub arrays
 		String L[] = new String[n1];
 		String R[] = new String[n2];
 
+		//insert elements in left and right sub arrays
 		for (int i = 0; i < n1; ++i)
-			L[i] = (String)arr[l + i];
+			L[i] = arr[l + i];
 		for (int j = 0; j < n2; ++j)
-			R[j] = (String)arr[m + 1 + j];
+			R[j] = arr[m + 1 + j];
+		
+		//initialise index of left,right and main array
 		int i = 0, j = 0, k = l;
 
+		//compare left and right sub arrays with main array
 		while (i < n1 && j < n2) {
 			if (L[i].compareTo(R[j]) <= 0) {
 				arr[k] = L[i];
@@ -1002,6 +1057,7 @@ public class Utility {
 			k++;
 		}
 
+		//take elements from left out array
 		while (i < n1) {
 			arr[k] = L[i];
 			i++;
@@ -1015,6 +1071,7 @@ public class Utility {
 		}
 	}
 
+	//print array
 	public static void printArray(String arr[]) {
 		int n = arr.length;
 		for (int i = 0; i < n; ++i)
@@ -1038,8 +1095,7 @@ public class Utility {
 		int y1 = year - (14 - month) / 12;
 		int x = y1 + y1 / 4 - y1 / 100 + y1 / 400;
 		int m1 = month + 12 * ((14 - month) / 12) - 2;
-		int d1 = (day + x + (31 * m1) / 12) % 7;
-		return d1;
+		return (day + x + (31 * m1) / 12) % 7;
 	}
 
 	
@@ -1052,12 +1108,12 @@ public class Utility {
 	public static double temperatureConversion(int choice) {
 		if (choice == 1) {
 			System.out.println("Enter temerature in celsius");
-			double faren = (userInputDouble() * (9 / 5)) + 32;
-			return faren;
+			return (userInputDouble() * 9/5) + 32;
+			
 		} else if (choice == 2) {
 			System.out.println("Enter temerature in farenheit");
-			double cel = (userInputDouble() - 31) * (5 / 9);
-			return cel;
+			return (userInputDouble() - 32) * (5.0 / 9);
+			
 		} else {
 			return -1;
 		}
@@ -1079,18 +1135,19 @@ public class Utility {
 		return (P * r) / (1 - pwr);
 	}
 
+	
+	
 	/**
 	 * Method to find square root using Newton's raphson's method
 	 * 
-	 * @param t 
-	 * @param num
-	 * @return
+	 * @param num Number of which square root needs to be calculated
+	 * @return square root
 	 */
-	public static double sqrt(double c) {
+	public static double sqrt(double num) {
 		double epsilon = 1e-15;
-		double t = c;
-		while ((Math.abs(t - (c / t)) > (epsilon * t))) {
-			t = ((c / t) + t) / 2;
+		double t = num;
+		while ((Math.abs(t - (num/ t)) > (epsilon * t))) {
+			t = ((num / t) + t) / 2;
 		}
 		return t;
 	}
@@ -1098,8 +1155,8 @@ public class Utility {
 	/**
 	 * Method to convert decimal to binary
 	 * 
-	 * @param num
-	 * @return
+	 * @param num decimal number
+	 * @return binary number
 	 */
 	public static StringBuilder toBinary(int num) {
 		String out = "";
@@ -1115,6 +1172,7 @@ public class Utility {
 		while (size % 4 != 0) {
 			size++;
 		}
+		
 		int diff = size - temp;
 		for (int i = 1; i <= diff; i++) {
 			out = '0' + out;
@@ -1125,7 +1183,7 @@ public class Utility {
 		for (int i = 0; i < out.length(); i++) {
 			count++;
 			if (count == 5) {
-				sb.insert(i, " ");
+				sb.insert(i," ");
 				count = 0;
 			}
 		}
@@ -1139,8 +1197,8 @@ public class Utility {
 	/**
 	 * Method to swap the binary digit based on nibbles
 	 * 
-	 * @param num
-	 * @return
+	 * @param num binary number
+	 * @return swapped decimal representation of given number
 	 */
 	public static int binary(int num) {
 		if (num < 127) {
@@ -1153,6 +1211,7 @@ public class Utility {
 			String temp = array[0];
 			array[0] = array[1];
 			array[1] = temp;
+			
 			String strBack = "";
 			for (int i = 0; i < array.length; i++) {
 				strBack += array[i];
@@ -1198,54 +1257,69 @@ public class Utility {
 	/**
 	 * Method to generate denominations of currency
 	 * 
-	 * @param num
+	 * @param num Total amount need to be generated in change
+	 * @return count of notes generated
 	 */
 
-	public static void generateChange(int num) {
-		int[] ar = { 1, 2, 5, 10, 50, 100, 500, 1000 };
+	public static int generateChange(int num) {
+		int[] ar = { 1,2,5,10,50,100,500,1000 };
 
 		for (int i = 0; i < ar.length; i++) {
 			if (num == ar[i]) {
-				System.out.println("The ");
 				System.out.println(num);
-				return;
+				countOfNotes++;
+				return countOfNotes;
 			}
 		}
 
 		for (int i = 0; i < ar.length; i++) {
 			for (int j = i + 1; j < ar.length; j++) {
-				if (num < ar[j] && num > ar[i] || num > ar[i]) {
+				if ( (num < ar[j] && num > ar[i]) || (num >= ar[i])) {
 					temp = ar[i];
 					index = i;
 					break;
 				}
 			}
 		}
-
+		
+		if(num>1000) {
+			int remainder=num%1000;
+			int number=num/1000;
+			for(int i=0;i<number;i++) {
+				System.out.println(1000);
+				countOfNotes++;
+			}
+			generateChange(remainder);
+			
+		}
+		
+		else {
 		System.out.println(temp);
+		countOfNotes++;
 		int goal = num - temp;
 		for (int i = index; i >= 0; i--) {
 			if (goal == ar[i]) {
 				System.out.println(ar[i]);
-				return;
+				countOfNotes++;
+				return countOfNotes;
 			}
-
 		}
-		generateChange(goal);
+		return generateChange(goal);
+		}
+		return countOfNotes;
 	}
 
 	/**
 	 * Method to read a file to linked list,search the word and save the linked list
 	 * back to file
 	 * 
-	 * @return
+	 * @param file File to be read
+	 * @return void
 	 * @throws FileNotFoundException
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Comparable<T>> void unOrderedList() throws FileNotFoundException {
-
-		File file = new File("/home/administrator/Documents/test1");
+	public static <T extends Comparable<T>> void unOrderedList(File file) throws FileNotFoundException {
 		FileReader fileReader = null;
 		BufferedReader bufferedReader = null;
 		try {
@@ -1277,7 +1351,7 @@ public class Utility {
 
 		// If the word is not found, add word to the list and save back the file
 		else {
-			list.addLast(wordToSearch);
+			list.add(wordToSearch);
 			list.display();
 		}
 
@@ -1294,12 +1368,13 @@ public class Utility {
 	 * Method to read a file to linked list,search the integer and save the linked
 	 * list back to file
 	 * 
+	 * @param file File to be read
 	 * @throws FileNotFoundException
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Comparable<T>> void orderedList() throws FileNotFoundException {
-		File file = new File("/home/administrator/Documents/test2");
+	public static <T extends Comparable<T>> void orderedList(File file) throws FileNotFoundException {
+		
 		FileReader fileReader = null;
 		BufferedReader bufferedReader = null;
 		try {
@@ -1314,12 +1389,12 @@ public class Utility {
 					System.out.println(array[i]);
 				}
 
-				int array1[] = new int[array.length];
+				Integer array1[] = new Integer[array.length];
 				for (int i = 0; i < array.length; i++) {
 					array1[i] = Integer.parseInt(array[i]);
 				}
 
-				int[] sortedArray = Utility.insertSortInt(array1);
+				Integer[] sortedArray = Utility.insertSortGen(array1);
 				for (int i = 0; i < sortedArray.length; i++) {
 					ilist.add(sortedArray[i]);
 				}
@@ -1327,6 +1402,7 @@ public class Utility {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		System.out.println("Contents of linked list...");
 		ilist.display();
 		System.out.println("Enter the word you want to search");
@@ -1344,8 +1420,7 @@ public class Utility {
 		else {
 			ilist.addSorted(integerToSearch);
 			ilist.display();
-
-		}
+			}
 
 		// save modified list to the file
 		PrintWriter writer = new PrintWriter("/home/administrator/Documents/test2");
@@ -1355,6 +1430,8 @@ public class Utility {
 		writer.close();
 	}
 
+	
+	
 	/**
 	 * Method to check balanced expression based on parenthesis using stack push()
 	 * and pop()
@@ -1399,7 +1476,7 @@ public class Utility {
 			System.out.println("Adding customer no. " + i);
 			linkedQueue.enQueue(i);
 		}
-		linkedQueue.displayQueue();
+
 		int num = 1;
 		while (num <= person) {
 
@@ -1441,10 +1518,8 @@ public class Utility {
 	 */
 	public static void pallindromeDeque(String string) {
 		LinkedDequeue<Character> linkedDequeue = new LinkedDequeue<Character>();
-		String string1 = string.replaceAll("\\s", "");
-		System.out.println(string1);
-		for (int i = string1.length() - 1; i >= 0; i--) {
-			linkedDequeue.insertAtRear(string1.charAt(i));
+		for (int i = string.length() - 1; i >= 0; i--) {
+			linkedDequeue.insertAtRear(string.charAt(i));
 		}
 
 		linkedDequeue.displayDequeue();
@@ -1456,7 +1531,7 @@ public class Utility {
 
 		String output = String.valueOf(array);
 
-		if (output.equals(string1)) {
+		if (output.equals(string)) {
 			System.out.println("The given string is a pallindrome");
 		} else {
 			System.out.println("The given string is not a pallindrome");
@@ -1597,23 +1672,23 @@ public class Utility {
         }
     }
 	
-//to check month
+//to check month range
     public static boolean checkMonth(int d, int m, int y) {
 
-        boolean st = true;
+        boolean range = true;
         if(((m == 4 || m == 6 || m == 9 || m == 11) && (d >30))
-                || (d>31)
-                || (m==2 && y % 100 == 0 && y % 400 != 0 && d > 28)
-                || (m==2 && y % 400 == 0 && d > 29)
-                || (m==2 && y % 100 != 0 && y % 4 != 0 && d > 28)
-                || (m==2 && y % 100 != 0 && y % 4 == 0 && d > 29))
+             || (d>31)
+             || (m==2 && y % 100 == 0 && y % 400 != 0 && d > 28)
+             || (m==2 && y % 400 == 0 && d > 29)
+             || (m==2 && y % 100 != 0 && y % 4 != 0 && d > 28)
+             || (m==2 && y % 100 != 0 && y % 4 == 0 && d > 29))
         {
-            st = false;
+            range = false;
         }
         else {
-            st=true;
+            range=true;
         }       
-        return st;
+        return range;
 }
   
 
@@ -1665,7 +1740,7 @@ public class Utility {
 
         System.out.println(months[month] + " " + year);
         System.out.println();
-        System.out.println(linkedQueueDays.getSize());
+
         linkedQueueWeek.displayInLine();
         linkedQueueDays.displayCalender();
     }
@@ -1718,18 +1793,15 @@ public class Utility {
 	        }
 	    
 	        int index=linkedStackDays.size();
-
+	       
 	        for(int i=0 ; i<index;i++) {
 	        	 linkedStackReverse.push(linkedStackDays.pop());
 	        	
 	        }
-	        
 
 	        System.out.println(months[month] + " " + year);
 	        System.out.println();
-	        
-	       
-	        linkedStackWeek.displayInLine();
+	         linkedStackWeek.displayInLine();
 	        
 	        linkedStackReverse.displayCalender();
 	    
@@ -1901,7 +1973,8 @@ public class Utility {
 		}
 		
 	//Pop from the stack until it becomes empty
-	while(!linkedStack.isEmpty()) {
+		int size=linkedStack.size();
+	for(int i=1 ;i<=size ; i++) {
 		
 			System.out.println(linkedStack.pop());
 		}
@@ -1958,8 +2031,6 @@ public static String[][] playCard(String[] suits, String[] ranks,int[] deck) {
 			int rankNum=ran.nextInt(13);
 				int suitNum=ran.nextInt(4);
 				if(checkDistinct(rankNum,suitNum,i++)) {
-					
-				
 					array[player][noOfCards]=(ranks[rankNum]+"-"+suits[suitNum]);
 					}
 else {

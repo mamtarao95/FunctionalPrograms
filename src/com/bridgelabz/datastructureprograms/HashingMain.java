@@ -1,3 +1,11 @@
+/*******************************************************************************
+ *  Purpose: This method search a number using the hashing key value pair 
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.datastructureprograms;
 
 import java.io.BufferedReader;
@@ -28,7 +36,7 @@ public class HashingMain {
 					array1[i] = Integer.parseInt(array[i]);
 				}
 				
-				new HashTableChaining(12);
+				new HashTableChaining(11);
 				int[] sortedArray = Utility.insertSortInt(array1);
 				for (int i = 0; i < sortedArray.length; i++) {
 					HashTableChaining.insert(sortedArray[i]);

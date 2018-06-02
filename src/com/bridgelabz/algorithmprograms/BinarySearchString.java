@@ -13,6 +13,7 @@ import com.bridgelabz.util.Utility;
 
 public class BinarySearchString {
 	
+	
 	public static void main(String[] args) {
 		System.out.println("Enter the size of array");
 		int size = Utility.userInputInteger();

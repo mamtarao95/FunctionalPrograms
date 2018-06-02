@@ -1,7 +1,7 @@
 package com.bridgelabz.datastructureprograms;
 
 public class LinkedStack<T extends Comparable<T>>  {
-    private Node<T> top = null;
+    private Node<T> top;
 	private int size = 0;
     LinkedList<T> linkedList=new LinkedList<>();
 	public static class Node<T extends Comparable<T>> {
@@ -23,19 +23,35 @@ public class LinkedStack<T extends Comparable<T>>  {
 
 	}
 	
+	
+	/**
+	 * Method to check whether stack is empty or not
+	 * @return boolean
+	 */
 	public boolean isEmpty() {
 		return top==null;
 	}
 	
+	
+	/**
+	 * Method to return size
+	 * @return
+	 */
 	public int size() {
 		return size;
 	}
 	
 	
+	
+	/**
+	 * Method to push data to the stack
+	 * @param data
+	 */
 	public void push(T data) {
-		//linkedList.add(data);
+		linkedList.addFirst(data);
+		size++;
 
-		Node<T> new_node=new Node<T>(data);
+		/*Node<T> new_node=new Node<T>(data);
 		if(top==null) {
 			top=new_node;
 		}
@@ -45,22 +61,35 @@ public class LinkedStack<T extends Comparable<T>>  {
 			}
 		size++;
 		}
+	*/
+	}
 	
 	
+
+	/**
+	 * Method to pop data to the stack
+	 * @param data
+	 */
 	public T pop() {
-		if(isEmpty()) {
+		/*if(isEmpty()) {
 			System.out.println("underflow exception");
 		}
 		Node<T> temp=top;
 			top=temp.next;
 			size--;
 		
-		return temp.data;
+		return temp.data;*/
+		size--;
+		return linkedList.removeAt(0);
 		
-		//return linkedList.removeAt(linkedList.getCount()-1);
 	}
 	
 	
+	
+	/**
+	 * Method to return the top value
+	 * @return top
+	 */
 	public T peek() {
 		if(isEmpty()) {
 			System.out.println("underflow exception");
@@ -70,58 +99,30 @@ public class LinkedStack<T extends Comparable<T>>  {
 	}
 	
 	
+	/**
+	 * Method to display linked list
+	 */
 	public void display() {
-		//linkedList.display();
-		System.out.println("Stack contains: ");
-		
-		if(size==0) {
-			System.out.println("Empty stack!!");
-			return;
-		}
-		
-		Node<T> temp=top;
-		while(temp!=null) {
-			System.out.println(temp.data);
-			temp=temp.next;
-		}
-		System.out.println();
-	}
+		linkedList.display();
 	
+}
 	
-
+	/**
+	 * Method to display calender in a zig zag manner
+	 * 
+	 */
 	public void displayCalender() {
-		if(size==0) {
-			System.out.println("Empty Queue");
-			return;
-		}
-		Node<T> temp=top;
-	
-		for(int i=0;i<6;i++){
-         for(int j=0;j<7;j++){
-        	 
-        	 if(temp!=null) {
-        	 System.out.print(temp.getData()+" ");
-        	temp=temp.next;}
-        	}
-         System.out.println();
-	}
-
-	}
+		linkedList.displayCalender();
+}
 		
 	
+	
+	/**
+	 * Method to display linked list horizontally
+	 */
 	public void displayInLine() {
-		if(size==0) {
-			System.out.println("Empty Queue");
-			return;
-		}
-		
-		Node<T> temp=top;
-		while(temp!=null) {
-			System.out.print(temp.getData());
-			temp=temp.next;
-		}
-		System.out.println();
-	}
+		linkedList.displayInLine();
+}
 	
 	
 	

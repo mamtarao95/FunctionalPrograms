@@ -1,11 +1,18 @@
+/*******************************************************************************
+ *  Purpose: This program provides linked list methods
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.datastructureprograms;
 
 public class LinkedList<T extends Comparable<T>> {
 	private Node<T> head;
 	private int size = 0;
 
-
-	public static class Node<T extends Comparable<T>> {
+public static class Node<T extends Comparable<T>> {
 		private T data;
 		private Node<T> next;
 
@@ -44,7 +51,6 @@ public class LinkedList<T extends Comparable<T>> {
 	}
 	 
 	
-	
 	/**
 	 * Method to add element at first of linked list
 	 * @param data    The data to be added at the first
@@ -54,25 +60,6 @@ public class LinkedList<T extends Comparable<T>> {
 		new_node.next = head;
 		head = new_node;
 		size++;
-	}
-
-	
-	
-	/**
-	 * Method to add element at the last node of linked list
-	 * @param data    The data to be added at the last
-	 */
-	public void addLast(T data) {
-		if (head == null) {
-			addFirst(data);
-		} else {
-			Node<T> temp = head;
-			while (temp.next != null) {
-				temp = temp.next;
-			}
-			temp.next = new Node<T>(data);
-			size++;
-		}
 	}
 
 	
@@ -105,7 +92,7 @@ public class LinkedList<T extends Comparable<T>> {
 		}
 	}
 
-	
+
 		
 	/**
 	 * Method to search the element in a linked list
@@ -137,6 +124,7 @@ public class LinkedList<T extends Comparable<T>> {
 			temp = temp.next;
 		}
 		return count;
+	
 	}
 
 	
@@ -185,6 +173,7 @@ public class LinkedList<T extends Comparable<T>> {
 			}
 		if (head.data.equals(data)) {
 			head = head.next;
+			size--;
 			return;
 		}
 
@@ -200,39 +189,11 @@ public class LinkedList<T extends Comparable<T>> {
 			System.out.println("cannot be null!!");
 		}
 		prev.next = cur.next;
-	}
-
-	
-	
-	
-	/**
-	 * Method to remove first node
-	 * @return First node element
-	 */
-	public Object removeFirst() {
-		Object temp = head.data;
-		head = (Node<T>) head.next;
 		size--;
-		return temp;
-	}
-
-
-
-	/**
-	 * Method to display mid element of list
-	 */
-	public void displayMid() {
-		Node<T> mid = head;
-		int count = 0;
-		while (count != size / 2) {
-			mid = mid.next;
-			count++;
-		}
-		System.out.println(mid.data);
 	}
 
 	
-	
+
 	
 	/**
 	 * Method to get the ith index element
@@ -270,14 +231,36 @@ public class LinkedList<T extends Comparable<T>> {
 		current = head;
 		while (current.next != null && current.next.data .compareTo( new_node.data)<0) {
 		    current = current.next;
-		        }
-		            new_node.next = current.next;
-		            current.next = new_node;
+		      }
+		        new_node.next = current.next;
+		        current.next = new_node;
 		         }
 		     }
 	
-	
 
+		
+	/**
+	 * Method to display linked list horizontally
+	 */
+	public void displayInLine() {
+		if(size==0) {
+			System.out.println("Empty Queue");
+			return;
+		}
+		
+		Node<T> temp=head;
+		while(temp!=null) {
+			System.out.print(temp.getData());
+			temp=temp.next;
+		}
+		System.out.println();
+	}
+	
+	
+	/**
+	 * Method to display calender in a zig zag manner
+	 * 
+	 */
 	public void displayCalender() {
 		if(size==0) {
 			System.out.println("Empty Queue");
@@ -296,24 +279,6 @@ public class LinkedList<T extends Comparable<T>> {
 	}
 
 	}
-		
-	
-	public void displayInLine() {
-		if(size==0) {
-			System.out.println("Empty Queue");
-			return;
-		}
-		
-		Node<T> temp=head;
-		while(temp!=null) {
-			System.out.print(temp.getData());
-			temp=temp.next;
-		}
-		System.out.println();
-	}
-	
-	
-	
 
 	
 	

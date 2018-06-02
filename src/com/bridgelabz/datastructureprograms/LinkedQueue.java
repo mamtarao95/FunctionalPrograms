@@ -1,3 +1,11 @@
+/*******************************************************************************
+ *  Purpose: This method provides linked list queues methods
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.datastructureprograms;
 
 public class LinkedQueue<T extends Comparable<T>>  {
@@ -38,6 +46,10 @@ public class LinkedQueue<T extends Comparable<T>>  {
 	}
 	
 	
+	/**
+	 * Method to enqueue into the queue
+	 * @param data to be added to the queue
+	 */
 	public void enQueue(T data) {
 		Node<T> new_node=new Node<T>(data);
 		if(rear==null && front==null) {
@@ -52,7 +64,9 @@ public class LinkedQueue<T extends Comparable<T>>  {
 		size++;
 	}
 	
-	
+	/**
+	 * Method to dequeue into the queue
+	 */
 	public T deQueue() {
 		if(isEmpty()) {
 			System.out.println("Underflow exception!! Deletion not possible");
@@ -68,6 +82,10 @@ public class LinkedQueue<T extends Comparable<T>>  {
 		
 	
 	
+	
+	/**
+	 * @return
+	 */
 	public T peek() {
 	if(isEmpty()) {
 		System.out.println("Underflow exception!!");

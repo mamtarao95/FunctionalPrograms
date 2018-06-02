@@ -1,3 +1,11 @@
+/*******************************************************************************
+ *  Purpose: This method return the day of the week given the month and year
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.algorithmprograms;
 import com.bridgelabz.util.Utility;
 
