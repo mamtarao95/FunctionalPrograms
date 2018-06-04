@@ -3,6 +3,15 @@ package com.bridgelabz.util;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import com.bridgelabz.util.Utility;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,6 +27,8 @@ import java.util.HashMap;
 import com.bridgelabz.datastructureprograms.LinkedDequeue;
 import com.bridgelabz.datastructureprograms.LinkedList;
 import com.bridgelabz.datastructureprograms.LinkedStack;
+import com.bridgelabz.objectorientedprgms.Stock;
+import com.bridgelabz.objectorientedprgms.StockGetList;
 import com.bridgelabz.datastructureprograms.LinkedQueue;
 
 /**
@@ -38,7 +49,7 @@ public class Utility {
 	static private LinkedList<Integer> ilist = new LinkedList<Integer>();
 	public static Scanner scanner = new Scanner(System.in);
 	public static Random ran = new Random();
-
+	private static ObjectMapper mapper= new ObjectMapper();
 	/*
 	 * Method to take user input as string
 	 */
@@ -47,6 +58,13 @@ public class Utility {
 
 	}
 
+	/*
+	 * Method to take user input as long
+	 */
+	public static Long userInputLong() {
+		return scanner.nextLong();
+
+	}
 	public static String userInputStringLine() {
 		return scanner.nextLine();
 	}
@@ -1309,6 +1327,78 @@ public class Utility {
 		return countOfNotes;
 	}
 
+	
+	
+	/**
+	 * Method to find the maximum amount by which a task's completion time overshoots its deadline
+	 * 
+	 * @param process Process contains number of processes to be scheduled
+	 * @param n length of the process array
+	 * @param burst_Time Defines the total time that a task would require to be completed
+	 * @param deadLine Defines  quantum time for each process
+	 * @param completionTime defines overshoot time
+	 * @return
+	 */
+	public static int[] overShootTime(int[] process, int n, int[] burst_Time,int[] deadLine, int[] completionTime) {
+	
+	   // Make a copy of burst times bt[] to store remaining
+	   // burst times.
+	   int rem_bt[] = new int[n];
+	   for (int i = 0 ; i < n ; i++)
+	       rem_bt[i] =  burst_Time[i];
+
+	   int t = 0; // Current time or arrival time
+
+	   // Keep traversing processes in round robin manner
+	   // until all of them are not done.
+	   while(true) {
+	       boolean done = true;
+
+	       // Traverse all processes one by one repeatedly
+	       for (int i = 0 ; i < n; i++)  {
+	           // If burst time of a process is greater than 0
+	           // then only need to process further
+	           if (rem_bt[i] > 0) {
+	        	   done = false; // There is a pending process
+
+	               if (rem_bt[i] > deadLine[i]) {
+	                   // Increase the value of t i.e. shows
+	                   // how much time a process has been processed
+	                   t += deadLine[i];
+
+	                   // Decrease the burst_time of current process
+	                   // by deadline
+	                   rem_bt[i] -= deadLine[i];
+	               }
+
+	               // If burst time is smaller than or equal to
+	               // deadline. Last cycle for this process
+	               else
+	               {
+	                   // Increase the value of t i.e. shows
+	                   // how much time a process has been processed
+	                   t = t + rem_bt[i];
+
+	                   // Waiting time is current time minus time
+	                   // used by this process
+	                   completionTime[i] =t-deadLine[i];
+
+	                   // As the process gets fully executed
+	                   // make its remaining burst time = 0
+	                   rem_bt[i] = 0;
+	               }
+	           }
+	       }
+
+	       // If all processes are done
+	       if (done == true)
+	         break;
+	   }
+	   return  completionTime;
+	}
+
+	
+	
 	/**
 	 * Method to read a file to linked list,search the word and save the linked list
 	 * back to file
@@ -1836,7 +1926,7 @@ public class Utility {
 				if (array[i][j] == 0) {
 					continue;
 				}
-				System.out.print(array[i][j] + " ");
+				System.out.format("%4d", array[i][j]);
 
 			}
 			System.out.println();
@@ -1886,7 +1976,7 @@ public class Utility {
 					count++;
 				}
 				
-				//compares anagram list and prime list to remove common terms from primelist
+				//compares anagram list and prime list to remove common terms from prime list
 				for (int i = 0; i < linkedList.getCount(); i++) {
 					for (int j = 0; j < linkedList1.getCount(); j++)
 						if (linkedList.getNth(i) == linkedList1.getNth(j)) {
@@ -2066,9 +2156,101 @@ public static boolean checkDistinct(int rankNum,int suitNum,int i) {
 		
 	}
 
+/*
+	public static String convertJavaToJson(Object object) {
+		
+		String jsonResult="";
+			try {
+				jsonResult=mapper.writeValueAsString(object);
+			}
+			
+			catch (JsonMappingException e) {
+				System.out.println("Exception occured during JsonMappingException");
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println("Exception occured during JsonMappingException");
+				e.printStackTrace();
+			}
+			
+		return jsonResult;
+	
+		}
+	
+	public static <T> T convertJsonToJava(String jsonString, Class<T> cls) {
+		
+		T result=null;
+		try {
+			result=mapper.readValue(jsonString,cls);
+		}
+		
+		catch (JsonMappingException e) {
+			System.out.println("Exception occured during JsonMappingException");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Exception occured during JsonMappingException");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	*/
+	
 
-	
-	
+	/**
+	 * Method to write to the JSON file(converting java to JSON object) and read the JSON object and converting back
+	 * into java and calculating values for each stock
+	 * 
+	 * @param file File into which jsonObject is written
+	 * @param number Number of stock reports
+	 * @throws JsonGenerationException
+	 * @throws JsonMappingException
+	 * @throws IOException
+	 * @throws org.json.simple.parser.ParseException
+	 */
+	public static void javaToJSON(File file,int number) throws JsonGenerationException, JsonMappingException, IOException, org.json.simple.parser.ParseException {
+	long TOTAL_STOCK = 0;
+	long PER_STOCK_VALUE = 0;
+		
+	 StockGetList stockgetlist = new  StockGetList();
+     ObjectMapper map = new ObjectMapper();
+    
+     Stock stock = new Stock();
+     for (int i = 0; i < number; i++) {
+         stock = stockMethod();
+         stockgetlist.getStockList().add(stock);
+     }
+     
+     //write to the JSON file
+     map.writeValue((file),stockgetlist);
+    
+     //reads from the JSON file
+     JSONParser parser = new JSONParser();
+     Object obj = parser.parse(new FileReader(file));
+     JSONObject jsonObject = (JSONObject) obj;
+     System.out.println(jsonObject);
+     JSONArray array = (JSONArray) jsonObject.get("stockList");
+     for (int i = 0; i <array.size(); i++) {
+         JSONObject obstock = (JSONObject) (array.get(i));
+         TOTAL_STOCK += ((long) obstock.get("noOfShare")) * ((long) obstock.get("sharePrice"));
+         PER_STOCK_VALUE= ((long) obstock.get("noOfShare")) * ((long) obstock.get("sharePrice"));
+         System.out.println("The stockvalue of "+ (i+1)+" stock is "+ PER_STOCK_VALUE);
+     }
+     System.out.println("the total stock value is"+ TOTAL_STOCK);
+    
+ }
+
+ public static Stock stockMethod() {
+     Stock stock = new Stock();
+     System.out.println("Enter the stock name");
+     String stockName = Utility.userInputString();
+     stock.setStockName(stockName);
+     System.out.println("Enter number of shares");
+    long noOfShare=Utility.userInputLong();
+     stock.setNoOfShare(noOfShare);
+     System.out.println("enter price of share");
+     long sharePrice=Utility.userInputLong();
+     stock.setSharePrice(sharePrice);
+     return stock;
+ }
 }
 	
 	
