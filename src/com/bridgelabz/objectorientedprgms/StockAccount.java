@@ -1,5 +1,9 @@
 package com.bridgelabz.objectorientedprgms;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.bridgelabz.datastructureprograms.LinkedList;
 import com.bridgelabz.util.Utility;
 
@@ -7,40 +11,73 @@ public class StockAccount {
 	String fileName;
 	double amount;
 	int noOfShares;
-	static LinkedList<String> linkedList=new LinkedList<String>();
-
+ StockGetList stockgetlist = new  StockGetList();
+ 
 	public StockAccount(String fileName) {
 		this.fileName=fileName;
 		amount=20000;
 		noOfShares=5;
-		System.out.println("New file created");
-		linkedList.add("ABC");
-		linkedList.add("XYZ");
-		linkedList.add("NPR");
-		linkedList.add("WTN");
-		linkedList.add("ITU");
+		System.out.println("New account created");
+		stockgetlist.getStockListString().add("Reliance");
+		stockgetlist.getStockListString().add("TATA");
+		stockgetlist.getStockListString().add("BSNL");
+		stockgetlist.getStockListString().add("PAYTM");
+		stockgetlist.getStockListString().add("AIRTEL");
 		
 		System.out.println("The following shares are available with you:");
-		for(int i=0 ; i<linkedList.getCount();i++) {
-			System.out.println(linkedList.getNth(i));
+		for(int i=0; i<stockgetlist.getStockListString().size() ;i++ ) {
+			System.out.println(stockgetlist.getStockListString().get(i));
 		}
-		}
+	}
+	
 	
 	public double valueOf() {
+		
 		return amount;
 		}
 	
 	public void buy(int amount,String symbol) {
-		
-		noOfShares++;
+		noOfShares--;
 		this.amount+=amount;
-		linkedList.add(symbol);
+		if(stockgetlist.getStockListString().contains(symbol)) {
+			int index=stockgetlist.getStockListString().indexOf(symbol);
+			String str=stockgetlist.getStockListString().remove(index);
+			stockgetlist.getLinkedStack().push("Bought share "+ str);
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date date = new Date();
+			stockgetlist.getLinkedQueue().enQueue(str +" bought on "+ date.toString());
 		}
+		else {
+			System.out.println("Company does'nt have the share that you are requesting for..!!");
+		
+		}
+	}
+	
 	
 	public void sell(int amount,String symbol) {
-		noOfShares--;
+		
+		noOfShares++;
 		this.amount-=amount;
-		linkedList.remove(symbol);
+		if(stockgetlist.getStockListString().contains(symbol)) {
+			int index=stockgetlist.getStockListString().indexOf(symbol);
+			String str=stockgetlist.getStockListString().remove(index);
+			stockgetlist.getLinkedStack().push(str);
+			
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date date = new Date();
+			stockgetlist.getLinkedQueue().enQueue(date.toString());
+		}
+		else {
+			System.out.println("Company does'nt have the share that you are requesting for..!!");
+		
+		}
+		noOfShares++;
+		this.amount-=amount;
+		stockgetlist.getLinkedStock().push(symbol);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		stockgetlist.getLinkedQueue().enQueue(date.toString());
 		}
 	
 	public void save(String fileNAme) {
@@ -58,62 +95,7 @@ public class StockAccount {
 		
 		}
 	
-	public static void main(String[] args) {
-		System.out.println("Want to create a new account??");
-		System.out.println("Enter the file name");
-		String fileName=Utility.userInputString();
-		StockAccount stockAccount=new StockAccount(fileName);
-		System.out.println("the current amount is "+ stockAccount.amount);
-		System.out.println("the current number of shares is "+ stockAccount.noOfShares);
-		boolean keepGoing=true;
-		
-	 while(keepGoing) {
-		
-		System.out.println("Enter your choice: (1)-SELL THE SHARES    (2)-BUY THE SHARES  (3)-PRINT REPORT");
-		switch(Utility.userInputInteger()) {
-		case 1: 
-			System.out.println("Enter the name of the share you want to sell ");
-			String name1=Utility.userInputString();
-			if(linkedList.search(name1)) {
-				System.out.println("Enter the amount in which you want to sell you share ");
-				int sellingAmount=Utility.userInputInteger();
-				if(sellingAmount>stockAccount.amount) {
-					System.out.println("You dont have enough money to sell your share");
-				}
-				else {
-				stockAccount.sell(sellingAmount,name1);
-				}
-			}
-			else {
-				System.out.println("You dont have the share named "+ name1+" in your account");
-			}
-			
-			break;
 	
-		
-		case 2:
-			System.out.println("Enter the name of the share you want to buy ");
-			String name2=Utility.userInputString();
-			System.out.println("Enter the amount for which you want to buy you share ");
-			int buyingAmount=Utility.userInputInteger();
-			stockAccount.buy(buyingAmount,name2);
-			break;
-			
-		
-		
-		case 3: stockAccount.printReport();
-		break;
-		}
-			
-		System.out.println("Do you want to continue(Y/N)");
-		if(Utility.userInputString().equals("Y")) {
-			keepGoing=true;
-		}
-		else {
-			keepGoing=false;
-		}
-		
-	}
 		
 		
 		
