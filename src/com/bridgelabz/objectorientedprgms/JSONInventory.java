@@ -20,7 +20,8 @@ public class JSONInventory {
 	public static void main(String[] args) throws Exception{
 		    Object object=new JSONParser().parse(new FileReader("/home/administrator/Documents/myjson.json"));
 		    JSONObject jsonoobj=(JSONObject)object;
-		    @SuppressWarnings("unchecked")
+		    //System.out.println(jsonoobj.toString());
+		 @SuppressWarnings("unchecked")
 		    Set<String> keys=jsonoobj.keySet();
 		     for (String inventorykeys : keys) {
 		        JSONArray inventoryarray=(JSONArray)jsonoobj.get(inventorykeys);
