@@ -9,6 +9,7 @@ import java.util.Collections;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -53,7 +54,10 @@ public class AddressBook {
 		String result = Utility.userInputString();
 		if (result.equals("Y")) {
 			doSave(fileAdd, arrayList1);
-		}
+			System.out.println("Added Successfully...!!!");
+		}else {
+			System.out.println("Changes not saved !!! ThankYou ");
+			}
 	}
 
 	
@@ -66,6 +70,7 @@ public class AddressBook {
 	}
 
 	public int getNumberOfPersons() {
+		
 		return personList.size();
 	}
 
@@ -115,12 +120,14 @@ public class AddressBook {
 		String result = Utility.userInputString();
 		if (result.equals("Y")) {
 			doSave(file, arrayList);
-		}
-
-	}
+			System.out.println("Updated Successfully...!!!");
+		}else {
+			System.out.println("Changes not saved !!! ThankYou ");
+			}
+}
 
 	/**
-	 * Method to delete a person from the address book
+	 * Method to DELETE a person from the address book
 	 * 
 	 * @param index
 	 * @param file
@@ -140,36 +147,50 @@ public class AddressBook {
 		String result = Utility.userInputString();
 		if (result.equals("Y")) {
 			doSave(file, arrayList);
+			System.out.println("Successfully deleted!!! ");
+		}
+		else {
+		System.out.println("Changes not saved !!! ThankYou ");
 		}
 
 	}
 
-	public void sortByName(File file) throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
+	
+	
+	/**
+	 * **Method to SORT the persons on your list based on LASTNAME
+	 * @param file
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws SecurityException
+	 * @throws InterruptedException
+	 */
+	public void sortByKey(File file,String key) throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
 
 		arrayList = parseJSON(file);
 		
 		for(int i=0 ; i<arrayList.size()-1;i++) {
 			for(int j=i+1; j<arrayList.size();j++) {
 				JSONObject jsonObject1 = (JSONObject) arrayList.get(i);
-				String lastName1 = (String) jsonObject1.get("lastName");
-				JSONObject jsonObject2 = (JSONObject) arrayList.get(j);
-				String lastName2 = (String) jsonObject2.get("lastName");
+				String key1 = (String) jsonObject1.get(key);
 				
-				if (lastName1.compareTo(lastName2)>0) {
+				JSONObject jsonObject2 = (JSONObject) arrayList.get(j);
+				String key2 = (String) jsonObject2.get(key);
+				
+				if (key1.compareTo(key2)>0) {
 					JSONObject temp =jsonObject1;
 					arrayList.set(i,jsonObject2);
 					arrayList.set(j,temp);
-		
+					}
 				}
-				
-			}
-		}
+			}		
 		doSave(file,arrayList);
 		System.out.println("Sorted successfully..!!");
 		
 		}
 
-	public void sortByZip(File file) throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
+	/*public void sortByZip(File file) throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
 		arrayList = parseJSON(file);
 		
 		for(int i=0 ; i<arrayList.size()-1;i++) {
@@ -192,7 +213,7 @@ public class AddressBook {
 		System.out.println("Sorted successfully..!!");
 		
 
-	}
+	}*/
 
 	public void printAll() {
 		arrayList.toString();
@@ -215,13 +236,16 @@ public class AddressBook {
 	 * @throws ParseException
 	 */
 	public ArrayList<Object> parseJSON(File file) throws FileNotFoundException, IOException, ParseException {
-		JSONParser parser1 = new JSONParser();
+		arrayList = mapper.readValue((file), new TypeReference<ArrayList<Object>>() {});
+		
+		
+		/*JSONParser parser1 = new JSONParser();
 		Object obj1 = parser1.parse(new FileReader(file));
 		JSONArray array1 = (JSONArray) obj1;
 
 		for (int i = 0; i < array1.size(); i++) {
 			arrayList.add(array1.get(i));
-		}
+		}*/
 		return arrayList;
 	}
 

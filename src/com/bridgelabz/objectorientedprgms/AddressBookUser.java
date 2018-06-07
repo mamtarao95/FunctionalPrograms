@@ -13,22 +13,26 @@ public class AddressBookUser {
 		System.out.println("Enter your choice");
 		
 		System.out.println("(1)- CREATE A NEW ADDRESSBOOK");
-		System.out.println("(2)- VIEW ADDRESSBOOK");
+		System.out.println("(2)- VIEW A PARTICULAR ADDRESSBOOK");
 		System.out.println("(3)- OPEN EXISTING ADDRESSBOOK");
-		System.out.println("(4)- DELETE ADDRESSBOOK");
+		System.out.println("(4)- VIEW ADDRESSBOOK LIST");
+		System.out.println("(5)- DELETE ADDRESSBOOK");
+		
 		int choice=Utility.userInputInteger();
 		switch(choice) {
 		
 		case 1:
-		System.out.println("Creating a new address book");
-		addressBookController.doNew();
+		System.out.println("Creating a new address book..!!!");
+		System.out.println("Enter the name of new address book ");
+		String addressBookName1 = Utility.userInputString();
+		addressBookController.doNew(addressBookName1);
 		System.out.println("Now you may add persons on your new address book..!!!");
 		System.out.println("(1)- ADD A PERSON TO ADDRESSBOOK");
 		System.out.println("(2)- QUIT ADDRESSBOOK");
 			int choice1=Utility.userInputInteger();
 			switch(choice1) {
-			case 1:System.out.println("Enter the address book in which you want to add person ");
-			addressBookController.doAdd(Utility.userInputString());
+			case 1:
+			addressBookController.doAdd(addressBookName1);
 			break;
 			
 			default: System.out.println("Exiting address book..!! ThankYou");
@@ -59,23 +63,23 @@ public class AddressBookUser {
 				switch(choice2) {
 			
 				case 1:
-					addressBookController.doAdd(Utility.userInputString());
+					addressBookController.doAdd(addressBookName);
 					break;
 			
 				case 2:
-					addressBookController.doDelete();
+					addressBookController.doDelete(addressBookName);
 					break;
 				
 				case 3: 
-					addressBookController.doEdit();
+					addressBookController.doEdit(addressBookName);
 					break;
 			
 				case 4:
-					addressBookController.doSortByName();	
+					addressBookController.doSortByName(addressBookName);	
 					break;
 			
 				case 5:
-					addressBookController.doSortByZip();
+					addressBookController.doSortByZip(addressBookName);
 					break;
 				
 				case 6:
@@ -88,6 +92,11 @@ public class AddressBookUser {
 				break;
 				
 		case 4:
+			addressBookController.displayAddressBookList();
+			break;
+			
+			
+		case 5:
 			addressBookController.deleteBook();
 			break;
 		}
