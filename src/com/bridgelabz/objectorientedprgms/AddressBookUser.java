@@ -1,86 +1,100 @@
 package com.bridgelabz.objectorientedprgms;
 
 import java.io.IOException;
-
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.json.simple.parser.ParseException;
-
 import com.bridgelabz.util.Utility;
 
 public class AddressBookUser {
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException, ClassCastException, ClassNotFoundException, SecurityException, InterruptedException, ParseException {
 		AddressBookController addressBookController=new AddressBookController();
-		
+		System.out.println("WELCOME TO ADDRESS BOOK APPLICATION...!!! ");
 		System.out.println("Enter your choice");
-		System.out.println("(1)- ADD A PERSON TO ADDRESSBOOK");
-		System.out.println("(2)- DELETE A PERSON FROM ADDRESSBOOK");
-		System.out.println("(3)- EDIT A PERSON IN ADDRESSBOOK");
-		System.out.println("(4)- SORT BY NAME IN ADDRESSBOOK");
-		System.out.println("(5)- SORT BY ZIP IN ADDRESSBOOK");
-		System.out.println("(6)- PRINT ADDRESSBOOK");
-		System.out.println("(7)- CREATE A NEW ADDRESSBOOK");
 		
-		
+		System.out.println("(1)- CREATE A NEW ADDRESSBOOK");
+		System.out.println("(2)- VIEW ADDRESSBOOK");
+		System.out.println("(3)- OPEN EXISTING ADDRESSBOOK");
+		System.out.println("(4)- DELETE ADDRESSBOOK");
 		int choice=Utility.userInputInteger();
 		switch(choice) {
 		
 		case 1:
-		System.out.println("Enter the first name of the person");
-		String firstName=Utility.userInputString();
+		System.out.println("Creating a new address book");
+		addressBookController.doNew();
+		System.out.println("Now you may add persons on your new address book..!!!");
+		System.out.println("(1)- ADD A PERSON TO ADDRESSBOOK");
+		System.out.println("(2)- QUIT ADDRESSBOOK");
+			int choice1=Utility.userInputInteger();
+			switch(choice1) {
+			case 1:System.out.println("Enter the address book in which you want to add person ");
+			addressBookController.doAdd(Utility.userInputString());
+			break;
+			
+			default: System.out.println("Exiting address book..!! ThankYou");
+			}
 		
-		System.out.println("Enter the last name of the person");
-		String lastName=Utility.userInputString();
-		
-		System.out.println("Enter the address of the person");
-		String address=Utility.userInputString();
-		
-		System.out.println("Enter the city of the person");
-		String city=Utility.userInputString();
-		
-		System.out.println("Enter the state of the person");
-		String state=Utility.userInputString();
-		
-		System.out.println("Enter the zipCode of the area");
-		String zip=Utility.userInputString();
-		
-		System.out.println("Enter the phone number of the person");
-		String phone=Utility.userInputString();
-		
-		/*System.out.println("Enter the addressBook name in which yo want to add");
-		String addressBookName=Utility.userInputString();*/
-		
-		addressBookController.doAdd(firstName, lastName, address, city, state, zip, phone);
 		break;
-		
-		
+	
 		case 2:
-			System.out.println("The address book details are shown below: ");
-			addressBookController.doOpen();
-			System.out.println("Enter the index position of the person you want to delete ");
-			int index=Utility.userInputInteger();
-			addressBookController.doDelete(index);
-			System.out.println("The modified address book is shown below: ");
-			addressBookController.doOpen();
+			addressBookController.displayAddressBookList();
+			System.out.println("Enter the address book you want to view ");
+			addressBookController.doOpen(Utility.userInputString());
 			break;
+		
+		case 3:
+			System.out.println("Enter the name of address book you want to open ");
+			String addressBookName=Utility.userInputString();
+			addressBookController.doOpen(addressBookName);
+			System.out.println("You may perform following operations on existing address book ");
+			System.out.println("(1)- ADD A PERSON TO ADDRESSBOOK");
+			System.out.println("(2)- DELETE A PERSON FROM ADDRESSBOOK");
+			System.out.println("(3)- EDIT A PERSON IN ADDRESSBOOK");
+			System.out.println("(4)- SORT BY NAME IN ADDRESSBOOK");
+			System.out.println("(5)- SORT BY ZIP IN ADDRESSBOOK");
+			System.out.println("(6)- GET PERSON'S FULL NAME");
+			System.out.println("(7)- QUIT ADDRESSBOOK");
 			
-		case 3: 
-			System.out.println("The address book details are shown below: ");
-			addressBookController.doOpen();
-			System.out.println("Enter the index position of the person you want to edit ");
-			int indexEdit=Utility.userInputInteger();
-			addressBookController.doEdit(indexEdit);
+				int choice2=Utility.userInputInteger();
+				switch(choice2) {
 			
-		case 7:
-			System.out.println("Creating a new address book");
-			addressBookController.doNew();
+				case 1:
+					addressBookController.doAdd(Utility.userInputString());
+					break;
+			
+				case 2:
+					addressBookController.doDelete();
+					break;
+				
+				case 3: 
+					addressBookController.doEdit();
+					break;
+			
+				case 4:
+					addressBookController.doSortByName();	
+					break;
+			
+				case 5:
+					addressBookController.doSortByZip();
+					break;
+				
+				case 6:
+					addressBookController.getFullNameOfPerson();
+					break;
+			
+				default: System.out.println("Exiting address book..!! ThankYou");
 			break;
-			
+				}
+				break;
+				
+		case 4:
+			addressBookController.deleteBook();
+			break;
 		}
-		
-		
-		
-		
+		}
 	}
 
-}
+		
+		
+	
+

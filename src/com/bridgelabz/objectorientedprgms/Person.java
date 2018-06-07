@@ -118,8 +118,32 @@ public Person(String firstName,String lastName,String address,String city,String
 	 this.state=state;
 	 this.zip=zip;
 	 this.phone=phone;
+	 
 	  }
  
+
+
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+public void setAddress(String address) {
+	this.address = address;
+}
+public void setCity(String city) {
+	this.city = city;
+}
+public void setState(String state) {
+	this.state = state;
+}
+public void setZip(String zip) {
+	this.zip = zip;
+}
+public void setPhone(String phone) {
+	this.phone = phone;
+}
 /**
  * @return firstName of the person
  */
@@ -179,35 +203,15 @@ public String getState() {
  * @param zip      ZipCode of the person
  * @param phone    Phone of the person
  */
-public void update(String address,String city,String state,String zip,String phone) {
+public void updatePerson(String address,String city,String state,String zip,String phone) {
+	
 	 this.address=address;
 	 this.city=city;
 	 this.state=state;
 	 this.zip=zip;
 	 this.phone=phone;
  }
- 
 
-
-/*public static class CompareByName implements Comparator<Person>{
-
-	@Override
-	public int compare(Person person1, Person person2) {
-		return person1.lastName.compareTo(person2.lastName);
-	}
-
-}
-
-public static class CompareByZip implements Comparator<Person>{
-
-	@Override
-	public int compare(Person person1, Person person2) {
-		return (person1.zip).compareTo(person2.zip);
-	}
-	
-
-}
-*/
 
 
 	
