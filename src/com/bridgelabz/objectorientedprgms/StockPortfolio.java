@@ -20,6 +20,6 @@ public class StockPortfolio {
 	 File file=new File("/home/administrator/Documents/stockReport.json");
 	 System.out.println("Enter number of stock");
      int number=Utility.userInputInteger();
-     Utility.javaToJSON(file,number);
+     Utility.readWriteJSON(file,number);
 	}
  }

@@ -1,31 +1,31 @@
+/******************************************************************************
+ *  Purpose:This program is for AddressBook,manages list of person in the address book
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.objectorientedprgms;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.bridgelabz.util.Utility;
 
 public class AddressBook {
-	ArrayList<Object> arrayList = new ArrayList<Object>();
-	ArrayList<Person> personList = new ArrayList<Person>();
-	Person.CompareByName compareByName = new Person.CompareByName();
-	Person.CompareByZip compareByZip = new Person.CompareByZip();
+	ArrayList<Person> personList=new ArrayList<Person>();
 	Person person = new Person();
 	ObjectMapper mapper = new ObjectMapper();
 
-	
 	
 	/**
 	 * Method to add person's details( to the address book
@@ -45,15 +45,13 @@ public class AddressBook {
 	 * @throws InterruptedException
 	 */
 	public void addPerson(String firstName, String lastName, String address, String city, String state, String zip,String phone, File fileAdd) throws JsonGenerationException, JsonMappingException, IOException, ParseException,SecurityException, InterruptedException {
-		ArrayList<Object> arrayList1 = new ArrayList<Object>();
-		arrayList1 = parseJSON(fileAdd);
+		personList = AddressUtility.parseJSONArray(fileAdd, Person.class);
 		Person person = new Person(firstName, lastName, address, city, state, zip, phone);
-		arrayList1.add(person);
+		personList.add(person);
 
 		System.out.println("Do you want to save??(Y/N)");
-		String result = Utility.userInputString();
-		if (result.equals("Y")) {
-			doSave(fileAdd, arrayList1);
+		if (Utility.userInputString().equals("Y")) {
+			doSave(fileAdd,personList);
 			System.out.println("Added Successfully...!!!");
 		}else {
 			System.out.println("Changes not saved !!! ThankYou ");
@@ -61,21 +59,22 @@ public class AddressBook {
 	}
 
 	
+	
 	public String getFullNameOfPerson(int index,File file) throws FileNotFoundException, IOException, ParseException {
-		arrayList = parseJSON(file);
-		JSONObject jsonObject = (JSONObject)arrayList.get(index);
-		String firstName = (String)jsonObject.get("firstName");
-		String lastName = (String)jsonObject.get("lastName");
+		personList= AddressUtility.parseJSONArray(file, Person.class);
+		String firstName = personList.get(index).getFirstName();
+		String lastName =  personList.get(index).getLastName();
 		return  (firstName+lastName) ;
 	}
 
-	public int getNumberOfPersons() {
-		
+	public int getNumberOfPersons(File file) throws FileNotFoundException, IOException, ParseException {
+		personList=AddressUtility.parseJSONArray(file,Person.class);
 		return personList.size();
+		
 	}
 
 	public String[] getOtherPersonInformation(int index) {
-		Person person = personList.get(index);
+		Person person = (Person) personList.get(index);
 		String[] otherInformation = { person.getAddress(), person.getCity(), person.getZip(), person.getState(),
 				person.getPhone() };
 		return otherInformation;
@@ -100,12 +99,12 @@ public class AddressBook {
 	 * @throws InterruptedException
 	 */
 	public void updatePerson(int index, String address, String city, String state, String zip, String phone, File file)
-			throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
-		arrayList = parseJSON(file);
-		JSONObject jsonObject = (JSONObject) arrayList.get(index);
-		String firstName = (String) jsonObject.get("firstName");
-		String lastName = (String) jsonObject.get("lastName");
-		arrayList.remove(arrayList.get(index));
+		throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
+		personList = AddressUtility.parseJSONArray(file, Person.class);
+
+		String firstName = personList.get(index).getFirstName();
+		String lastName =  personList.get(index).getLastName();
+		personList.remove(personList.get(index));
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
 		person.setAddress(address);
@@ -114,12 +113,12 @@ public class AddressBook {
 		person.setState(state);
 		person.setZip(zip);
 
-		arrayList.add(index, person);
+		personList.add(index,person);
 
 		System.out.println("Do you want to save??(Y/N)");
 		String result = Utility.userInputString();
 		if (result.equals("Y")) {
-			doSave(file, arrayList);
+			doSave(file, personList);
 			System.out.println("Updated Successfully...!!!");
 		}else {
 			System.out.println("Changes not saved !!! ThankYou ");
@@ -139,14 +138,14 @@ public class AddressBook {
 	 */
 	public void removePerson(int index, File file)
 			throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
-		arrayList = parseJSON(file);
-		arrayList.remove(arrayList.get(index));
-		mapper.writeValue((file), arrayList);
+		personList = AddressUtility.parseJSONArray(file,Person.class);
+		personList.remove(personList.get(index));
+		mapper.writeValue((file),personList);
 
 		System.out.println("Do you want to save??(Y/N)");
 		String result = Utility.userInputString();
 		if (result.equals("Y")) {
-			doSave(file, arrayList);
+			doSave(file, personList);
 			System.out.println("Successfully deleted!!! ");
 		}
 		else {
@@ -166,89 +165,55 @@ public class AddressBook {
 	 * @throws SecurityException
 	 * @throws InterruptedException
 	 */
-	public void sortByKey(File file,String key) throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
+	public void sortByName(File file) throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
 
-		arrayList = parseJSON(file);
-		
-		for(int i=0 ; i<arrayList.size()-1;i++) {
-			for(int j=i+1; j<arrayList.size();j++) {
-				JSONObject jsonObject1 = (JSONObject) arrayList.get(i);
-				String key1 = (String) jsonObject1.get(key);
-				
-				JSONObject jsonObject2 = (JSONObject) arrayList.get(j);
-				String key2 = (String) jsonObject2.get(key);
-				
-				if (key1.compareTo(key2)>0) {
-					JSONObject temp =jsonObject1;
-					arrayList.set(i,jsonObject2);
-					arrayList.set(j,temp);
+		personList = AddressUtility.parseJSONArray(file,Person.class);
+		for(int i=0 ; i<personList.size()-1;i++) {
+			for(int j=i+1; j<personList.size();j++) {
+				String person1=personList.get(i).getLastName();
+				String person2=personList.get(j).getLastName();
+				if (person1.compareTo(person2)>0) {
+					Person temp =personList.get(i);
+					personList.set(i,personList.get(j));
+					personList.set(j,temp);
 					}
 				}
 			}		
-		doSave(file,arrayList);
+		doSave(file,personList);
 		System.out.println("Sorted successfully..!!");
 		
+	
 		}
 
-	/*public void sortByZip(File file) throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
-		arrayList = parseJSON(file);
-		
-		for(int i=0 ; i<arrayList.size()-1;i++) {
-			for(int j=i+1; j<arrayList.size();j++) {
-				JSONObject jsonObject1 = (JSONObject) arrayList.get(i);
-				String zip1 = (String) jsonObject1.get("zip");
-				JSONObject jsonObject2 = (JSONObject) arrayList.get(j);
-				String zip2 = (String) jsonObject2.get("zip");
-				
-				if (zip1.compareTo(zip2)>0) {
-					JSONObject temp =jsonObject1;
-					arrayList.set(i,jsonObject2);
-					arrayList.set(j,temp);
-		
-				}
-				
-			}
-		}
-		doSave(file,arrayList);
-		System.out.println("Sorted successfully..!!");
-		
-
-	}*/
-
-	public void printAll() {
-		arrayList.toString();
-	}
-
-	public String toString() {
-
-		return "FirstName: " + person.getFirstName() + "; LastName: " + person.getLastName() + "; Address: "
-				+ person.getAddress() + "; City: " + person.getCity() + "; ZipCode: " + person.getZip() + "; State: "
-				+ person.getState() + "; PhoneNumber: " + person.getPhone();
-	}
-
+	
 	/**
-	 * Method to parse the JSON file and store into the array list
-	 * 
+	 * **Method to SORT the persons on your list based on LASTNAME
 	 * @param file
-	 * @return
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws ParseException
+	 * @throws SecurityException
+	 * @throws InterruptedException
 	 */
-	public ArrayList<Object> parseJSON(File file) throws FileNotFoundException, IOException, ParseException {
-		arrayList = mapper.readValue((file), new TypeReference<ArrayList<Object>>() {});
-		
-		
-		/*JSONParser parser1 = new JSONParser();
-		Object obj1 = parser1.parse(new FileReader(file));
-		JSONArray array1 = (JSONArray) obj1;
+	public void sortByZip(File file) throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException {
 
-		for (int i = 0; i < array1.size(); i++) {
-			arrayList.add(array1.get(i));
-		}*/
-		return arrayList;
-	}
-
+		personList = AddressUtility.parseJSONArray(file,Person.class);
+		for(int i=0 ; i<personList.size()-1;i++) {
+			for(int j=i+1; j<personList.size();j++) {
+				String person1=personList.get(i).getZip();
+				String person2=personList.get(j).getZip();
+				if (person1.compareTo(person2)>0) {
+					Person temp =personList.get(i);
+					personList.set(i,personList.get(j));
+					personList.set(j,temp);
+					}
+				}
+			}		
+		doSave(file,personList);
+		System.out.println("Sorted successfully..!!");
+		
+	
+		}
 	/**
 	 * Method to save the last changes made to the address book
 	 * 
@@ -258,9 +223,9 @@ public class AddressBook {
 	 * @throws java.lang.InterruptedException
 	 * @throws java.lang.SecurityException
 	 */
-	public void doSave(File file, ArrayList arrayList)
+	public void doSave(File file, ArrayList personList)
 			throws java.io.IOException, java.lang.InterruptedException, java.lang.SecurityException {
-		mapper.writeValue((file), arrayList);
+		mapper.writeValue((file), personList);
 	
 	}
 

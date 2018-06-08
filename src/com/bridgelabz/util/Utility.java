@@ -27,6 +27,7 @@ import java.util.HashMap;
 import com.bridgelabz.datastructureprograms.LinkedDequeue;
 import com.bridgelabz.datastructureprograms.LinkedList;
 import com.bridgelabz.datastructureprograms.LinkedStack;
+import com.bridgelabz.objectorientedprgms.ProductDetails;
 import com.bridgelabz.objectorientedprgms.Stock;
 import com.bridgelabz.objectorientedprgms.StockGetList;
 import com.bridgelabz.datastructureprograms.LinkedQueue;
@@ -43,13 +44,16 @@ public class Utility {
 	public static int indexOfArray = 0;
 	public static int temp = 0;
 	public static int index = 0;
-	public static int countOfNotes=0;
+	public static int countOfNotes = 0;
 	public static ArrayList<Integer> arrayList = new ArrayList<Integer>();
 	static private LinkedList<String> list = new LinkedList<String>();
 	static private LinkedList<Integer> ilist = new LinkedList<Integer>();
 	public static Scanner scanner = new Scanner(System.in);
 	public static Random ran = new Random();
-	private static ObjectMapper mapper= new ObjectMapper();
+	private static ObjectMapper mapper = new ObjectMapper();
+	private static StockGetList stockgetlist = new StockGetList();
+	private static Stock stock = new Stock();
+
 	/*
 	 * Method to take user input as string
 	 */
@@ -65,6 +69,7 @@ public class Utility {
 		return scanner.nextLong();
 
 	}
+
 	public static String userInputStringLine() {
 		return scanner.nextLine();
 	}
@@ -129,7 +134,8 @@ public class Utility {
 	/**
 	 * Method to check given year is leap year or not
 	 * 
-	 * @param year to be checked for leap
+	 * @param year
+	 *            to be checked for leap
 	 * @return
 	 */
 	public static String checkLeapYear(String year) {
@@ -569,8 +575,10 @@ public class Utility {
 	/**
 	 * Method to check whether the two strings are anagrams or not
 	 * 
-	 * @param s1 String1 to be checked for anagram
-	 * @param s2 String2 to be checked for anagram
+	 * @param s1
+	 *            String1 to be checked for anagram
+	 * @param s2
+	 *            String2 to be checked for anagram
 	 * @return
 	 */
 	public static boolean isAnagram(String s1, String s2) {
@@ -589,10 +597,11 @@ public class Utility {
 		return false;
 	}
 
-	
 	/**
 	 * Method to sort the strings
-	 * @param string String to be sorted
+	 * 
+	 * @param string
+	 *            String to be sorted
 	 * @return
 	 */
 	public static String sortStrings(String string) {
@@ -613,13 +622,14 @@ public class Utility {
 
 	/**
 	 * Method to print all the prime numbers between 0 to 1000
+	 * 
 	 * @return integer array consisting of prime number between 0 t0 1000
 	 */
 	public static int[] printPrime(int indexOfArray) {
 		int[] array = new int[168];
 		for (int num = 0; num <= 1000; num++) {
 			int count = 0;
-			for (int i = 2; i <=num; i++) {
+			for (int i = 2; i <= num; i++) {
 				if (num % i == 0) {
 					count++;
 				}
@@ -664,30 +674,32 @@ public class Utility {
 	 */
 	public static void checkPallindrome() {
 		System.out.println("The pallindrome prime number from 0-1000 are: ");
-		int indexOfArray=0;
+		int indexOfArray = 0;
 		int[] array = Utility.printPrime(indexOfArray);
-		
-		for(int i=0 ;i<array.length;i++) {
 
-			int var=array[i];
-			int num=array[i];
-			int reverse=0;
-			while (num >0) {
-				reverse=reverse*10 + num%10;
-				num=num/10;
+		for (int i = 0; i < array.length; i++) {
+
+			int var = array[i];
+			int num = array[i];
+			int reverse = 0;
+			while (num > 0) {
+				reverse = reverse * 10 + num % 10;
+				num = num / 10;
 			}
-			if (reverse==var) {
+			if (reverse == var) {
 				System.out.println(var);
 			}
 		}
-		
+
 	}
 
 	/**
 	 * Method to perform binary search to find the integer element
 	 * 
-	 * @param ar array which contains elements
-	 * @param element to be searched for in the array
+	 * @param ar
+	 *            array which contains elements
+	 * @param element
+	 *            to be searched for in the array
 	 * @return
 	 */
 	public static int binSearchInt(int[] array, int element) {
@@ -709,8 +721,10 @@ public class Utility {
 	/**
 	 * Method to perform binary search to find the string element
 	 * 
-	 * @param ar array which contains elements 
-	 * @param element to be searched for in the array
+	 * @param ar
+	 *            array which contains elements
+	 * @param element
+	 *            to be searched for in the array
 	 * @return
 	 */
 
@@ -722,7 +736,7 @@ public class Utility {
 		while (start <= end) {
 			int mid = start + (end - start) / 2;
 
-			if (array[mid].compareTo(element)==0)
+			if (array[mid].compareTo(element) == 0)
 				return mid;
 			if (array[mid].compareTo(element) < 0)
 				start = mid + 1;
@@ -735,8 +749,10 @@ public class Utility {
 	/**
 	 * Generic method to perform binary search
 	 * 
-	 * @param ar Array to be searched
-	 * @param element Element to be found in the array
+	 * @param ar
+	 *            Array to be searched
+	 * @param element
+	 *            Element to be found in the array
 	 * @return
 	 */
 	public static <T extends Comparable<T>> void binSearchGenerics(T[] array, T element) {
@@ -747,9 +763,9 @@ public class Utility {
 			int mid = start + (end - start) / 2;
 			if (array[mid].compareTo(element) == 0) {
 				System.out.println("Element found at " + "index " + mid);
-				return;	
+				return;
 			}
-			
+
 			if (array[mid].compareTo(element) < 0)
 				start = mid + 1;
 			else
@@ -761,7 +777,9 @@ public class Utility {
 
 	/**
 	 * Method to perform insertion sort on integer
-	 * @param array Array to be searched
+	 * 
+	 * @param array
+	 *            Array to be searched
 	 * @return sorted array
 	 */
 	public static int[] insertSortInt(int[] array) {
@@ -778,12 +796,11 @@ public class Utility {
 		return array;
 	}
 
-
-
 	/**
 	 * Method to perform insertion sort in string
 	 * 
-	 * @param size Size of the array
+	 * @param size
+	 *            Size of the array
 	 * @return sorted string array
 	 */
 	public static String[] insertSortStr(int size) {
@@ -806,11 +823,11 @@ public class Utility {
 		return string;
 	}
 
-	
 	/**
 	 * Generic insertion sort that takes both string and integer as input
 	 * 
-	 * @param size Size of the array
+	 * @param size
+	 *            Size of the array
 	 * @return sorted array
 	 */
 	public static <T extends Comparable<T>> T[] insertSortGen(T[] ar) {
@@ -829,7 +846,8 @@ public class Utility {
 	/**
 	 * Method to perform bubble sort on integer
 	 * 
-	 *@param size Size of the array
+	 * @param size
+	 *            Size of the array
 	 * @return sorted array
 	 */
 	public static int[] bubbleSortInt(int size) {
@@ -855,7 +873,8 @@ public class Utility {
 	/**
 	 * Method to perform bubble sort on string
 	 * 
-	 *@param size Size of the array
+	 * @param size
+	 *            Size of the array
 	 * @return sorted array
 	 */
 	public static String[] bubbleSortStr(int size) {
@@ -881,7 +900,8 @@ public class Utility {
 	/**
 	 * Generic method for bubble sort: takes both string and integer as input
 	 * 
-	 * @param ar array that needs to be sorted
+	 * @param ar
+	 *            array that needs to be sorted
 	 * @return sorted array
 	 */
 	public static <T extends Comparable<T>> T[] bubbleSortGen(T[] array) {
@@ -898,11 +918,11 @@ public class Utility {
 		return array;
 	}
 
-	
-	
-	
-	/**Method to compare elapsed time in different sorting techniques
-	 * @param array Array containing elements that needs to be sorted
+	/**
+	 * Method to compare elapsed time in different sorting techniques
+	 * 
+	 * @param array
+	 *            Array containing elements that needs to be sorted
 	 */
 	public static <T extends Comparable<T>> void compareElapsedTime(T[] array) {
 
@@ -938,8 +958,10 @@ public class Utility {
 	/**
 	 * Method to play guessing game
 	 * 
-	 * @param low Range of number
-	 * @param high high Range of number
+	 * @param low
+	 *            Range of number
+	 * @param high
+	 *            high Range of number
 	 * @return
 	 */
 	public static int guessGame(int low, int high) {
@@ -961,9 +983,9 @@ public class Utility {
 	 * @throws IOException
 	 */
 	public static void searchWord() throws IOException {
-		String path="test";
-		File file=new File(path);
-		
+		String path = "test";
+		File file = new File(path);
+
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		String str;
 		while ((str = in.readLine()) != null) {
@@ -985,56 +1007,59 @@ public class Utility {
 		in.close();
 	}
 
-	
-	/**Method to search a word fromafile using binary search
-	 * @param file File to be read
+	/**
+	 * Method to search a word fromafile using binary search
+	 * 
+	 * @param file
+	 *            File to be read
 	 */
 	public static void wordSearch(File file) {
-		
-	 FileReader fr=null;
-     int count=0;
-     ArrayList<String> a=new ArrayList<String>();
-     BufferedReader fo=null;
-     try {
-    	 fr=new FileReader(file);
-    	 fo=new  BufferedReader(fr);
-    	 String word=fo.readLine();
-    	 System.out.println(word);
-    	 while(word!=null) {
-    		 String[] str=word.split(",");
-    		 for(int i=0;i<str.length;i++) {
-    			  System.out.println(str[i]);
-    			  count++;
-    			 a.add(str[i]);
-    
-    		 }
-    		 word=null;
-    	 }
-     }
-    catch (Exception e) {
-         e.printStackTrace();
-    }
-   
-     String[] str1=new String[count];
-     for(int i=0; i<a.size();i++) {
-    	 str1[i]=a.get(i);
-     }
-     System.out.println("enter the word you want to search");
-     String word=Utility.userInputString();
-    int result= Utility.binSearchStr(str1,word);
-     if (result == -1)
+
+		FileReader fr = null;
+		int count = 0;
+		ArrayList<String> a = new ArrayList<String>();
+		BufferedReader fo = null;
+		try {
+			fr = new FileReader(file);
+			fo = new BufferedReader(fr);
+			String word = fo.readLine();
+			System.out.println(word);
+			while (word != null) {
+				String[] str = word.split(",");
+				for (int i = 0; i < str.length; i++) {
+					System.out.println(str[i]);
+					count++;
+					a.add(str[i]);
+
+				}
+				word = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String[] str1 = new String[count];
+		for (int i = 0; i < a.size(); i++) {
+			str1[i] = a.get(i);
+		}
+		System.out.println("enter the word you want to search");
+		String word = Utility.userInputString();
+		int result = Utility.binSearchStr(str1, word);
+		if (result == -1)
 			System.out.println("Element not present");
 		else
 			System.out.println("Element found at " + "index " + result);
-     }
-    
-  
+	}
+
 	/**
 	 * Method to perform merge sort
 	 *
-	 * @param arr containing elements that needs to be sorted
-	 * @param l low range
-	 * @param r high range
+	 * @param arr
+	 *            containing elements that needs to be sorted
+	 * @param l
+	 *            low range
+	 * @param r
+	 *            high range
 	 */
 	public static void mergeSort(String arr[], int l, int r) {
 		if (l < r) {
@@ -1049,21 +1074,21 @@ public class Utility {
 		// find length of sub arrays
 		int n1 = m - l + 1;
 		int n2 = r - m;
-		
-		//create left and right sub arrays
+
+		// create left and right sub arrays
 		String L[] = new String[n1];
 		String R[] = new String[n2];
 
-		//insert elements in left and right sub arrays
+		// insert elements in left and right sub arrays
 		for (int i = 0; i < n1; ++i)
 			L[i] = arr[l + i];
 		for (int j = 0; j < n2; ++j)
 			R[j] = arr[m + 1 + j];
-		
-		//initialise index of left,right and main array
+
+		// initialise index of left,right and main array
 		int i = 0, j = 0, k = l;
 
-		//compare left and right sub arrays with main array
+		// compare left and right sub arrays with main array
 		while (i < n1 && j < n2) {
 			if (L[i].compareTo(R[j]) <= 0) {
 				arr[k] = L[i];
@@ -1075,7 +1100,7 @@ public class Utility {
 			k++;
 		}
 
-		//take elements from left out array
+		// take elements from left out array
 		while (i < n1) {
 			arr[k] = L[i];
 			i++;
@@ -1089,18 +1114,14 @@ public class Utility {
 		}
 	}
 
-	//print array
+	// print array
 	public static void printArray(String arr[]) {
 		int n = arr.length;
 		for (int i = 0; i < n; ++i)
 			System.out.print(arr[i] + " ");
 		System.out.println();
 	}
-	
-	
 
-
-	
 	/**
 	 * Method to find the day of the week using gregorian calender
 	 * 
@@ -1116,34 +1137,36 @@ public class Utility {
 		return (day + x + (31 * m1) / 12) % 7;
 	}
 
-	
 	/**
 	 * Method for temperature conversion : celsius to farenheit and vice versa
 	 * 
-	 * @param choice to specify which conversion method is opted by user
+	 * @param choice
+	 *            to specify which conversion method is opted by user
 	 * @return result of conversion
 	 */
 	public static double temperatureConversion(int choice) {
 		if (choice == 1) {
 			System.out.println("Enter temerature in celsius");
-			return (userInputDouble() * 9/5) + 32;
-			
+			return (userInputDouble() * 9 / 5) + 32;
+
 		} else if (choice == 2) {
 			System.out.println("Enter temerature in farenheit");
 			return (userInputDouble() - 32) * (5.0 / 9);
-			
+
 		} else {
 			return -1;
 		}
 	}
 
-	
 	/**
 	 * Method to calculate monthly payment
 	 * 
-	 * @param P Principle amount
-	 * @param Y year
-	 * @param R rate of interest
+	 * @param P
+	 *            Principle amount
+	 * @param Y
+	 *            year
+	 * @param R
+	 *            rate of interest
 	 * @return
 	 */
 	public static double monthlyPayment(double P, double Y, double R) {
@@ -1153,18 +1176,17 @@ public class Utility {
 		return (P * r) / (1 - pwr);
 	}
 
-	
-	
 	/**
 	 * Method to find square root using Newton's raphson's method
 	 * 
-	 * @param num Number of which square root needs to be calculated
+	 * @param num
+	 *            Number of which square root needs to be calculated
 	 * @return square root
 	 */
 	public static double sqrt(double num) {
 		double epsilon = 1e-15;
 		double t = num;
-		while ((Math.abs(t - (num/ t)) > (epsilon * t))) {
+		while ((Math.abs(t - (num / t)) > (epsilon * t))) {
 			t = ((num / t) + t) / 2;
 		}
 		return t;
@@ -1173,7 +1195,8 @@ public class Utility {
 	/**
 	 * Method to convert decimal to binary
 	 * 
-	 * @param num decimal number
+	 * @param num
+	 *            decimal number
 	 * @return binary number
 	 */
 	public static StringBuilder toBinary(int num) {
@@ -1190,7 +1213,7 @@ public class Utility {
 		while (size % 4 != 0) {
 			size++;
 		}
-		
+
 		int diff = size - temp;
 		for (int i = 1; i <= diff; i++) {
 			out = '0' + out;
@@ -1201,7 +1224,7 @@ public class Utility {
 		for (int i = 0; i < out.length(); i++) {
 			count++;
 			if (count == 5) {
-				sb.insert(i," ");
+				sb.insert(i, " ");
 				count = 0;
 			}
 		}
@@ -1215,7 +1238,8 @@ public class Utility {
 	/**
 	 * Method to swap the binary digit based on nibbles
 	 * 
-	 * @param num binary number
+	 * @param num
+	 *            binary number
 	 * @return swapped decimal representation of given number
 	 */
 	public static int binary(int num) {
@@ -1229,7 +1253,7 @@ public class Utility {
 			String temp = array[0];
 			array[0] = array[1];
 			array[1] = temp;
-			
+
 			String strBack = "";
 			for (int i = 0; i < array.length; i++) {
 				strBack += array[i];
@@ -1275,12 +1299,13 @@ public class Utility {
 	/**
 	 * Method to generate denominations of currency
 	 * 
-	 * @param num Total amount need to be generated in change
+	 * @param num
+	 *            Total amount need to be generated in change
 	 * @return count of notes generated
 	 */
 
 	public static int generateChange(int num) {
-		int[] ar = { 1,2,5,10,50,100,500,1000 };
+		int[] ar = { 1, 2, 5, 10, 50, 100, 500, 1000 };
 
 		for (int i = 0; i < ar.length; i++) {
 			if (num == ar[i]) {
@@ -1292,118 +1317,120 @@ public class Utility {
 
 		for (int i = 0; i < ar.length; i++) {
 			for (int j = i + 1; j < ar.length; j++) {
-				if ( (num < ar[j] && num > ar[i]) || (num >= ar[i])) {
+				if ((num < ar[j] && num > ar[i]) || (num >= ar[i])) {
 					temp = ar[i];
 					index = i;
 					break;
 				}
 			}
 		}
-		
-		if(num>1000) {
-			int remainder=num%1000;
-			int number=num/1000;
-			for(int i=0;i<number;i++) {
+
+		if (num > 1000) {
+			int remainder = num % 1000;
+			int number = num / 1000;
+			for (int i = 0; i < number; i++) {
 				System.out.println(1000);
 				countOfNotes++;
 			}
 			generateChange(remainder);
-			
+
 		}
-		
+
 		else {
-		System.out.println(temp);
-		countOfNotes++;
-		int goal = num - temp;
-		for (int i = index; i >= 0; i--) {
-			if (goal == ar[i]) {
-				System.out.println(ar[i]);
-				countOfNotes++;
-				return countOfNotes;
+			System.out.println(temp);
+			countOfNotes++;
+			int goal = num - temp;
+			for (int i = index; i >= 0; i--) {
+				if (goal == ar[i]) {
+					System.out.println(ar[i]);
+					countOfNotes++;
+					return countOfNotes;
+				}
 			}
-		}
-		return generateChange(goal);
+			return generateChange(goal);
 		}
 		return countOfNotes;
 	}
 
-	
-	
 	/**
-	 * Method to find the maximum amount by which a task's completion time overshoots its deadline
+	 * Method to find the maximum amount by which a task's completion time
+	 * overshoots its deadline
 	 * 
-	 * @param process Process contains number of processes to be scheduled
-	 * @param n length of the process array
-	 * @param burst_Time Defines the total time that a task would require to be completed
-	 * @param deadLine Defines  quantum time for each process
-	 * @param completionTime defines overshoot time
+	 * @param process
+	 *            Process contains number of processes to be scheduled
+	 * @param n
+	 *            length of the process array
+	 * @param burst_Time
+	 *            Defines the total time that a task would require to be completed
+	 * @param deadLine
+	 *            Defines quantum time for each process
+	 * @param completionTime
+	 *            defines overshoot time
 	 * @return
 	 */
-	public static int[] overShootTime(int[] process, int n, int[] burst_Time,int[] deadLine, int[] completionTime) {
-	
-	   // Make a copy of burst times bt[] to store remaining
-	   // burst times.
-	   int rem_bt[] = new int[n];
-	   for (int i = 0 ; i < n ; i++)
-	       rem_bt[i] =  burst_Time[i];
+	public static int[] overShootTime(int[] process, int n, int[] burst_Time, int[] deadLine, int[] completionTime) {
 
-	   int t = 0; // Current time or arrival time
+		// Make a copy of burst times bt[] to store remaining
+		// burst times.
+		int rem_bt[] = new int[n];
+		for (int i = 0; i < n; i++)
+			rem_bt[i] = burst_Time[i];
 
-	   // Keep traversing processes in round robin manner
-	   // until all of them are not done.
-	   while(true) {
-	       boolean done = true;
+		int t = 0; // Current time or arrival time
 
-	       // Traverse all processes one by one repeatedly
-	       for (int i = 0 ; i < n; i++)  {
-	           // If burst time of a process is greater than 0
-	           // then only need to process further
-	           if (rem_bt[i] > 0) {
-	        	   done = false; // There is a pending process
+		// Keep traversing processes in round robin manner
+		// until all of them are not done.
+		while (true) {
+			boolean done = true;
 
-	               if (rem_bt[i] > deadLine[i]) {
-	                   // Increase the value of t i.e. shows
-	                   // how much time a process has been processed
-	                   t += deadLine[i];
+			// Traverse all processes one by one repeatedly
+			for (int i = 0; i < n; i++) {
+				// If burst time of a process is greater than 0
+				// then only need to process further
+				if (rem_bt[i] > 0) {
+					done = false; // There is a pending process
 
-	                   // Decrease the burst_time of current process
-	                   // by deadline
-	                   rem_bt[i] -= deadLine[i];
-	               }
+					if (rem_bt[i] > deadLine[i]) {
+						// Increase the value of t i.e. shows
+						// how much time a process has been processed
+						t += deadLine[i];
 
-	               // If burst time is smaller than or equal to
-	               // deadline. Last cycle for this process
-	               else
-	               {
-	                   // Increase the value of t i.e. shows
-	                   // how much time a process has been processed
-	                   t = t + rem_bt[i];
+						// Decrease the burst_time of current process
+						// by deadline
+						rem_bt[i] -= deadLine[i];
+					}
 
-	                   // Waiting time is current time minus time
-	                   // used by this process
-	                   completionTime[i] =t-deadLine[i];
+					// If burst time is smaller than or equal to
+					// deadline. Last cycle for this process
+					else {
+						// Increase the value of t i.e. shows
+						// how much time a process has been processed
+						t = t + rem_bt[i];
 
-	                   // As the process gets fully executed
-	                   // make its remaining burst time = 0
-	                   rem_bt[i] = 0;
-	               }
-	           }
-	       }
+						// Waiting time is current time minus time
+						// used by this process
+						completionTime[i] = t - deadLine[i];
 
-	       // If all processes are done
-	       if (done == true)
-	         break;
-	   }
-	   return  completionTime;
+						// As the process gets fully executed
+						// make its remaining burst time = 0
+						rem_bt[i] = 0;
+					}
+				}
+			}
+
+			// If all processes are done
+			if (done == true)
+				break;
+		}
+		return completionTime;
 	}
 
-	
-	
 	/**
 	 * Method to read a file to linked list,search the word and save the linked list
 	 * back to file
 	 * 
-	 * @param file File to be read
+	 * @param file
+	 *            File to be read
 	 * @return void
 	 * @throws FileNotFoundException
 	 * 
@@ -1458,13 +1485,14 @@ public class Utility {
 	 * Method to read a file to linked list,search the integer and save the linked
 	 * list back to file
 	 * 
-	 * @param file File to be read
+	 * @param file
+	 *            File to be read
 	 * @throws FileNotFoundException
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends Comparable<T>> void orderedList(File file) throws FileNotFoundException {
-		
+
 		FileReader fileReader = null;
 		BufferedReader bufferedReader = null;
 		try {
@@ -1492,7 +1520,7 @@ public class Utility {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("Contents of linked list...");
 		ilist.display();
 		System.out.println("Enter the word you want to search");
@@ -1510,7 +1538,7 @@ public class Utility {
 		else {
 			ilist.addSorted(integerToSearch);
 			ilist.display();
-			}
+		}
 
 		// save modified list to the file
 		PrintWriter writer = new PrintWriter("/home/administrator/Documents/test2");
@@ -1520,8 +1548,6 @@ public class Utility {
 		writer.close();
 	}
 
-	
-	
 	/**
 	 * Method to check balanced expression based on parenthesis using stack push()
 	 * and pop()
@@ -1716,189 +1742,172 @@ public class Utility {
 		}
 	}
 
-/*
+	/*
 	 * Method to print calendar using 2D array
 	 * 
-	 */ 
-	public static void printCalender(int month,int year) {
-        String[][] a = new String[6][7];
-        int d = 1;
-        String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
-                           "October", "November", "December" };
-        String[] days = { " S", " M", " T", " W", "Th", " F", " Sa" };
-        for (int i = 0; i < 6; i++){
-            for (int j = 0; j < 7; j++){
-                a[i][j] = "  ";
-            }
-        }
-       
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (checkMonth(d, month, year))
-                {
-                    j = dayOfWeek(d, month, year);
-                    if (d < 10) {
-                        a[i][j] = " " + d++;
-                    } else {
-                        a[i][j] = "" + d++;
-                    }
-                }
+	 */
+	public static void printCalender(int month, int year) {
+		String[][] a = new String[6][7];
+		int d = 1;
+		String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+				"October", "November", "December" };
+		String[] days = { " S", " M", " T", " W", "Th", " F", " Sa" };
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				a[i][j] = "  ";
+			}
+		}
 
-            }
-        }
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (checkMonth(d, month, year)) {
+					j = dayOfWeek(d, month, year);
+					if (d < 10) {
+						a[i][j] = " " + d++;
+					} else {
+						a[i][j] = "" + d++;
+					}
+				}
 
-        System.out.println(months[month] + " " + year);
-        System.out.println();
-        for (int i = 0; i < 7; i++)
-        {
-            System.out.print(days[i] + "  ");
-        }
-        System.out.println();
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                System.out.print(a[i][j] + "  ");
-            }
-            System.out.println();
-        }
-    }
-	
-//to check month range
-    public static boolean checkMonth(int d, int m, int y) {
+			}
+		}
 
-        boolean range = true;
-        if(((m == 4 || m == 6 || m == 9 || m == 11) && (d >30))
-             || (d>31)
-             || (m==2 && y % 100 == 0 && y % 400 != 0 && d > 28)
-             || (m==2 && y % 400 == 0 && d > 29)
-             || (m==2 && y % 100 != 0 && y % 4 != 0 && d > 28)
-             || (m==2 && y % 100 != 0 && y % 4 == 0 && d > 29))
-        {
-            range = false;
-        }
-        else {
-            range=true;
-        }       
-        return range;
-}
-  
-
-    /*
-     * Method to print calender using queue
-     */
-	public static void calenderQueue(int month,int year) {
-		 LinkedQueue<String> linkedQueueWeek =new LinkedQueue<String>();
-		 LinkedQueue<String> linkedQueueDays =new LinkedQueue<String>();
-        String[][] a = new String[6][7];
-        int d = 1;
-        String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
-                           "October", "November", "December" };
-        String[] days = { " S ", " M ", " T ", " W ", " Th ", "F", " Sa" };
-        
-
-        for(int i=0 ; i<days.length;i++) {
-       	 linkedQueueWeek.enQueue(days[i]);
-       }
-        for (int i = 0; i < 6; i++){
-            for (int j = 0; j < 7; j++){
-                a[i][j] = "  ";
-            }
-        }
-        int startday = dayOfWeek(d, month, year);
-        for(int i=0 ; i<startday;i++) {
-        	linkedQueueDays.enQueue("  ");
-        }
-        
-       
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (checkMonth(d, month, year))
-                {
-                    j = dayOfWeek(d, month, year);
-                    if (d < 10) {
-                        a[i][j] = " " + d++;
-                        linkedQueueDays.enQueue(a[i][j]);
-                    } 
-                    else {
-                        a[i][j] = "" + d++;
-                        linkedQueueDays.enQueue(a[i][j]);
-                    }
-                    
-                }
-
-            }
-        }
-
-        System.out.println(months[month] + " " + year);
-        System.out.println();
-
-        linkedQueueWeek.displayInLine();
-        linkedQueueDays.displayCalender();
-    }
-	
-	public static void calenderStack(int month,int year) {
-		
-			LinkedStack<String> linkedStackWeek =new LinkedStack<String>();
-			LinkedStack<String> linkedStackDays =new LinkedStack<String>();
-			LinkedStack<String> linkedStackReverse =new LinkedStack<String>();
-	        String[][] a = new String[6][7];
-	        int d = 1;
-	        String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
-	                           "October", "November", "December" };
-	        String[] days = { " S ", " M ", " T ", " W ", " Th ", "F", " Sa" };
-	        
-
-	        for(int i=days.length -1; i>=0;i--) {
-	       	 linkedStackWeek.push(days[i]);
-	       }
-	        for (int i = 0; i < 6; i++){
-	            for (int j = 0; j < 7; j++){
-	                a[i][j] = "  ";
-	            }
-	        }
-	        int startDay = dayOfWeek(d, month, year);
-	        for(int i=0 ; i<startDay;i++) {
-	        	
-	        	linkedStackDays.push("  ");
-	        	
-	        }
-	        
-	       
-	        for (int i = 0; i < 6; i++) {
-	            for (int j = 0; j < 7; j++) {
-	                if (checkMonth(d, month, year))
-	                {
-	                    j = dayOfWeek(d, month, year);
-	                    if (d < 10) {
-	                        a[i][j] = " " + d++;
-	                        linkedStackDays.push(a[i][j]);
-	                    } 
-	                    else {
-	                        a[i][j] = "" + d++;
-	                        linkedStackDays.push(a[i][j]);
-	                    }
-	                    
-	                }
-
-	            }
-	        }
-	    
-	        int index=linkedStackDays.size();
-	       
-	        for(int i=0 ; i<index;i++) {
-	        	 linkedStackReverse.push(linkedStackDays.pop());
-	        	
-	        }
-
-	        System.out.println(months[month] + " " + year);
-	        System.out.println();
-	         linkedStackWeek.displayInLine();
-	        
-	        linkedStackReverse.displayCalender();
-	    
-		
+		System.out.println(months[month] + " " + year);
+		System.out.println();
+		for (int i = 0; i < 7; i++) {
+			System.out.print(days[i] + "  ");
+		}
+		System.out.println();
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				System.out.print(a[i][j] + "  ");
+			}
+			System.out.println();
+		}
 	}
 
-	
+	// to check month range
+	public static boolean checkMonth(int d, int m, int y) {
+
+		boolean range = true;
+		if (((m == 4 || m == 6 || m == 9 || m == 11) && (d > 30)) || (d > 31)
+				|| (m == 2 && y % 100 == 0 && y % 400 != 0 && d > 28) || (m == 2 && y % 400 == 0 && d > 29)
+				|| (m == 2 && y % 100 != 0 && y % 4 != 0 && d > 28)
+				|| (m == 2 && y % 100 != 0 && y % 4 == 0 && d > 29)) {
+			range = false;
+		} else {
+			range = true;
+		}
+		return range;
+	}
+
+	/*
+	 * Method to print calender using queue
+	 */
+	public static void calenderQueue(int month, int year) {
+		LinkedQueue<String> linkedQueueWeek = new LinkedQueue<String>();
+		LinkedQueue<String> linkedQueueDays = new LinkedQueue<String>();
+		String[][] a = new String[6][7];
+		int d = 1;
+		String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+				"October", "November", "December" };
+		String[] days = { " S ", " M ", " T ", " W ", " Th ", "F", " Sa" };
+
+		for (int i = 0; i < days.length; i++) {
+			linkedQueueWeek.enQueue(days[i]);
+		}
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				a[i][j] = "  ";
+			}
+		}
+		int startday = dayOfWeek(d, month, year);
+		for (int i = 0; i < startday; i++) {
+			linkedQueueDays.enQueue("  ");
+		}
+
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (checkMonth(d, month, year)) {
+					j = dayOfWeek(d, month, year);
+					if (d < 10) {
+						a[i][j] = " " + d++;
+						linkedQueueDays.enQueue(a[i][j]);
+					} else {
+						a[i][j] = "" + d++;
+						linkedQueueDays.enQueue(a[i][j]);
+					}
+
+				}
+
+			}
+		}
+
+		System.out.println(months[month] + " " + year);
+		System.out.println();
+
+		linkedQueueWeek.displayInLine();
+		linkedQueueDays.displayCalender();
+	}
+
+	public static void calenderStack(int month, int year) {
+
+		LinkedStack<String> linkedStackWeek = new LinkedStack<String>();
+		LinkedStack<String> linkedStackDays = new LinkedStack<String>();
+		LinkedStack<String> linkedStackReverse = new LinkedStack<String>();
+		String[][] a = new String[6][7];
+		int d = 1;
+		String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+				"October", "November", "December" };
+		String[] days = { " S ", " M ", " T ", " W ", " Th ", "F", " Sa" };
+
+		for (int i = days.length - 1; i >= 0; i--) {
+			linkedStackWeek.push(days[i]);
+		}
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				a[i][j] = "  ";
+			}
+		}
+		int startDay = dayOfWeek(d, month, year);
+		for (int i = 0; i < startDay; i++) {
+
+			linkedStackDays.push("  ");
+
+		}
+
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (checkMonth(d, month, year)) {
+					j = dayOfWeek(d, month, year);
+					if (d < 10) {
+						a[i][j] = " " + d++;
+						linkedStackDays.push(a[i][j]);
+					} else {
+						a[i][j] = "" + d++;
+						linkedStackDays.push(a[i][j]);
+					}
+
+				}
+
+			}
+		}
+
+		int index = linkedStackDays.size();
+
+		for (int i = 0; i < index; i++) {
+			linkedStackReverse.push(linkedStackDays.pop());
+
+		}
+
+		System.out.println(months[month] + " " + year);
+		System.out.println();
+		linkedStackWeek.displayInLine();
+
+		linkedStackReverse.displayCalender();
+
+	}
+
 	/*
 	 * Method to print prime numbers in the certain ranges using 2 D array
 	 */
@@ -1969,14 +1978,14 @@ public class Utility {
 				linkedList1 = isAnagramRange(linkedList);
 				int count = 0;
 				int count1 = 0;
-				
-				//stores anagram in the prime range into array[]
+
+				// stores anagram in the prime range into array[]
 				for (int i = 0; i < linkedList1.getCount(); i++) {
 					array[row][count] = linkedList1.getNth(i);
 					count++;
 				}
-				
-				//compares anagram list and prime list to remove common terms from prime list
+
+				// compares anagram list and prime list to remove common terms from prime list
 				for (int i = 0; i < linkedList.getCount(); i++) {
 					for (int j = 0; j < linkedList1.getCount(); j++)
 						if (linkedList.getNth(i) == linkedList1.getNth(j)) {
@@ -1984,7 +1993,7 @@ public class Utility {
 						}
 				}
 
-				//stores modified list that contains non anagrams into non-anagram[] 
+				// stores modified list that contains non anagrams into non-anagram[]
 				for (int i = 0; i < linkedList.getCount(); i++) {
 					nonAnagram[row][count1] = linkedList.getNth(i);
 					count1++;
@@ -1994,7 +2003,6 @@ public class Utility {
 			}
 		}
 
-		
 		System.out.println("2D ANAGRAM ARRAY");
 		// printing anagram array
 		for (int i = 0; i < 10; i++) {
@@ -2008,10 +2016,9 @@ public class Utility {
 			System.out.println();
 		}
 
-	
 		System.out.println("******************");
 		System.out.println("2D NON-ANAGRAM ARRAY");
-		//print non-anagram array
+		// print non-anagram array
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 100; j++) {
 				if (nonAnagram[i][j] == 0) {
@@ -2027,8 +2034,10 @@ public class Utility {
 
 	/**
 	 * Method to check anagram numbers in any range
-	 * @param linkedList 	The linkedlist that contains numbers to be checked for anagram 
-	 * @return linkedlist 
+	 * 
+	 * @param linkedList
+	 *            The linkedlist that contains numbers to be checked for anagram
+	 * @return linkedlist
 	 */
 	public static LinkedList<Integer> isAnagramRange(LinkedList<Integer> linkedList) {
 		LinkedList<Integer> linkedList2 = new LinkedList<Integer>();
@@ -2048,47 +2057,53 @@ public class Utility {
 		return linkedList2;
 
 	}
-	
-	
-	
+
 	/**
-	 * Method to print prime anagrams in the range 0-1000 in reverse order using stack
+	 * Method to print prime anagrams in the range 0-1000 in reverse order using
+	 * stack
 	 */
 	public static void stackPrime() {
-		LinkedList<Integer> linkedList =  printPrime(0,1000);
-		LinkedList<Integer> linkedList1 =isAnagramRange(linkedList);
+		LinkedList<Integer> linkedList = printPrime(0, 1000);
+		LinkedList<Integer> linkedList1 = isAnagramRange(linkedList);
 		LinkedStack<Integer> linkedStack = new LinkedStack<Integer>();
-		for(int i=0 ; i<linkedList1.getCount() ; i++) {
+		for (int i = 0; i < linkedList1.getCount(); i++) {
 			linkedStack.push(linkedList1.getNth(i));
 		}
-		
-	//Pop from the stack until it becomes empty
-		int size=linkedStack.size();
-	for(int i=1 ;i<=size ; i++) {
-		
+
+		// Pop from the stack until it becomes empty
+		int size = linkedStack.size();
+		for (int i = 1; i <= size; i++) {
+
 			System.out.println(linkedStack.pop());
 		}
 	}
-
-	
 
 	/**
 	 * Method to print prime anagrams in the range 0-1000 using queue
 	 */
 	public static void queuePrime() {
-		LinkedList<Integer> linkedList =  printPrime(0,1000);
-		LinkedList<Integer> linkedList1 =isAnagramRange(linkedList);
+		LinkedList<Integer> linkedList = printPrime(0, 1000);
+		LinkedList<Integer> linkedList1 = isAnagramRange(linkedList);
 		LinkedQueue<Integer> linkedQueue = new LinkedQueue<Integer>();
-		for(int i=0 ; i<linkedList1.getCount() ; i++) {
+		for (int i = 0; i < linkedList1.getCount(); i++) {
 			linkedQueue.enQueue(linkedList1.getNth(i));
 		}
 		linkedQueue.displayQueue();
 	}
-	
-	
-	
-	
-	public static void replaceRegExp(String userName,String fullName,String number,String template) {
+
+	/**
+	 * Method to manipulate a string template using regEx
+	 * 
+	 * @param userName
+	 *            UserName of the user
+	 * @param fullName
+	 *            full Name of the user
+	 * @param number
+	 *            Phone number of the user
+	 * @param template
+	 *            Given template
+	 */
+	public static void replaceRegExp(String userName, String fullName, String number, String template) {
 		String regex1 = "(\\<<)(name)(\\>>)";
 		String regex2 = "(\\<<)(full name)(\\>>)";
 		String regex3 = "(01/01/2016)";
@@ -2096,166 +2111,178 @@ public class Utility {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String date = dateFormat.format(new Date());
 		template = regexReplacement(template, regex1, userName);
-		template =regexReplacement(template, regex2, fullName);
-		template =regexReplacement(template, regex3, date);
+		template = regexReplacement(template, regex2, fullName);
+		template = regexReplacement(template, regex3, date);
 		template = regexReplacement(template, regex4, number);
 		System.out.println(template);
-	
-	  }
-	public static String regexReplacement(String template, String regex, String replaceWith) {
-			Pattern pattern = Pattern.compile(regex);
-			Matcher matcher = pattern.matcher(template);
-			template = matcher.replaceAll(replaceWith);
-			return template;
-		}
-		
-public static String[][] playCard(String[] suits, String[] ranks,int[] deck) {
-	
-	String[][] array=new String[4][9];
-	int player=0;
-	int i=0;
-	
-	while(player<4) {
-		
-			for(int noOfCards=0 ;noOfCards<9;noOfCards++) {
-			int rankNum=ran.nextInt(13);
-				int suitNum=ran.nextInt(4);
-				if(checkDistinct(rankNum,suitNum,i++)) {
-					array[player][noOfCards]=(ranks[rankNum]+"-"+suits[suitNum]);
-					}
-else {
 
-				noOfCards--;
-			}
-			
-		   }
-		player++;
 	}
-	return array;
-	
-	
-}
-static String[] randomArray=new String[36];
-public static boolean checkDistinct(int rankNum,int suitNum,int i) {
-	
-	String check=Integer.toString(rankNum)+Integer.toString(suitNum);
-	if(i==0) {
-		randomArray[0]=check;
-		return true;
-	}
-
-     if (i != 0) {
-			for (int j = i - 1; j >= 0; j--) {
-				if (check ==randomArray[j] )
-					return false;
-				}
-	}
-			randomArray[i]=Integer.toString(rankNum)+Integer.toString(suitNum);
-			return true;
-		
-		
-	}
-
-/*
-	public static String convertJavaToJson(Object object) {
-		
-		String jsonResult="";
-			try {
-				jsonResult=mapper.writeValueAsString(object);
-			}
-			
-			catch (JsonMappingException e) {
-				System.out.println("Exception occured during JsonMappingException");
-				e.printStackTrace();
-			} catch (IOException e) {
-				System.out.println("Exception occured during JsonMappingException");
-				e.printStackTrace();
-			}
-			
-		return jsonResult;
-	
-		}
-	
-	public static <T> T convertJsonToJava(String jsonString, Class<T> cls) {
-		
-		T result=null;
-		try {
-			result=mapper.readValue(jsonString,cls);
-		}
-		
-		catch (JsonMappingException e) {
-			System.out.println("Exception occured during JsonMappingException");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Exception occured during JsonMappingException");
-			e.printStackTrace();
-		}
-		return result;
-	}
-	*/
-	
 
 	/**
-	 * Method to write to the JSON file(converting java to JSON object) and read the JSON object and converting back
-	 * into java and calculating values for each stock
+	 * Method uses pattern matcher classes to replace strings using regEx
 	 * 
-	 * @param file File into which jsonObject is written
-	 * @param number Number of stock reports
+	 * @param template
+	 *            Given template to be manipulated
+	 * @param regex
+	 *            regular expressions to be used
+	 * @param replaceWith
+	 *            String to be replaced with
+	 * @return
+	 */
+	public static String regexReplacement(String template, String regex, String replaceWith) {
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(template);
+		template = matcher.replaceAll(replaceWith);
+		return template;
+	}
+
+	/**Method to distribute 9 random cards to 4 players
+	 * @param suits Suits of the deck of card
+	 * @param ranks ranks of the deck of card
+	 * @param deck 
+	 * @return array of distinct cards
+	 */
+	public static String[][] playCard(String[] suits, String[] ranks, int[] deck) {
+		java.util.LinkedList<String> cardList=new java.util.LinkedList<String>();
+		String[][] array = new String[4][9];
+		
+		for(Integer i=0 ;i<4 ;i++) {
+			for(Integer j=0;j<13;j++) {
+				cardList.add(i.toString() + j.toString());
+					}
+			}
+		
+		int player = 0;
+		while (player < 4) {
+			for(int noOfCards = 0; noOfCards < 9; noOfCards++) {
+				int rankNum = ran.nextInt(13);
+				int suitNum = ran.nextInt(4);
+				if (checkDistinct(rankNum, suitNum,cardList)) {
+					
+					array[player][noOfCards] = (ranks[rankNum] + "-" + suits[suitNum]);
+					
+				}
+				else {
+					 noOfCards--;
+				}
+			}
+			player++;
+		}
+		return array;
+	}
+
+	public static boolean checkDistinct(int rankNum, int suitNum,java.util.LinkedList<String>cardList) {
+		if(cardList.contains(Integer.toString(suitNum)+Integer.toString(rankNum))) {
+			cardList.remove(Integer.toString(suitNum)+Integer.toString(rankNum));
+			return true;
+			
+		}
+		
+		else {
+			return false;
+		}
+		
+
+		/*String check = Integer.toString(rankNum)+Integer.toString(suitNum);
+		
+		if (indexRandomArray == 0) {
+			randomArray[0] = check;
+		
+			return true;
+			}
+		if (indexRandomArray != 0) {
+			for (int j=indexRandomArray-1; j>=0; j--) {
+				System.out.println(check +"---"+ randomArray[j]);
+				if(check.equals(randomArray[j])) {
+					return false;
+					}
+			}
+		}
+		randomArray[indexRandomArray] = check;
+	
+		return true;*/
+		}
+
+	
+	/**
+	 * Method to write to the JSON file(converting java to JSON object) and read the
+	 * JSON object and converting back into java and calculating values for each
+	 * stock
+	 * 
+	 * @param file
+	 *            File into which jsonObject is written
+	 * @param number
+	 *            Number of stock reports
 	 * @throws JsonGenerationException
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 * @throws org.json.simple.parser.ParseException
 	 */
-	public static void javaToJSON(File file,int number) throws JsonGenerationException, JsonMappingException, IOException, org.json.simple.parser.ParseException {
-	long TOTAL_STOCK = 0;
-	long PER_STOCK_VALUE = 0;
-		
-	 StockGetList stockgetlist = new  StockGetList();
-     ObjectMapper map = new ObjectMapper();
-    
-     Stock stock = new Stock();
-     for (int i = 0; i < number; i++) {
-         stock = stockMethod();
-         stockgetlist.getStockList().add(stock);
-     }
-     
-     //write to the JSON file
-     map.writeValue((file),stockgetlist);
-    
-     //reads from the JSON file
-     JSONParser parser = new JSONParser();
-     Object obj = parser.parse(new FileReader(file));
-     JSONObject jsonObject = (JSONObject) obj;
-     System.out.println(jsonObject);
-     JSONArray array = (JSONArray) jsonObject.get("stockList");
-     for (int i = 0; i <array.size(); i++) {
-         JSONObject obstock = (JSONObject) (array.get(i));
-         TOTAL_STOCK += ((long) obstock.get("noOfShare")) * ((long) obstock.get("sharePrice"));
-         PER_STOCK_VALUE= ((long) obstock.get("noOfShare")) * ((long) obstock.get("sharePrice"));
-         System.out.println("The stockvalue of "+ (i+1)+" stock is "+ PER_STOCK_VALUE);
-     }
-     System.out.println("the total stock value is"+ TOTAL_STOCK);
-    
- }
+	public static void readWriteJSON(File file, int number)
+			throws JsonGenerationException, JsonMappingException, IOException, org.json.simple.parser.ParseException {
+		long total_Stock = 0;
+		long per_Stock_Value = 0;
 
- public static Stock stockMethod() {
-     Stock stock = new Stock();
-     System.out.println("Enter the stock name");
-     String stockName = Utility.userInputString();
-     stock.setStockName(stockName);
-     System.out.println("Enter number of shares");
-    long noOfShare=Utility.userInputLong();
-     stock.setNoOfShare(noOfShare);
-     System.out.println("enter price of share");
-     long sharePrice=Utility.userInputLong();
-     stock.setSharePrice(sharePrice);
-     return stock;
- }
+		for (int i = 0; i < number; i++) {
+			stock = stockMethod();
+			stockgetlist.getStockList().add(stock);
+		}
+
+		// write to the JSON file
+		mapper.writeValue((file), stockgetlist);
+
+		// reads from the JSON file
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(new FileReader(file));
+		JSONObject jsonObject = (JSONObject) obj;
+		System.out.println(jsonObject);
+		JSONArray array = (JSONArray) jsonObject.get("stockList");
+		for (int i = 0; i < array.size(); i++) {
+			JSONObject obstock = (JSONObject) (array.get(i));
+			total_Stock += ((long) obstock.get("noOfShare")) * ((long) obstock.get("sharePrice"));
+			per_Stock_Value = ((long) obstock.get("noOfShare")) * ((long) obstock.get("sharePrice"));
+			System.out.println("The stockvalue of " + (i + 1) + " stock is " + per_Stock_Value);
+		}
+		System.out.println("the total stock value is" + total_Stock);
+
+	}
+
+	/**
+	 * Method to take inputs from the user about stock details
+	 * 
+	 * @return Stock object
+	 */
+	public static Stock stockMethod() {
+		Stock stock = new Stock();
+		System.out.println("Enter the stock name");
+		String stockName = Utility.userInputString();
+		stock.setStockName(stockName);
+		System.out.println("Enter number of shares");
+		long noOfShare = Utility.userInputLong();
+		stock.setNoOfShare(noOfShare);
+		System.out.println("enter price of share");
+		long sharePrice = Utility.userInputLong();
+		stock.setSharePrice(sharePrice);
+		return stock;
+	}
+
+	/**
+	 * Method to take inputs from the user about product details
+	 * 
+	 * @return ProductDetail object
+	 */
+	public static ProductDetails productMethod() {
+		ProductDetails productDetails = new ProductDetails();
+		System.out.println("Enter the product name");
+		String productName = Utility.userInputString();
+		productDetails.setProductName(productName);
+		System.out.println("Enter the product price");
+		long productPrice = Utility.userInputLong();
+		productDetails.setProductPrice(productPrice);
+		System.out.println("Enter the weight of the product");
+		long productWeight = Utility.userInputLong();
+		productDetails.setProductWeight(productWeight);
+		return productDetails;
+	}
+
 }
-	
-	
-	
-	
-	
-	
-

@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Purpose:Program for inventory factory that allows to access the storage list
+ *
+ *  @author  BridgeLabz
+ *  @version 1.0
+ *  @since   06-08-2017
+ *
+ ******************************************************************************/
 package com.bridgelabz.objectorientedprgms;
 
 import java.util.ArrayList;
