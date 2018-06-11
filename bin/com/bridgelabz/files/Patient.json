@@ -1,0 +1,20 @@
+[
+	{
+		"patientName": "mamta",
+		"patientID": "101",
+		"patientMobNumber": "9876564783",
+		"patientAge": 22
+	},
+	{
+		"patientName": "kashis",
+		"patientID": "333",
+		"patientMobNumber": "5433432434",
+		"patientAge": 55
+	},
+	{
+		"patientName": "kajal",
+		"patientID": "544",
+		"patientMobNumber": "56565656",
+		"patientAge": 22
+	}
+]
