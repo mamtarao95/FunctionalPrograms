@@ -13,9 +13,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.bridgelabz.model.Appointment;
 import com.bridgelabz.model.Doctor;
 import com.bridgelabz.model.Patient;
+import com.bridgelabz.service.ManagerService;
 import com.bridgelbaz.utility.ClinicUtility;
 
-public class ManagerServiceImplementation {
+public class ManagerServiceImplementation implements ManagerService {
 	ArrayList<Doctor> doctorList = new ArrayList<Doctor>();
 	ArrayList<Patient> patientList=new ArrayList<>();
 	ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
@@ -267,6 +268,8 @@ public ArrayList<Doctor> searchDoctorID(String doctorID) throws JsonParseExcepti
 		appointmentList=ClinicUtility.parseJSONArray(appointmentFile, Appointment.class);
 		System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(appointmentList));
 	}
+
+
 	
 
 }

@@ -160,9 +160,8 @@ public class PatientServiceImplementation implements PatientService{
 		ArrayList<Doctor> fixedDoctor = new ArrayList<Doctor>();
 		System.out.println("Kindly provide the doctor's ID to fix your choice");
 		String fixDoctor = ClinicUtility.userInputString();
-		appointmentList = ClinicUtility.parseJSONArray(appointmentFile, Appointment.class);
+		appointmentList = ClinicUtility.parseJSONArray(appointmentFile,Appointment.class);
 
-		
 		for (int i = 0; i < foundDoctorList.size(); i++) {
 			if (foundDoctorList.get(i).getDoctorID().equals(fixDoctor)) {
 				fixedDoctor.add(foundDoctorList.get(i));
@@ -182,8 +181,7 @@ public class PatientServiceImplementation implements PatientService{
 					break;
 				}
 			}
-			System.out.println("....");
-			System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(fixedDoctor));
+			
 			doctorList.add(index, fixedDoctor.get(0));
 			doctorList.remove(index + 1);
 			mapper.writeValue(doctorFileLoc, doctorList);

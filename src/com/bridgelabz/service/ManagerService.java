@@ -7,15 +7,15 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 public interface ManagerService {
 	
-	public void addDoctor();
+	public void addDoctor(String doctorName,String doctorID,String doctorSpecialisation,String doctorAvailability) throws JsonMappingException, IOException;
 	
-	public void addPatient();
+	public void addPatient(String patientName,String patientID,String patientMobNumber,int patientAge) throws JsonParseException, JsonMappingException, IOException;
 	
-	public void updatePatientAge(String patientName);
+	public void updatePatientAge(String patientName) throws JsonParseException, JsonMappingException, IOException;
 	
-	public void updatePatientMobNumber(String patientName);
+	public void updatePatientMobNumber(String patientName) throws JsonParseException, JsonMappingException, IOException;
 	
-	public void deletePatient(String patientID);
+	public void deletePatient(String patientID) throws JsonParseException, JsonMappingException, IOException;
 
 	public void updateAvailTime(String doctorID) throws JsonParseException, JsonMappingException, IOException;
 
