@@ -3,7 +3,10 @@ package com.bridgelbaz.utility;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import org.codehaus.jackson.JsonParseException;
@@ -103,5 +106,11 @@ public class ClinicUtility {
 		int patientAge=ClinicUtility.userInputInteger();
 		String doctorsDetails[]= {patientName,patientID,patientMobileNumber,Integer.toString(patientAge)};
 		return doctorsDetails;
+	}
+	public static String timeStamp() {
+		Date date = new Date();  
+	    Timestamp ts=new Timestamp(date.getTime());  
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
+		return (formatter.format(ts));
 	}
 }

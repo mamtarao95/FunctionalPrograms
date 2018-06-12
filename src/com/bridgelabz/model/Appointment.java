@@ -1,8 +1,5 @@
 package com.bridgelabz.model;
 
-import java.util.Date;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat; 
 public class Appointment {
 	private String doctorName;
 	private String doctorID;
@@ -35,10 +32,8 @@ public class Appointment {
 		this.patientID = patientID;
 	}
 	public String getTimeStamp() {
-		Date date = new Date();  
-	    Timestamp ts=new Timestamp(date.getTime());  
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
-		return (formatter.format(ts));
+		
+		return timeStamp;
 	}
 	
 	public void setTimeStamp(String timeStamp) {

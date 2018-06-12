@@ -16,11 +16,5 @@ public interface PatientService {
 
 	public void searchPatientMobNumber(String patientMobNumber) throws JsonParseException, JsonMappingException, IOException;
 
-	public void updatePatientAge(String patientName);
-	
-	public void updatePatientMobNumber(String patientName);
-	
-	public void deletePatient(String patientID);
-
 	public void takeAppointment();
 }

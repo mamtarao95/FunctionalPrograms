@@ -1,23 +1,16 @@
 [
 	{
-		"doctorName": "Dr Meera Shetty",
-		"doctorID": "102",
-		"patientName": "shrutii",
-		"patientID": "106",
-		"timeStamp": "2018-06-11 19:01:53"
-	},
-	{
 		"doctorName": "Dr vineet",
 		"doctorID": "333",
-		"patientName": "uu",
-		"patientID": "yt",
-		"timeStamp": "2018-06-11 19:01:53"
+		"patientName": "supriya",
+		"patientID": "33",
+		"timeStamp": "2018-06-12 09:29:21"
 	},
 	{
-		"doctorName": "Dr vineet",
-		"doctorID": "333",
-		"patientName": "uu",
-		"patientID": "ww",
-		"timeStamp": "2018-06-11 19:01:53"
+		"doctorName": "Dr Agarwal",
+		"doctorID": "201",
+		"patientName": "rohi",
+		"patientID": "55",
+		"timeStamp": "2018-06-12 11:04:23"
 	}
 ]

@@ -18,6 +18,13 @@
 		"doctorID": "666",
 		"doctorAvailability": "PM",
 		"doctorSpecialisation": "Neurologist",
-		"countOfPatient": 5
+		"countOfPatient": 2
+	},
+	{
+		"doctorName": "Dr Sharma",
+		"doctorID": "213",
+		"doctorAvailability": "PM",
+		"doctorSpecialisation": "Physician",
+		"countOfPatient": 0
 	}
 ]

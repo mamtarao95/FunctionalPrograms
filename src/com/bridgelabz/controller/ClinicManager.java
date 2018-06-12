@@ -14,7 +14,8 @@ public class ClinicManager {
 	static DoctorServiceImplementation doctorServiceImplementation=new DoctorServiceImplementation();
 	static PatientServiceImplementation patientServiceImplementation=new PatientServiceImplementation();
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-		
+		boolean keepOn=true;
+		while(keepOn) {
 		System.out.println("WELCOME TO APPOLLO CLINIC..!! ");
 		System.out.println("kindly Enter your choice to proceed further....");
 		System.out.println("(1)- TAKE APPOINTMENT");
@@ -23,6 +24,7 @@ public class ClinicManager {
 		System.out.println("(4)- POPULAR DOCTOR");
 		System.out.println("(5)- POPULAR SPECIALISATION");
 		System.out.println("(6)- PRINT REPORT");
+		System.out.println("(7)- QUIT CLINIC");
 		
 		
 	
@@ -43,6 +45,7 @@ public class ClinicManager {
 			System.out.println("(4)- SEARCH DOCTOR BY AVAILABILITY");
 			int choiceOfSearch=ClinicUtility.userInputInteger();
 			switch(choiceOfSearch) {
+		
 			case 1: 
 				System.out.println("Enter doctor's name");
 				ClinicUtility.userInputStringLine();
@@ -52,7 +55,7 @@ public class ClinicManager {
 				
 			case 2:
 				System.out.println("Enter doctor's ID");
-				doctorServiceImplementation.searchDoctorsByID(ClinicUtility.userInputString());
+				doctorServiceImplementation.searchDoctorsByID(ClinicUtility.userInputString(),patientDetails[0],patientDetails[1]);
 				break;
 			case 3:
 				System.out.println("Enter doctor's specialisation");
@@ -130,11 +133,11 @@ public class ClinicManager {
 					int choiceOfSearch3=ClinicUtility.userInputInteger();
 					switch(choiceOfSearch3) {
 					case 1:
-						patientServiceImplementation.updatePatientAge(patientName) ;
+					managerServiceImplementation.updatePatientAge(patientName) ;
 						break;
 						
 					case 2:
-						patientServiceImplementation.updatePatientMobNumber(patientName) ;
+						managerServiceImplementation.updatePatientMobNumber(patientName) ;
 						break;
 						
 					}
@@ -144,7 +147,7 @@ public class ClinicManager {
 					System.out.println("The list of patient in the record is..");
 					patientServiceImplementation.showPatient();
 					System.out.println("Please provide patient's id whom you wish to delete from the record: ");
-					patientServiceImplementation.deletePatient(ClinicUtility.userInputString()) ;
+					managerServiceImplementation.deletePatient(ClinicUtility.userInputString()) ;
 					break;
 					}
 			break;
@@ -172,6 +175,7 @@ public class ClinicManager {
 				System.out.println("The list of doctor's in the record ..");
 				doctorServiceImplementation.showDoctors();
 				System.out.println("Please provide doctor's ID whose details you wish to update: ");
+				ClinicUtility.userInputStringLine();
 				String doctorID=ClinicUtility.userInputStringLine();
 				System.out.println("You can update following details:");
 				System.out.println("(1)- UPDATE DOCTOR'S AVAILABILITY TIME");
@@ -180,11 +184,11 @@ public class ClinicManager {
 				int choiceOfSearch5=ClinicUtility.userInputInteger();
 				switch(choiceOfSearch5) {
 				case 1: 
-					doctorServiceImplementation.updateAvailTime(doctorID);
+					managerServiceImplementation.updateAvailTime(doctorID);
 				break;
 				
 				case 2:
-					doctorServiceImplementation.updateSpecialisation(doctorID);
+					managerServiceImplementation.updateSpecialisation(doctorID);
 				break;
 				}
 				break;
@@ -193,11 +197,23 @@ public class ClinicManager {
 				System.out.println("The list of doctors in the record is..");
 				doctorServiceImplementation.showDoctors();
 				System.out.println("Please provide doctor's id whom you wish to delete from the record: ");
-				patientServiceImplementation.deletePatient(ClinicUtility.userInputString()) ;
+				managerServiceImplementation.deleteDoctor(ClinicUtility.userInputString()) ;
 				break;
-				
+				}
+			break;
+		 
+		case 4:patientServiceImplementation.popularDoctor();
+		break;
+		case 5: patientServiceImplementation.popularSpecialisation();
+		break;
+		case 6:
+			managerServiceImplementation.printReport();
+			break;
+		default:System.out.println("Quiting Clinic... ThankYou Visit Again!!");
+			keepOn=false;
+		}
 				
 		}
 	}
 	}
-}
+
