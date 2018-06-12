@@ -12,7 +12,7 @@ public  void showDoctors() throws JsonParseException, JsonMappingException, IOEx
 
 	public void searchDoctorsByName(String doctorName,String patientDetails1,String patientDetails2) throws JsonGenerationException, JsonMappingException, IOException, NoSuchMethodException, SecurityException, ClassNotFoundException;
 
-	public void searchDoctorsByID(String ID,String patientDetails1,String patientDetails2) throws JsonParseException, JsonMappingException, IOException;
+	public void searchDoctorsByID(String doctorID,String patientDetails1,String patientDetails2) throws JsonParseException, JsonMappingException, IOException;
 
 	public void searchDoctorsBySpecialisation(String specialisation,String patientDetails1,String patientDetails2) throws JsonParseException, JsonMappingException, IOException;
 

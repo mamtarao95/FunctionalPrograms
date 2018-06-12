@@ -1,16 +1,1 @@
-[
-	{
-		"doctorName": "Dr vineet",
-		"doctorID": "333",
-		"patientName": "supriya",
-		"patientID": "33",
-		"timeStamp": "2018-06-12 09:29:21"
-	},
-	{
-		"doctorName": "Dr Agarwal",
-		"doctorID": "201",
-		"patientName": "rohi",
-		"patientID": "55",
-		"timeStamp": "2018-06-12 11:04:23"
-	}
-]
+[{"doctorName":"Dr vineet","doctorID":"333","patientName":"supriya","patientID":"33","timeStamp":"2018-06-12 09:29:21"},{"doctorName":"Dr Agarwal","doctorID":"201","patientName":"rohi","patientID":"55","timeStamp":"2018-06-12 11:04:23"},{"doctorName":"Dr Bhatra","doctorID":"666","patientName":"yy","patientID":"yy","timeStamp":"2018-06-12 13:19:41"}]

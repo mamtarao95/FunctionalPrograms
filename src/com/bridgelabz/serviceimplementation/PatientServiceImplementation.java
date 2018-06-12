@@ -1,3 +1,4 @@
+
 package com.bridgelabz.serviceimplementation;
 
 import java.io.File;
@@ -12,13 +13,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.bridgelabz.model.Appointment;
 import com.bridgelabz.model.Doctor;
 import com.bridgelabz.model.Patient;
+import com.bridgelabz.service.PatientService;
 import com.bridgelbaz.utility.ClinicUtility;
 
 /**
  * @author administrator
  *
  */
-public class PatientServiceImplementation {
+public class PatientServiceImplementation implements PatientService{
 	File doctorFileLoc = new File(
 			"/home/administrator/mamta-workspace/ClinicManagement/src/com/bridgelabz/files/Doctor.json");
 	File patientFileLoc = new File(
@@ -170,16 +172,18 @@ public class PatientServiceImplementation {
 
 		
 		doctorList = ClinicUtility.parseJSONArray(doctorFileLoc, Doctor.class);
+		
 		int count = fixedDoctor.get(0).getCountOfPatient();
 		if (count < 5) {
 			fixedDoctor.get(0).setCountOfPatient(count + 1);
-			for (int index1 = 0; index < doctorList.size(); index1++) {
-				if (doctorList.get(index).getDoctorID().equals(fixDoctor)) {
+			for (int index1 = 0; index1 < doctorList.size(); index1++) {
+				if (doctorList.get(index1).getDoctorID().equals(fixDoctor)) {
 					index = index1;
 					break;
 				}
 			}
-
+			System.out.println("....");
+			System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(fixedDoctor));
 			doctorList.add(index, fixedDoctor.get(0));
 			doctorList.remove(index + 1);
 			mapper.writeValue(doctorFileLoc, doctorList);
@@ -251,4 +255,7 @@ public class PatientServiceImplementation {
 		}
 		return popular;
 	}
+
 }
+
+

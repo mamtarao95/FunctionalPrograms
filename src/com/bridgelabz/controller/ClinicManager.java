@@ -35,7 +35,6 @@ public class ClinicManager {
 			String patientDetails[]=ClinicUtility.takePatientInputs(); 
 			managerServiceImplementation.addPatient(patientDetails[0],patientDetails[1],patientDetails[2],Integer.parseInt(patientDetails[3]) );
 			
-			
 			System.out.println("Kindly proceed further to fix your appointment ");
 			System.out.println("We have following doctors available in the clinic..");
 			doctorServiceImplementation.showDoctors();

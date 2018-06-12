@@ -4,7 +4,7 @@
 		"doctorID": "201",
 		"doctorAvailability": "AM",
 		"doctorSpecialisation": "ENT",
-		"countOfPatient": 4
+		"countOfPatient": 5
 	},
 	{
 		"doctorName": "Dr vineet",
@@ -24,7 +24,14 @@
 		"doctorName": "Dr Sharma",
 		"doctorID": "213",
 		"doctorAvailability": "PM",
-		"doctorSpecialisation": "Physician",
+		"doctorSpecialisation": "Opthamalogist",
+		"countOfPatient": 0
+	},
+	{
+		"doctorName": "Dr Subbalaxmi Reddy",
+		"doctorID": "433",
+		"doctorAvailability": "Both",
+		"doctorSpecialisation": "Pediatrician",
 		"countOfPatient": 0
 	}
 ]
