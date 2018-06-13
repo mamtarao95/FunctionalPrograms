@@ -1,0 +1,12 @@
+[
+	{
+		"stockSymbol": "RELIANCE",
+		"noOfShare": 20,
+		"sharePrice": 100.0
+	},
+	{
+		"stockSymbol": "AIRTEL",
+		"noOfShare": 50,
+		"sharePrice": 200.0
+	}
+]

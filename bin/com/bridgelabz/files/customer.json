@@ -1,0 +1,14 @@
+[
+	{
+		"customerName": "mamta",
+		"customerID": "111",
+		"noOfShares": 20,
+		"amountOfShares": 2000.0
+	},
+	{
+		"customerName": "shruti",
+		"customerID": "113",
+		"noOfShares": 100,
+		"amountOfShares": 1000.0
+	}
+]
