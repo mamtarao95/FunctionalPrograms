@@ -15,8 +15,8 @@ public class ClinicManager {
 	static PatientServiceImplementation patientServiceImplementation=new PatientServiceImplementation();
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		boolean keepOn=true;
-		while(keepOn) {
 		System.out.println("WELCOME TO APPOLLO CLINIC..!! ");
+		while(keepOn) {
 		System.out.println("kindly Enter your choice to proceed further....");
 		System.out.println("(1)- TAKE APPOINTMENT");
 		System.out.println("(2)- PATIENTS PORTFOLIO");
@@ -121,10 +121,10 @@ public class ClinicManager {
 					System.out.println("Kindly proceed further to update patient details ");
 					System.out.println("The list of patient in the record is..");
 					patientServiceImplementation.showPatient();
-					System.out.println("Please provide patient's name whose details you wish to update: ");
+					System.out.println("Please provide patient's ID whose details you wish to update: ");
 					ClinicUtility.userInputStringLine();
-					String patientName=ClinicUtility.userInputStringLine();
-					System.out.println("You can update "+patientName+"'s following details:");
+					String patientID=ClinicUtility.userInputStringLine();
+					System.out.println("You can update following details:");
 					System.out.println("(1)- UPDATE PATIENT'S AGE");
 					System.out.println("(2)- UPDATE PATIENT'S MOBILE NUMBER");
 					System.out.println("Enter your choice: ");
@@ -132,11 +132,11 @@ public class ClinicManager {
 					int choiceOfSearch3=ClinicUtility.userInputInteger();
 					switch(choiceOfSearch3) {
 					case 1:
-					managerServiceImplementation.updatePatientAge(patientName) ;
+					managerServiceImplementation.updatePatientAge(patientID) ;
 						break;
 						
 					case 2:
-						managerServiceImplementation.updatePatientMobNumber(patientName) ;
+						managerServiceImplementation.updatePatientMobNumber(patientID) ;
 						break;
 						
 					}

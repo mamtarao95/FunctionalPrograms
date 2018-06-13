@@ -178,7 +178,7 @@ public ArrayList<Doctor> searchDoctorID(String doctorID) throws JsonParseExcepti
 
 		boolean found = false;
 		for (int i = 0; i < patientList.size(); i++) {
-			if (patientList.get(i).getPatientID().equals( patientID)) {
+			if (patientList.get(i).getPatientID().equals(patientID)) {
 				 foundPatientList.add(patientList.get(i));
 				found = true;
 			}
