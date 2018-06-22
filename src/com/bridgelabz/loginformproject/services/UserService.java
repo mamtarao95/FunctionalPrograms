@@ -1,12 +1,10 @@
-package com.bridgelabz.services;
+package com.bridgelabz.loginformproject.services;
 
 import java.sql.SQLException;
 
-public interface loginService {
+public interface UserService {
 	public void login() throws SQLException, ClassNotFoundException;
 
 	public void register() throws SQLException, ClassNotFoundException;
-
-	public void forgotPassword(String userName) throws SQLException;
 
 }

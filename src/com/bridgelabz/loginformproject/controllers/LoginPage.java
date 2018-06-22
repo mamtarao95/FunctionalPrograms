@@ -1,12 +1,15 @@
-package com.bridgelabz.controller;
+package com.bridgelabz.loginformproject.controllers;
 
 import java.sql.SQLException;
-import com.bridgelabz.seviceimplementation.LoginServiceImplementaion;
+
+import com.bridgelabz.loginformproject.services.UserServiceImplementation;
 import com.bridgelabz.utility.LoginUtility;
 
 public class LoginPage {
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-		LoginServiceImplementaion loginServiceImplementaion = new LoginServiceImplementaion();
+		String typeOfStatement =args[0];
+		
+		
 		boolean keepOn = true;
 		System.out.println("Welcome to login page!! ");
 
@@ -19,11 +22,13 @@ public class LoginPage {
 			int choice = LoginUtility.userInputInteger();
 			switch (choice) {
 			case 1:
-				loginServiceImplementaion.register();
+				UserServiceImplementation userServiceImplementation=new UserServiceImplementation(typeOfStatement);
+				userServiceImplementation.register();
 				break;
 
 			case 2:
-				loginServiceImplementaion.login();
+				UserServiceImplementation userServiceImplementation1=new UserServiceImplementation(typeOfStatement);
+				userServiceImplementation1.login();
 				break;
 			default:
 				System.out.println("Exiting login page!!!");

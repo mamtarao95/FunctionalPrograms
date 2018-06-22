@@ -1,56 +1,49 @@
-package com.bridgelabz.seviceimplementation;
+package com.bridgelabz.loginformproject.repositories;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-import com.bridgelabz.model.User;
-import com.bridgelabz.services.loginService;
+import com.bridgelabz.loginformproject.models.User;
 import com.bridgelabz.utility.LoginUtility;
 
-public class LoginServiceImplementaion implements loginService {
+public class PreparedStatementRepository implements UserRepository {
 
-	Connection con = null;
-	ResultSet resultSet = null;
-	PreparedStatement preparedStatement = null;
+	static Connection connection = null;
+	static ResultSet resultSet = null;
+	static PreparedStatement preparedStatement = null;
 
-	
-	
-	/* (non-Javadoc)
-	 * @see com.bridgelabz.services.loginService#login()
-	 */
 	@Override
-	public void login() throws SQLException, ClassNotFoundException {
+	public Connection getConnection() throws ClassNotFoundException {
+		connection = LoginUtility.EstablishConn();
+		return connection;
 
+	}
+
+	@Override
+	public void login(String userName, String password) throws SQLException, ClassNotFoundException {
+		System.out.println("hi iam login of ps");
 		boolean userNameExist = false;
 		boolean passwordExist = false;
-		con = LoginUtility.EstablishConn();
 		String query = "select * from loginDetails";
-		preparedStatement = con.prepareStatement(query);
+		preparedStatement = getConnection().prepareStatement(query);
 		resultSet = preparedStatement.executeQuery();
-		System.out.println("Enter user name ");
-		String userName = LoginUtility.userInputString();
+		
 
 		while (resultSet.next()) {
-
 			if (userName.equals(resultSet.getString(2))) {
 				userNameExist = true;
 			}
 		}
 
 		if (userNameExist) {
-			System.out.println("Enter password");
-			String pwd = LoginUtility.userInputString();
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 
-				if (pwd.equals(resultSet.getString(3))) {
-
+				if (password.equals(resultSet.getString(3))) {
 					System.out.println("LOGIN SUCCESSFULL!!!");
 					passwordExist = true;
-
 				}
 			}
 
@@ -66,20 +59,16 @@ public class LoginServiceImplementaion implements loginService {
 		}
 		if (!userNameExist) {
 			System.out.println("Username does not exist.Kindly register!!");
-
-			register();
+			User user = LoginUtility.insertValues();
+			register(user);
 		}
 
 	}
 
-	
-	
-	@Override
-	public void register() throws SQLException, ClassNotFoundException {
+	public void register(User user) throws SQLException, ClassNotFoundException {
+		System.out.println("i amreg of ps");
 		String query = "insert into loginDetails values(?,?,?,?)";
-		con = LoginUtility.EstablishConn();
-		preparedStatement = con.prepareStatement(query);
-		User user = LoginUtility.insertValues();
+		preparedStatement = getConnection().prepareStatement(query);
 		if (user != null) {
 			preparedStatement.setInt(1, 0);
 			preparedStatement.setString(2, user.getUserName());
@@ -95,16 +84,13 @@ public class LoginServiceImplementaion implements loginService {
 
 	}
 
-	
-	
 	@Override
-	public void forgotPassword(String userName) throws SQLException {
+	public void forgotPassword(String userName) throws SQLException, ClassNotFoundException {
 		boolean search = false;
-		PreparedStatement pstmt = null;
 		String query = "select * from loginDetails";
 		String query1 = "update logindetails set password=? where user_name=?";
-		pstmt = con.prepareStatement(query1);
-		preparedStatement = con.prepareStatement(query);
+		preparedStatement = getConnection().prepareStatement(query);
+		PreparedStatement pstmt = getConnection().prepareStatement(query1);
 		resultSet = preparedStatement.executeQuery();
 
 		System.out.println("Enter mobile number for verification");
@@ -123,4 +109,31 @@ public class LoginServiceImplementaion implements loginService {
 		}
 
 	}
+
+	@Override
+	public void closeConnection() {
+		if (resultSet != null) {
+			try {
+				resultSet.close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (preparedStatement != null) {
+			try {
+				preparedStatement.close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (connection != null) {
+			try {
+				connection .close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 }

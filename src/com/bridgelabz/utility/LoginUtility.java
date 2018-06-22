@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.bridgelabz.model.User;
+import com.bridgelabz.loginformproject.models.User;
 
 public class LoginUtility {
 

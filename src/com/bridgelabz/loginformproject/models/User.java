@@ -1,4 +1,4 @@
-package com.bridgelabz.model;
+package com.bridgelabz.loginformproject.models;
 
 public class User {
 	private int userID;
