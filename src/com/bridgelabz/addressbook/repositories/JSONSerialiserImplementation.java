@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
@@ -41,8 +42,8 @@ public class JSONSerialiserImplementation implements Serialiser {
 		});
 		// Creating empty addressBook
 		File file = new File(template + addressBookName + ".json");
-		addressBookList.add(file.toString());
-		mapper.writeValue(file, personList);
+		addressBookList.add(addressBookName);
+		mapper.writeValue(file,personList);
 		// Adding new address book to the addressBookList
 		mapper.writeValue((new File(bookList)), addressBookList);
 	}
@@ -123,7 +124,7 @@ public class JSONSerialiserImplementation implements Serialiser {
 	}
 
 	@Override
-	public void updatePerson(String addressBookName, String[] inputs)
+	public void updatePerson(String addressBookName)
 			throws JsonGenerationException, JsonMappingException, IOException, ParseException {
 		File file = findAddressBook(addressBookName);
 		personList = AddressUtility.parseJSONArray(file, Person.class);
@@ -133,6 +134,7 @@ public class JSONSerialiserImplementation implements Serialiser {
 
 		System.out.println("Enter the index position of the person you want to edit ");
 		int index = AddressUtility.userInputInteger();
+		String[] inputs = AddressUtility.askForInputsUpdate();
 		String firstName = personList.get(index).getFirstName();
 		String lastName = personList.get(index).getLastName();
 		personList.remove(personList.get(index));
@@ -172,12 +174,34 @@ public class JSONSerialiserImplementation implements Serialiser {
 		// parse to select multiple address books
 		addressBookList = mapper.readValue(new File(bookList), new TypeReference<ArrayList<String>>() {
 		});
-		if (addressBookList.contains(template + addressBookName + ".json")) {
-			int index = addressBookList.indexOf(template + addressBookName + ".json");
-			return new File(addressBookList.get(index));
+		if (addressBookList.contains(addressBookName)) {
+			//int index = addressBookList.indexOf(template + addressBookName + ".json");
+			File file1=new File(template + addressBookName + ".json");
+			return file1;
 		}
 		System.out.println("Sorry!!! The address book you are looking for doesn't exist..");
 		return null;
+	}
+
+
+	@Override
+	public void viewAddBookList() throws JsonParseException, JsonMappingException, IOException {
+		addressBookList = mapper.readValue(new File(bookList), new TypeReference<ArrayList<String>>() {
+		});
+		for (int i = 0; i < addressBookList.size(); i++) {
+			
+			System.out.println(addressBookList.get(i));
+		}
+
+	}
+
+	@Override
+	public void saveBook(String addressbook) {
+	}
+
+	@Override
+	public void readBook(String addressbook)
+			throws SQLException, IOException, PropertyVetoException, ClassNotFoundException {
 	}
 
 }

@@ -47,10 +47,11 @@ public class AddressBookManagerImplementation{
 	 * @throws IOException
 	 * @throws PropertyVetoException 
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * @throws ParseException
 	 */
 	
-	public void createAddressBook(String serialiseType,String addressBookName) throws JsonGenerationException, JsonMappingException, IOException, SQLException, PropertyVetoException {
+	public void createAddressBook(String serialiseType,String addressBookName) throws JsonGenerationException, JsonMappingException, IOException, SQLException, PropertyVetoException, ClassNotFoundException {
 		serialiser=SerialiserFactory.getSerialiser(serialiseType);
 		serialiser.createBook(addressBookName);
 		}
@@ -72,16 +73,21 @@ public class AddressBookManagerImplementation{
 		}
 	}
 
+public void viewAddBookList(String serialiseType ) throws ClassNotFoundException, SQLException, IOException, PropertyVetoException {
+	serialiser=SerialiserFactory.getSerialiser(serialiseType);
+	serialiser.viewAddBookList();
+	
+}
 
 
-
-	/**
+	/**Method to delete addressbook
 	 * @param serialiseType
 	 * @throws SQLException
 	 * @throws IOException
 	 * @throws PropertyVetoException
+	 * @throws ClassNotFoundException 
 	 */
-	public void deleteAddressBook(String serialiseType) throws SQLException, IOException, PropertyVetoException {
+	public void deleteAddressBook(String serialiseType) throws SQLException, IOException, PropertyVetoException, ClassNotFoundException {
 		serialiser=SerialiserFactory.getSerialiser(serialiseType);
 		serialiser.deleteAddressBook();
 		
@@ -89,7 +95,7 @@ public class AddressBookManagerImplementation{
 	}
 
 
-	/**
+	/**Method to open existing addressbook
 	 * @param serialiseType
 	 * @throws JsonGenerationException
 	 * @throws JsonMappingException
@@ -97,8 +103,9 @@ public class AddressBookManagerImplementation{
 	 * @throws ParseException
 	 * @throws SQLException
 	 * @throws PropertyVetoException
+	 * @throws ClassNotFoundException 
 	 */
-	public void openExistingAdBook(String serialiseType) throws JsonGenerationException, JsonMappingException, IOException, ParseException, SQLException, PropertyVetoException {
+	public void openExistingAdBook(String serialiseType) throws JsonGenerationException, JsonMappingException, IOException, ParseException, SQLException, PropertyVetoException, ClassNotFoundException {
 		serialiser=SerialiserFactory.getSerialiser(serialiseType);
 		System.out.println("Enter the address book you want to view ");
 		String addressBookName=AddressUtility.userInputString();
@@ -107,7 +114,7 @@ public class AddressBookManagerImplementation{
 	}
 
 
-	/**
+	/**Method to add person
 	 * @param serialiseType
 	 * @param addressbookName
 	 * @throws JsonGenerationException
@@ -118,8 +125,9 @@ public class AddressBookManagerImplementation{
 	 * @throws InterruptedException
 	 * @throws SQLException
 	 * @throws PropertyVetoException
+	 * @throws ClassNotFoundException 
 	 */
-	public void addPerson(String serialiseType,String addressbookName) throws JsonGenerationException, JsonMappingException, SecurityException, IOException, ParseException, InterruptedException, SQLException, PropertyVetoException {
+	public void addPerson(String serialiseType,String addressbookName) throws JsonGenerationException, JsonMappingException, SecurityException, IOException, ParseException, InterruptedException, SQLException, PropertyVetoException, ClassNotFoundException {
 		serialiser=SerialiserFactory.getSerialiser(serialiseType);
 		addressBookImplementation.addPerson(serialiser,addressbookName);
 
@@ -129,7 +137,7 @@ public class AddressBookManagerImplementation{
 
 
 	
-	/**
+	/**Method to remove person
 	 * @param serialiseType
 	 * @param addressbookName
 	 * @throws FileNotFoundException
@@ -139,17 +147,23 @@ public class AddressBookManagerImplementation{
 	 * @throws InterruptedException
 	 * @throws SQLException
 	 * @throws PropertyVetoException
+	 * @throws ClassNotFoundException 
 	 */
-	public void removePerson(String serialiseType,String addressbookName) throws FileNotFoundException, SecurityException, IOException, ParseException, InterruptedException, SQLException, PropertyVetoException {
+	public void removePerson(String serialiseType,String addressbookName) throws FileNotFoundException, SecurityException, IOException, ParseException, InterruptedException, SQLException, PropertyVetoException, ClassNotFoundException {
 		serialiser=SerialiserFactory.getSerialiser(serialiseType);
 		addressBookImplementation.removePerson(serialiser,addressbookName);
 		
 	}
 
 
+public void saveBook(String serialiseType,String addressbookName) throws SQLException, IOException, PropertyVetoException, ClassNotFoundException {
+	serialiser=SerialiserFactory.getSerialiser(serialiseType);
+	serialiser.saveBook(addressbookName);
 
+	
+}
 
-	/**
+	/**Method to update person
 	 * @param serialiseType
 	 * @param addressbookName
 	 * @throws FileNotFoundException
@@ -159,14 +173,19 @@ public class AddressBookManagerImplementation{
 	 * @throws InterruptedException
 	 * @throws SQLException
 	 * @throws PropertyVetoException
+	 * @throws ClassNotFoundException 
 	 */
-	public void updatePerson(String serialiseType,String addressbookName) throws FileNotFoundException, SecurityException, IOException, ParseException, InterruptedException, SQLException, PropertyVetoException {
+	public void updatePerson(String serialiseType,String addressbookName) throws FileNotFoundException, SecurityException, IOException, ParseException, InterruptedException, SQLException, PropertyVetoException, ClassNotFoundException {
 	
 		serialiser=SerialiserFactory.getSerialiser(serialiseType);
 		addressBookImplementation.updatePerson(serialiser, addressbookName);
 	}
 
-
+public void readBook(String serialiseType,String addressbookName) throws ClassNotFoundException, SQLException, IOException, PropertyVetoException {
+	serialiser=SerialiserFactory.getSerialiser(serialiseType);
+	serialiser.readBook(addressbookName);
+	
+}
 
 	}
 

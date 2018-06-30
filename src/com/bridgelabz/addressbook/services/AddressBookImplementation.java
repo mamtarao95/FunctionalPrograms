@@ -46,8 +46,9 @@ public class AddressBookImplementation {
 	 * @throws InterruptedException
 	 * @throws PropertyVetoException 
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public void addPerson(Serialiser serialiser,String addressbookName) throws JsonGenerationException, JsonMappingException, IOException, ParseException,SecurityException, InterruptedException, SQLException, PropertyVetoException {
+	public void addPerson(Serialiser serialiser,String addressbookName) throws JsonGenerationException, JsonMappingException, IOException, ParseException,SecurityException, InterruptedException, SQLException, PropertyVetoException, ClassNotFoundException {
 		String[] personData=AddressUtility.askForInputs();
 		Person person = new Person(personData[0],personData[1],personData[2],personData[3],personData[4],personData[5],personData[6]);
 		serialiser.addPerson(person,addressbookName);
@@ -73,11 +74,11 @@ public class AddressBookImplementation {
 	 * @throws InterruptedException
 	 * @throws PropertyVetoException 
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	public void updatePerson(Serialiser serialiser,String addressbookName)
-		throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException, SQLException, PropertyVetoException {
-		String[] inputs = AddressUtility.askForInputsUpdate();
-		serialiser.updatePerson(addressbookName,inputs);
+		throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException, SQLException, PropertyVetoException, ClassNotFoundException {
+		serialiser.updatePerson(addressbookName);
 		
 		
 		
@@ -95,9 +96,10 @@ public class AddressBookImplementation {
 	 * @throws InterruptedException
 	 * @throws PropertyVetoException 
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	public void removePerson(Serialiser serialiser,String addressbookName)
-			throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException, SQLException, PropertyVetoException {
+			throws FileNotFoundException, IOException, ParseException, SecurityException, InterruptedException, SQLException, PropertyVetoException, ClassNotFoundException {
 		serialiser.deletePerson(addressbookName);
 	}
 

@@ -9,16 +9,17 @@
 package com.bridgelabz.addressbook.repositories;
 
 public class SerialiserFactory {
-	
-public static Serialiser getSerialiser(String serialiserType) {
-	
-	if((serialiserType).equalsIgnoreCase("JSON")) {
-		return new JSONSerialiserImplementation();
+
+	public static Serialiser getSerialiser(String serialiserType) {
+
+		if ((serialiserType).equalsIgnoreCase("JSON")) {
+			return new JSONSerialiserImplementation();
+		} else if ((serialiserType).equalsIgnoreCase("JDBC")) {
+			return new JDBCSerialiserImplementation();
+		}
+
+		System.out.println("Invalid serialiser type!!!");
+		return null;
+
 	}
-	else if((serialiserType).equalsIgnoreCase("JDBC")) {
-		return new JDBCSerialiserImplementation();
-	}
-	return null;
-	
-}
 }

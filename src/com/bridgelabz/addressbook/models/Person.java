@@ -13,6 +13,9 @@ import java.io.Serializable;
 public class Person implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+
+	private Status status;
+	
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -51,7 +54,17 @@ public class Person implements Serializable {
 		this.state = state;
 		this.zip = zip;
 		this.phone = phone;
+        this.status=Status.DEFAULT;
+	}
+	
 
+	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public void setFirstName(String firstName) {

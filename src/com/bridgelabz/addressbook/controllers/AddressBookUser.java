@@ -26,6 +26,7 @@ public class AddressBookUser {
 		AddressBookManagerImplementation addressBookManagerImpl = new AddressBookManagerImplementation();
 		System.out.println("WELCOME TO ADDRESS BOOK APPLICATION...!!! ");
 		boolean keepOn = true;
+		boolean keepOn1 = true;
 		while (keepOn) {
 			System.out.println("Enter your choice");
 
@@ -43,19 +44,6 @@ public class AddressBookUser {
 				System.out.println("Enter addressbook name you want to create");
 				String addressBookName = AddressUtility.userInputString();
 				addressBookManagerImpl.createAddressBook(serialiseType, addressBookName);
-				System.out.println("Now you may add persons on your new address book..!!!");
-				System.out.println("(1)- ADD A PERSON TO ADDRESSBOOK");
-				System.out.println("(2)- QUIT ADDRESSBOOK");
-				int choice1 = AddressUtility.userInputInteger();
-				switch (choice1) {
-				case 1:
-
-					addressBookManagerImpl.addPerson(serialiseType, addressBookName);
-					break;
-
-				default:
-					System.out.println("Exiting address book..!! ThankYou");
-				}
 
 				break;
 
@@ -66,36 +54,48 @@ public class AddressBookUser {
 			case 3:
 				System.out.println("Enter the name of address book you want to open ");
 				String addressBookName1 = AddressUtility.userInputString();
+				addressBookManagerImpl.readBook(serialiseType, addressBookName1);
 
-				System.out.println("You may perform following operations on existing address book ");
-				System.out.println("(1)- ADD A PERSON TO ADDRESSBOOK");
-				System.out.println("(2)- DELETE A PERSON FROM ADDRESSBOOK");
-				System.out.println("(3)- EDIT A PERSON IN ADDRESSBOOK");
-				System.out.println("(4)- QUIT ADDRESSBOOK");
+				while (keepOn1) {
+					System.out.println("You may perform following operations on existing address book ");
+					System.out.println("(1)- ADD A PERSON TO ADDRESSBOOK");
+					System.out.println("(2)- DELETE A PERSON FROM ADDRESSBOOK");
+					System.out.println("(3)- EDIT A PERSON IN ADDRESSBOOK");
+					System.out.println("(4)- QUIT ADDRESSBOOK");
 
-				int choice2 = AddressUtility.userInputInteger();
-				switch (choice2) {
+					int choice2 = AddressUtility.userInputInteger();
+					switch (choice2) {
 
-				case 1:
-					addressBookManagerImpl.addPerson(serialiseType, addressBookName1);
-					break;
+					case 1:
+						addressBookManagerImpl.addPerson(serialiseType, addressBookName1);
+						break;
 
-				case 2:
-					addressBookManagerImpl.removePerson(serialiseType, addressBookName1);
-					break;
+					case 2:
+						addressBookManagerImpl.removePerson(serialiseType, addressBookName1);
+						break;
 
-				case 3:
-					addressBookManagerImpl.updatePerson(serialiseType, addressBookName1);
-					break;
+					case 3:
+						addressBookManagerImpl.updatePerson(serialiseType, addressBookName1);
+						break;
 
-				default:
-					System.out.println("Exiting address book..!! ThankYou");
+					default:
+						System.out.println("Do you want to save the changes?(Y/N)");
+						String res = AddressUtility.userInputString();
+						if (res.equals("Y")) {
+							addressBookManagerImpl.saveBook(serialiseType, addressBookName1);
+							System.out.println("Changes saved");
+							System.out.println("Exiting addressbook!!");
+						} else {
+							System.out.println("Changes not saved");
+							System.out.println("Exiting addressbook!!");
+						}
+						keepOn1=false;
 
+					}
 				}
 				break;
-
 			case 4:
-				addressBookManagerImpl.openExistingAdBook(serialiseType);
+				addressBookManagerImpl.viewAddBookList(serialiseType);
 				break;
 
 			case 5:
